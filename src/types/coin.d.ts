@@ -1,3 +1,4 @@
+import { theme } from "./../styles/theme";
 export interface ICoin {
   ath: number;
   ath_change_percentage: number;
@@ -26,4 +27,14 @@ export interface ICoin {
   symbol: string;
   total_supply: number;
   total_volume: number;
+}
+
+export interface IFormateNumber {
+  number: number;
+  currencyCode?: string;
+}
+
+export interface IToggleNumber {
+  number: number;
+  color?: string;
 }
