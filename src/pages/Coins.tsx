@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchCoins } from "../services/api";
 import { ICoin } from "../types/coin";
 import { A11y } from "../styles/common";
-import { Main } from "../styles/layout";
+import { Main } from "../styles/coins";
 
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
