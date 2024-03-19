@@ -1,4 +1,6 @@
-declare module "theme" {
+import "styled-components";
+
+declare module "styled-components" {
   export interface DefaultTheme {
     mainFontColor: string;
     secondFontColor: string;
