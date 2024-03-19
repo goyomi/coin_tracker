@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IToggleNumber } from "../types/coin";
 
 export const MainContainer = styled.div`
   max-width: 114rem;
@@ -20,7 +21,14 @@ export const CoinList = styled.table`
   tbody > tr > td:last-child {
     padding-right: 2.4rem;
   }
-
+  thead > tr > th > div,
+  tbody > tr > td > div {
+    margin-right: 3.5rem;
+  }
+  thead > tr > th > div:last-child,
+  tbody > tr > td > div:last-child {
+    margin-right: 0;
+  }
   .name,
   .coin_name {
     width: 28.1rem;
@@ -28,6 +36,10 @@ export const CoinList = styled.table`
   .price,
   .coin_price {
     width: 12.7rem;
+  }
+  .price_chart,
+  .coin_price_chart {
+    width: 10.3rem;
   }
   .change,
   .coin_change_percentage {
@@ -52,57 +64,26 @@ export const CoinListHead = styled.thead`
   tr > th {
     padding: 1.85rem 0;
   }
-  /* .name {
-    width: 35rem;
-  }
-  .price {
-    width: 4.6rem;
-  }
-  .change {
-    width: 8.5rem;
-  }
-  .volume {
-    width: 11.6rem;
-  }
-  .market_cap {
-    width: 9.4rem;
-  }
-  .supply {
-    width: 5.6rem;
-  } */
 `;
 
 export const CoinListItem = styled.tbody`
   font-size: 1.6rem;
   tr {
     width: 100%;
-    /* display: flex;
-    align-items: center;
-    gap: 5.6rem; */
   }
   td {
-    flex-grow: 1;
     padding: 1.4rem 0;
   }
-  /* .coin_price {
-    width: 12.7rem;
-  }
-  .coin_change_percentage {
-    width: 6.9rem;
-  }
-  .coin_volume {
-    width: 2rem;
-  }
-  .coin_market_cap {
-    width: 8rem;
-  }
+  .coin_price,
+  .coin_change_percentage,
+  .coin_volume,
+  .coin_market_cap,
   .coin_supply {
-    width: 6.4rem;
-  } */
+    text-align: right;
+  }
 `;
 
 export const Name = styled.div`
-  /* width: 28.1rem; */
   display: flex;
   align-items: center;
   gap: 1.6rem;
@@ -114,4 +95,8 @@ export const Name = styled.div`
     color: ${(props) => props.theme.thirdFontColor};
     text-transform: uppercase;
   }
+`;
+
+export const ToggleColor = styled.div<IToggleNumber>`
+  color: ${(props) => props.theme[props.color || "mainFontColor"]};
 `;

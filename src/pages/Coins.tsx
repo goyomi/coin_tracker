@@ -3,6 +3,8 @@ import { fetchCoins } from "../services/api";
 import { ICoin } from "../types/coin";
 import { A11y } from "../styles/common";
 import { CoinList, CoinListHead, CoinListItem, Name } from "../styles/coins";
+import NumberFormatter from "../utils/numberFormatter";
+import ToggleColorWithValue from "../utils/colorChangeOnValue";
 
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
@@ -13,12 +15,27 @@ function Coins() {
         <CoinList>
           <CoinListHead>
             <tr>
-              <th className="name">Name</th>
-              <th className="price">Price</th>
-              <th className="change">Change</th>
-              <th className="volume">Volume(24h)</th>
-              <th className="market_cap">Market Cap</th>
-              <th className="supply">Supply</th>
+              <th className="name">
+                <div>Name</div>
+              </th>
+              <th className="price">
+                <div>Price</div>
+              </th>
+              <th className="change">
+                <div>Change</div>
+              </th>
+              <th className="price_chart">
+                <div>Price chart</div>
+              </th>
+              <th className="volume">
+                <div>Volume(24h)</div>
+              </th>
+              <th className="market_cap">
+                <div>Market Cap</div>
+              </th>
+              <th className="supply">
+                <div>Supply</div>
+              </th>
             </tr>
           </CoinListHead>
           <CoinListItem>
@@ -31,13 +48,22 @@ function Coins() {
                     <span className="coin_symbol">{coin.symbol}</span>
                   </Name>
                 </td>
-                <td className="coin_price">USD {coin.current_price}</td>
-                <td className="coin_change_percentage">
-                  {coin.price_change_percentage_24h.toFixed(2)}%
+                <td className="coin_price">
+                  <div>USD {coin.current_price}</div>
                 </td>
-                <td className="coin_volume">USD {coin.total_volume}</td>
-                <td className="coin_market_cap">USD {coin.market_cap}</td>
-                <td className="coin_supply">{coin.circulating_supply}</td>
+                <td className="coin_change_percentage">
+                  <ToggleColorWithValue number={coin.price_change_percentage_24h} />
+                </td>
+                <td className="coin_price_chart"></td>
+                <td className="coin_volume">
+                  <NumberFormatter number={coin.total_volume} currencyCode="USD " />
+                </td>
+                <td className="coin_market_cap">
+                  <NumberFormatter number={coin.market_cap} currencyCode="USD " />
+                </td>
+                <td className="coin_supply">
+                  <NumberFormatter number={coin.circulating_supply} />
+                </td>
               </tr>
             ))}
           </CoinListItem>
