@@ -39,7 +39,6 @@ html{
 
 body {
 	line-height: 1;
-	text-align: left;
 }
 
 ol, ul {
