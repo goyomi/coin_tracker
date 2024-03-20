@@ -1,6 +1,6 @@
 import Routes from "./routes";
 import { GlobalStyle } from "./styles/GlobalStyle";
-import { MainContainer } from "./styles/coins";
+import { MainContainer } from "./styles/common";
 
 function App() {
   return (

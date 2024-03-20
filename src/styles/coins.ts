@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { IToggleNumber } from "../types/coin";
-
-export const MainContainer = styled.div`
-  max-width: 114rem;
-  margin: 6.6rem auto;
-`;
+import { Link } from "react-router-dom";
 
 export const CoinList = styled.table`
   width: 100%;
@@ -74,16 +70,9 @@ export const CoinListItem = styled.tbody`
   td {
     padding: 1.4rem 0;
   }
-  .coin_price,
-  .coin_change_percentage,
-  .coin_volume,
-  .coin_market_cap,
-  .coin_supply {
-    text-align: right;
-  }
 `;
 
-export const Name = styled.div`
+export const Name = styled(Link)`
   display: flex;
   align-items: center;
   gap: 1.6rem;
