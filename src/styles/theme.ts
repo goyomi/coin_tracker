@@ -5,6 +5,6 @@ export const theme: DefaultTheme = {
   secondFontColor: "#113353",
   thirdFontColor: "rgba(17, 51, 83, 0.6)",
   borderColor: "#ECEFF1",
-  changeUpColor: "#DF5F67",
-  changeDownColor: "#3ACC8A",
+  changeUpColor: "#3ACC8A",
+  changeDownColor: "#DF5F67",
 };
