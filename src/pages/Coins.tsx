@@ -1,13 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchCoins } from "../services/api";
-import { ICoin } from "../types/coin";
 import { A11y } from "../styles/common";
 import { CoinList, CoinListHead, CoinListItem, Name } from "../styles/coins";
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
+import { useContext } from "react";
+import { CoinDataContext } from "../contexts/CoinDataContext";
 
 function Coins() {
-  const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
+  const data = useContext(CoinDataContext);
   return (
     <>
       <A11y>Coin Tracker Table</A11y>
@@ -42,7 +41,7 @@ function Coins() {
             {data?.map((coin) => (
               <tr key={coin.id}>
                 <td>
-                  <Name className="coin_name">
+                  <Name to={`/${coin.id}`} className="coin_name">
                     <img src={coin.image} alt={coin.name} />
                     <span>{coin.name}</span>
                     <span className="coin_symbol">{coin.symbol}</span>
