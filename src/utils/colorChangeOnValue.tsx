@@ -5,7 +5,7 @@ function ToggleColorWithValue({ number }: IToggleNumber) {
   const color = Math.sign(number) > 0 ? "changeUpColor" : "changeDownColor";
   return (
     <ToggleColor color={color} number={number}>
-      {number}%
+      {number.toFixed(2)}%
     </ToggleColor>
   );
 }
