@@ -46,3 +46,12 @@ export interface IToggleNumber {
 export interface IThousandSeparator {
   number?: number;
 }
+
+// chart
+interface IOhlc {
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
+}
