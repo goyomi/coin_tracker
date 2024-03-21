@@ -60,16 +60,22 @@ export const CoinConvertor = styled.div`
   & > * {
     margin-bottom: 1rem;
   }
-  input {
+  .input_wrapper {
     width: 100%;
-    padding: 2rem;
     border: 0.1rem solid ${(props) => props.theme.borderColor};
     border-radius: 0.5rem;
-    font-size: 2rem;
   }
-  input::placeholder {
+  .input_wrapper > input {
+    width: 80%;
+    padding: 2rem;
+    font-size: 2rem;
+    border: none;
+  }
+  .input_wrapper > span {
+    padding: 2rem;
     font-size: 2rem;
     text-align: right;
     text-transform: uppercase;
+    color: grey;
   }
 `;

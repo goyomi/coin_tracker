@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import { useParams } from "react-router-dom";
 import {
@@ -18,6 +18,30 @@ function Coin() {
   const coinData = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
   const selectedCoin = coinData?.find((coin) => coin.id === coinId);
+  const [inputOne, setInputOne] = useState<number | "">(0);
+  const [inputTwo, setInputTwo] = useState<number | "">(0);
+
+  const handleInputOneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value);
+    const price = selectedCoin?.current_price || 1;
+    setInputOne(value);
+    setInputTwo(value * price);
+  };
+
+  const handleInputTwoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value);
+    const price = selectedCoin?.current_price || 1;
+    setInputTwo(value);
+    setInputOne(value / price);
+  };
+
+  const handleInputOneFocus = () => {
+    setInputOne("");
+  };
+
+  const handleInputTwoFocus = () => {
+    setInputTwo("");
+  };
 
   return (
     <CoinWrapper>
@@ -77,8 +101,24 @@ function Coin() {
           </CoinDataTable>
           <CoinConvertor>
             <h4>{selectedCoin.symbol} 환전기</h4>
-            <input type="number" placeholder={selectedCoin.symbol} />
-            <input type="number" placeholder="USD" />
+            <div className="input_wrapper">
+              <input
+                type="number"
+                value={inputOne}
+                onChange={handleInputOneChange}
+                onFocus={handleInputOneFocus}
+              />
+              <span>{selectedCoin.symbol}</span>
+            </div>
+            <div className="input_wrapper">
+              <input
+                type="number"
+                value={inputTwo}
+                onChange={handleInputTwoChange}
+                onFocus={handleInputTwoFocus}
+              />
+              <span>USD</span>
+            </div>
           </CoinConvertor>
         </CoinData>
       ) : null}
