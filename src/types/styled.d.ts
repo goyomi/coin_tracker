@@ -4,9 +4,10 @@ declare module "styled-components" {
   interface DefaultTheme {
     mainFontColor: string;
     secondFontColor: string;
-    thirdFontColor: string;
-    borderColor: string;
+    grey1Color: string;
+    grey2Color: string;
     changeUpColor: string;
     changeDownColor: string;
+    onActiveColor: string;
   }
 }
