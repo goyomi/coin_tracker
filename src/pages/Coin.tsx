@@ -13,6 +13,7 @@ import { A11y } from "../styles/common";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import { IParams } from "../types/coin";
 import ThousandSeparator from "../utils/thousandSeparator";
+import Chart from "../components/Chart";
 
 function Coin() {
   const coinData = useContext(CoinDataContext);
@@ -123,7 +124,7 @@ function Coin() {
         </CoinData>
       ) : null}
       <section>
-        <button>Chart</button>
+        <Chart selectedCoin={selectedCoin} />
         <button>소개</button>
       </section>
     </CoinWrapper>
