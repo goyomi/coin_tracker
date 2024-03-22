@@ -7,7 +7,7 @@ export const CoinList = styled.table`
   table-layout: fixed;
   thead,
   tbody {
-    border: 1px solid ${(props) => props.theme.borderColor};
+    border: 1px solid ${(props) => props.theme.grey1Color};
   }
   thead > tr > th:first-child,
   tbody > tr > td:first-child {

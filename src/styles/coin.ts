@@ -47,7 +47,7 @@ export const CoinDataTable = styled.table`
   th,
   td {
     padding: 1.2rem 0;
-    box-shadow: 0 0.15rem ${(props) => props.theme.borderColor};
+    box-shadow: 0 0.15rem ${(props) => props.theme.grey1Color};
   }
   td {
     text-align: right;
@@ -62,12 +62,12 @@ export const CoinConvertor = styled.div`
   }
   .input_wrapper {
     width: 100%;
-    border: 0.1rem solid ${(props) => props.theme.borderColor};
-    border-radius: 0.5rem;
+    border: 0.15rem solid ${(props) => props.theme.grey1Color};
+    border-radius: 0.8rem;
   }
   .input_wrapper > input {
     width: 80%;
-    padding: 2rem;
+    padding: 1.5rem;
     font-size: 2rem;
     border: none;
   }
