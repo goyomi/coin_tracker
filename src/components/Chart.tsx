@@ -96,10 +96,10 @@ function Chart({ selectedCoin }: { selectedCoin: ICoin | undefined }) {
   };
 
   return (
-    <>
+    <section>
       <ButtonWrapper>
         <button
-          className={isActive === "1" ? "isActive" : ""}
+          className={!isActive ? "isActive" : ""}
           id="1"
           onClick={handleClickBtn}
         >
@@ -138,7 +138,7 @@ function Chart({ selectedCoin }: { selectedCoin: ICoin | undefined }) {
           width={600}
         />
       )}
-    </>
+    </section>
   );
 }
 
