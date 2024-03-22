@@ -33,6 +33,11 @@ export interface ICoin {
 export interface IParams {
   coinId: string;
 }
+export interface ICoinIntro {
+  description: {
+    ko: string;
+  };
+}
 
 // utils
 export interface IFormateNumber {
