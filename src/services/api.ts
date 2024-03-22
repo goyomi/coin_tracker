@@ -7,6 +7,7 @@ export function fetchCoins() {
 }
 
 export async function ohlc(coinId: string, days: number) {
-  console.log(coinId, days);
-  return await (await fetch(`${BASE_URL}/${coinId}/ohlc?vs_currency=usd&days=${days}`)).json();
+  return await (
+    await fetch(`${BASE_URL}/${coinId}/ohlc?vs_currency=usd&days=${days}`)
+  ).json();
 }
