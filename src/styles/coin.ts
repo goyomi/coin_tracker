@@ -2,13 +2,17 @@ import styled from "styled-components";
 
 export const CoinWrapper = styled.div`
   display: flex;
-  gap: 10rem;
+  gap: 5rem;
 `;
 
-export const CoinData = styled.section`
+export const LeftZone = styled.div`
   width: 40%;
 `;
+export const RightZone = styled.div`
+  width: 60%;
+`;
 
+export const CoinData = styled.section``;
 export const CoinTitle = styled.h2`
   margin-bottom: 1rem;
   display: flex;
@@ -54,7 +58,7 @@ export const CoinDataTable = styled.table`
   }
 `;
 
-export const CoinConvertor = styled.div`
+export const CoinConvertor = styled.section`
   font-size: 2.5rem;
   text-transform: uppercase;
   & > * {
@@ -77,5 +81,43 @@ export const CoinConvertor = styled.div`
     text-align: right;
     text-transform: uppercase;
     color: grey;
+  }
+`;
+
+export const HistoricalPrice = styled.section`
+  margin-top: 3rem;
+  h2 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
+`;
+
+export const HistoricalPriceTable = styled(CoinDataTable)`
+  .separator {
+    margin: 0 0.5rem;
+  }
+  tbody tr td i {
+    margin-right: 1.3rem;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: ${(props) => props.theme.grey2Color};
+  }
+`;
+
+export const CoinIntro = styled.section`
+  h2 {
+    margin: 3rem 0 2rem 0;
+    font-size: 2.5rem;
+  }
+  p {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+  }
+  .subtitle {
+    margin-top: 3rem;
+    background-color: #e9f6ff;
+    font-size: 2rem;
+    line-height: 3rem;
   }
 `;
