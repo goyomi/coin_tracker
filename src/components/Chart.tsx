@@ -8,7 +8,7 @@ import { ButtonWrapper } from "../styles/chart";
 
 function Chart({ selectedCoin }: { selectedCoin: ICoin | undefined }) {
   const [days, setDays] = useState(1);
-  const [isActive, setIsActive] = useState("");
+  const [isActive, setIsActive] = useState("1");
 
   // query
   const queries = {
@@ -99,7 +99,7 @@ function Chart({ selectedCoin }: { selectedCoin: ICoin | undefined }) {
     <section>
       <ButtonWrapper>
         <button
-          className={!isActive ? "isActive" : ""}
+          className={isActive === "1" ? "isActive" : ""}
           id="1"
           onClick={handleClickBtn}
         >
