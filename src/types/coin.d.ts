@@ -35,7 +35,7 @@ export interface IParams {
 }
 export interface ICoinIntro {
   description: {
-    ko: string;
+    en: string;
   };
 }
 

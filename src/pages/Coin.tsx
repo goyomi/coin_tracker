@@ -21,6 +21,7 @@ import ThousandSeparator from "../utils/thousandSeparator";
 import Chart from "../components/Chart";
 import { useQuery } from "@tanstack/react-query";
 import { introCoin } from "../services/api";
+import parse from "html-react-parser";
 
 function Coin() {
   const coinData = useContext(CoinDataContext);
@@ -35,7 +36,7 @@ function Coin() {
     { staleTime: Infinity }
   );
 
-  const textLine = coinIntro?.description.ko.split("\r\n");
+  const textLine = coinIntro?.description.en.split("\r\n");
 
   const handleInputOneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
@@ -61,7 +62,7 @@ function Coin() {
 
   return (
     <CoinWrapper>
-      <A11y>코인 상세 페이지</A11y>
+      <A11y>Coin detail page</A11y>
       <LeftZone>
         {selectedCoin ? (
           <CoinData key={selectedCoin.id}>
@@ -83,13 +84,13 @@ function Coin() {
             <CoinDataTable>
               <tbody>
                 <tr>
-                  <th>시가총액</th>
+                  <th>Market Cap</th>
                   <td>
                     <ThousandSeparator number={selectedCoin.market_cap} />
                   </td>
                 </tr>
                 <tr>
-                  <th>완전 희석 가치(FDV)</th>
+                  <th>Fully Diluted Valuation</th>
                   <td>
                     <ThousandSeparator
                       number={selectedCoin.fully_diluted_valuation}
@@ -97,13 +98,13 @@ function Coin() {
                   </td>
                 </tr>
                 <tr>
-                  <th>24시간 거래대금</th>
+                  <th>24 Hour Trading Vol</th>
                   <td>
                     <ThousandSeparator number={selectedCoin.total_volume} />
                   </td>
                 </tr>
                 <tr>
-                  <th>유통량</th>
+                  <th>Circulating Supply</th>
                   <td>
                     <ThousandSeparator
                       number={selectedCoin.circulating_supply}
@@ -111,13 +112,13 @@ function Coin() {
                   </td>
                 </tr>
                 <tr>
-                  <th>총 공급량</th>
+                  <th>Total Supply</th>
                   <td>
                     <ThousandSeparator number={selectedCoin.total_supply} />
                   </td>
                 </tr>
                 <tr>
-                  <th>최대 공급량</th>
+                  <th>Max Supply</th>
                   <td>
                     <ThousandSeparator number={selectedCoin.max_supply} />
                   </td>
@@ -127,7 +128,7 @@ function Coin() {
           </CoinData>
         ) : null}
         <CoinConvertor>
-          <h4>{selectedCoin?.symbol} 환전기</h4>
+          <h4>{selectedCoin?.symbol} Converter</h4>
           <div className="input_wrapper">
             <input
               type="number"
@@ -148,11 +149,11 @@ function Coin() {
           </div>
         </CoinConvertor>
         <HistoricalPrice>
-          <h2>{selectedCoin?.symbol} 과거가격</h2>
+          <h2>{selectedCoin?.symbol} Historical Price</h2>
           <HistoricalPriceTable>
             <tbody>
               <tr>
-                <th>24시간 범위</th>
+                <th>24h Range</th>
                 <td>
                   <ThousandSeparator number={selectedCoin?.low_24h} />
                   <span className="separator">-</span>
@@ -160,7 +161,7 @@ function Coin() {
                 </td>
               </tr>
               <tr>
-                <th>역대 최고가</th>
+                <th>All-Time High</th>
                 <td>
                   <i>
                     (
@@ -173,7 +174,7 @@ function Coin() {
                 </td>
               </tr>
               <tr>
-                <th>역대 최저가</th>
+                <th>All-Time Low</th>
                 <td>
                   <i>
                     (
@@ -192,11 +193,9 @@ function Coin() {
       <RightZone>
         <Chart selectedCoin={selectedCoin} />
         <CoinIntro>
-          <h2>소개</h2>
+          <h2>About</h2>
           {textLine?.map((text: string, idx: number) => (
-            <p key={idx} className={idx === 8 || idx === 13 ? "subtitle" : ""}>
-              {text}
-            </p>
+            <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
           ))}
         </CoinIntro>
       </RightZone>

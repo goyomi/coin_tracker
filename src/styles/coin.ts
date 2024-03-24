@@ -114,10 +114,4 @@ export const CoinIntro = styled.section`
     font-size: 1.5rem;
     line-height: 2.25rem;
   }
-  .subtitle {
-    margin-top: 3rem;
-    background-color: #e9f6ff;
-    font-size: 2rem;
-    line-height: 3rem;
-  }
 `;
