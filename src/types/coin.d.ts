@@ -1,3 +1,8 @@
+export interface IContext {
+  data: ICoin[] | undefined;
+  isLoading: boolean;
+}
+
 // coins
 export interface ICoin {
   ath: number;

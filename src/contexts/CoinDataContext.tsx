@@ -1,4 +1,7 @@
 import React from "react";
-import { ICoin } from "../types/coin";
+import { IContext } from "../types/coin";
 
-export const CoinDataContext = React.createContext<ICoin[] | null>(null);
+export const CoinDataContext = React.createContext<IContext>({
+  data: undefined,
+  isLoading: true,
+});

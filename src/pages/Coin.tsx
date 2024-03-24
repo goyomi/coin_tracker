@@ -16,7 +16,7 @@ import {
 } from "../styles/coin";
 import { A11y } from "../styles/common";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
-import { ICoinIntro, IParams } from "../types/coin";
+import { ICoin, ICoinIntro, IParams } from "../types/coin";
 import ThousandSeparator from "../utils/thousandSeparator";
 import Chart from "../components/Chart";
 import { useQuery } from "@tanstack/react-query";
@@ -24,9 +24,9 @@ import { introCoin } from "../services/api";
 import parse from "html-react-parser";
 
 function Coin() {
-  const coinData = useContext(CoinDataContext);
+  const { data: coinData, isLoading } = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
-  const selectedCoin = coinData?.find((coin) => coin.id === coinId);
+  const selectedCoin = coinData?.find((coin: ICoin) => coin.id === coinId);
   const [inputOne, setInputOne] = useState<number | "">(0);
   const [inputTwo, setInputTwo] = useState<number | "">(0);
 

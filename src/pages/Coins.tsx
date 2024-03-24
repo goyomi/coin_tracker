@@ -2,13 +2,16 @@ import { A11y } from "../styles/common";
 import { CoinList, CoinListHead, CoinListItem, Name } from "../styles/coins";
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
+import Header from "../components/Header";
 import { useContext } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 
 function Coins() {
-  const data = useContext(CoinDataContext);
+  const { data, isLoading } = useContext(CoinDataContext);
+
   return (
     <>
+      <Header />
       <A11y>Coin Tracker Table</A11y>
       <main>
         <CoinList>
@@ -51,14 +54,22 @@ function Coins() {
                   <div>USD {coin.current_price}</div>
                 </td>
                 <td className="coin_change_percentage">
-                  <ToggleColorWithValue number={coin.price_change_percentage_24h} />
+                  <ToggleColorWithValue
+                    number={coin.price_change_percentage_24h}
+                  />
                 </td>
                 <td className="coin_price_chart"></td>
                 <td className="coin_volume">
-                  <NumberFormatter number={coin.total_volume} currencyCode="USD " />
+                  <NumberFormatter
+                    number={coin.total_volume}
+                    currencyCode="USD "
+                  />
                 </td>
                 <td className="coin_market_cap">
-                  <NumberFormatter number={coin.market_cap} currencyCode="USD " />
+                  <NumberFormatter
+                    number={coin.market_cap}
+                    currencyCode="USD "
+                  />
                 </td>
                 <td className="coin_supply">
                   <NumberFormatter number={coin.circulating_supply} />
