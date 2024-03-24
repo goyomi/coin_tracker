@@ -15,5 +15,9 @@ export async function ohlc(coinId: string, days: number) {
 }
 
 export async function introCoin(coinId: string) {
-  return await (await fetch(`${BASE_URL}/${coinId}`)).json();
+  return await (
+    await fetch(
+      `${BASE_URL}/${coinId}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`
+    )
+  ).json();
 }
