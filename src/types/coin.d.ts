@@ -43,6 +43,25 @@ export interface ICoinIntro {
     en: string;
   };
 }
+export interface IChartQueries {
+  "1": UseQueryResult<IOhlc[], unknown>;
+  "7": UseQueryResult<IOhlc[], unknown>;
+  "30": UseQueryResult<IOhlc[], unknown>;
+  "365": UseQueryResult<IOhlc[], unknown>;
+}
+
+// chart
+interface IOhlc {
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
+}
+interface IChart {
+  selectedCoin: ICoin | undefined;
+  queries: IChartQueries;
+}
 
 // utils
 export interface IFormateNumber {
@@ -55,13 +74,4 @@ export interface IToggleNumber {
 }
 export interface IThousandSeparator {
   number?: number;
-}
-
-// chart
-interface IOhlc {
-  0: number;
-  1: number;
-  2: number;
-  3: number;
-  4: number;
 }
