@@ -6,9 +6,17 @@ import Header from "../components/Header";
 import { useContext } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import Loading from "../components/Loading";
+import Timebar from "../components/Timebar";
 
 function Coins() {
   const { data, isLoading } = useContext(CoinDataContext);
+  const times = {
+    "1h": "1H",
+    "24h": "24H",
+    "7d": "1W",
+    "30d": "1M",
+    "365d": "1Y",
+  };
 
   return (
     <>
@@ -18,6 +26,7 @@ function Coins() {
         <>
           <Header />
           <A11y>Coin Tracker Table</A11y>
+          <Timebar times={times} />
           <main>
             <CoinList>
               <CoinListHead>

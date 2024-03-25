@@ -1,21 +1,21 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { IChart } from "../types/coin";
+// import { useState } from "react";
+import Timebar from "./Timebar";
 import { useState } from "react";
-import { ButtonWrapper } from "../styles/chart";
+// import { ButtonWrapper } from "../styles/timebar";
 
 function Chart({ selectedCoin, queries }: IChart) {
-  const [days, setDays] = useState(1);
-  const [isActive, setIsActive] = useState("1");
-
+  const [days, setDays] = useState("1");
   const { data: currentData } =
     queries[days.toString() as keyof typeof queries];
 
-  // handle fn
-  const handleClickBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.target as HTMLButtonElement;
-    setDays(Number(target.id));
-    setIsActive(target.id);
+  const times = {
+    "1": "1H",
+    "7": "1W",
+    "30": "1M",
+    "365": "1Y",
   };
 
   // chart option
@@ -64,36 +64,7 @@ function Chart({ selectedCoin, queries }: IChart) {
   return (
     <>
       <section>
-        <ButtonWrapper>
-          <button
-            className={isActive === "1" ? "isActive" : ""}
-            id="1"
-            onClick={handleClickBtn}
-          >
-            1D
-          </button>
-          <button
-            className={isActive === "7" ? "isActive" : ""}
-            id="7"
-            onClick={handleClickBtn}
-          >
-            1W
-          </button>
-          <button
-            className={isActive === "30" ? "isActive" : ""}
-            id="30"
-            onClick={handleClickBtn}
-          >
-            1M
-          </button>
-          <button
-            className={isActive === "365" ? "isActive" : ""}
-            id="365"
-            onClick={handleClickBtn}
-          >
-            1Y
-          </button>
-        </ButtonWrapper>
+        <Timebar times={times} setDays={setDays} />
         <ReactApexChart
           options={chartOptions}
           series={[{ data: seriesData || [] }]}
