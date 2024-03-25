@@ -63,6 +63,12 @@ interface IChart {
   queries: IChartQueries;
 }
 
+// timebar
+export interface ITimes {
+  times: { [key: string]: string };
+  setDays?: Function;
+}
+
 // utils
 export interface IFormateNumber {
   number: number;
