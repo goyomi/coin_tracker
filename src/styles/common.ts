@@ -13,5 +13,5 @@ export const A11y = styled.h2`
 
 export const MainContainer = styled.div`
   max-width: 114rem;
-  margin: 6.6rem auto;
+  margin: 10rem auto;
 `;

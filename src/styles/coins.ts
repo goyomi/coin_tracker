@@ -56,6 +56,10 @@ export const CoinList = styled.table`
 `;
 
 export const CoinListHead = styled.thead`
+  position: sticky;
+  top: 10rem;
+  background-color: #fff;
+  box-shadow: inset 0 -0.1rem ${(props) => props.theme.grey1Color};
   font-size: 1.2rem;
   tr > th {
     padding: 1.85rem 0;
