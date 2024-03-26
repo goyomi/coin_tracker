@@ -1,5 +1,11 @@
 import { A11y } from "../styles/common";
-import { CoinList, CoinListHead, CoinListItem, Name } from "../styles/coins";
+import {
+  CoinList,
+  CoinListHead,
+  CoinListItem,
+  Name,
+  NavTimebarWrapper,
+} from "../styles/coins";
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
@@ -7,6 +13,7 @@ import { useContext } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import Loading from "../components/Loading";
 import Timebar from "../components/Timebar";
+import Breadcrumb from "../components/Breadcrumb";
 
 function Coins() {
   const { data, isLoading } = useContext(CoinDataContext);
@@ -17,6 +24,7 @@ function Coins() {
     "30d": "1M",
     "365d": "1Y",
   };
+  const links = [{ name: "Coins Currency", path: "/" }];
 
   return (
     <>
@@ -26,7 +34,10 @@ function Coins() {
         <>
           <Header />
           <A11y>Coin Tracker Table</A11y>
-          <Timebar times={times} />
+          <NavTimebarWrapper>
+            <Breadcrumb links={links} />
+            <Timebar times={times} />
+          </NavTimebarWrapper>
           <main>
             <CoinList>
               <CoinListHead>

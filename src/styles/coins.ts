@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { IToggleNumber } from "../types/coin";
 import { Link } from "react-router-dom";
 
+export const NavTimebarWrapper = styled.div`
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const CoinList = styled.table`
   width: 100%;
   table-layout: fixed;
