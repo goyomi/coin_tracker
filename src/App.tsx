@@ -5,15 +5,19 @@ import { MainContainer } from "./styles/common";
 import { ICoin } from "./types/coin";
 import { fetchCoins } from "./services/api";
 import { CoinDataContext } from "./contexts/CoinDataContext";
+import { useState } from "react";
 
 function App() {
-  const { data, isLoading } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
+  const [time, setTime] = useState("1h");
+  const { data, isLoading } = useQuery<ICoin[]>(["allCoins", time], () =>
+    fetchCoins(time)
+  );
 
   return (
     <CoinDataContext.Provider value={{ data: data ?? undefined, isLoading }}>
       <GlobalStyle />
       <MainContainer>
-        <Routes />
+        <Routes setTime={setTime} />
       </MainContainer>
     </CoinDataContext.Provider>
   );

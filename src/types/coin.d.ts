@@ -67,6 +67,7 @@ interface IChart {
 export interface ITimes {
   times: { [key: string]: string };
   setDays?: Function;
+  setTime?: Function;
 }
 
 // utils

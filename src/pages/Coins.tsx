@@ -15,7 +15,7 @@ import Loading from "../components/Loading";
 import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
 
-function Coins() {
+function Coins({ setTime }: { setTime: Function }) {
   const { data, isLoading } = useContext(CoinDataContext);
   const times = {
     "1h": "1H",
@@ -25,7 +25,7 @@ function Coins() {
     "365d": "1Y",
   };
   const links = [{ name: "Coins Currency", path: "/" }];
-
+  console.log(isLoading);
   return (
     <>
       {isLoading ? (
@@ -36,7 +36,7 @@ function Coins() {
           <A11y>Coin Tracker Table</A11y>
           <NavTimebarWrapper>
             <Breadcrumb links={links} />
-            <Timebar times={times} />
+            <Timebar times={times} setTime={setTime} />
           </NavTimebarWrapper>
           <main>
             <CoinList>
