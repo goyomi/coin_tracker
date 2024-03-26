@@ -9,5 +9,6 @@ declare module "styled-components" {
     changeUpColor: string;
     changeDownColor: string;
     onActiveColor: string;
+    backgroundColor: string;
   }
 }

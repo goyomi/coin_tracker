@@ -8,4 +8,5 @@ export const theme: DefaultTheme = {
   changeUpColor: "#3ACC8A",
   changeDownColor: "#DF5F67",
   onActiveColor: "#0052FF",
+  backgroundColor: "#E9F6FF",
 };
