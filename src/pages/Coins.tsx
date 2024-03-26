@@ -76,7 +76,12 @@ function Coins({ setTime }: { setTime: Function }) {
                       </Name>
                     </td>
                     <td className="coin_price">
-                      <div>USD {coin.current_price}</div>
+                      <div>
+                        USD{" "}
+                        {0 < coin.current_price
+                          ? coin.current_price.toFixed(2)
+                          : coin.current_price}
+                      </div>
                     </td>
                     <td className="coin_change_percentage">
                       <ToggleColorWithValue
