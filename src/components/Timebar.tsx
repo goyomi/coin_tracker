@@ -15,11 +15,7 @@ function Timebar({ times, setDays, setTime }: ITimes) {
   return (
     <ButtonWrapper>
       {Object.entries(times).map(([id, value]) => (
-        <button
-          id={id}
-          className={isActive === id ? "isActive" : ""}
-          onClick={handleClickBtn}
-        >
+        <button id={id} className={isActive === id ? "isActive" : ""} onClick={handleClickBtn}>
           {value}
         </button>
       ))}

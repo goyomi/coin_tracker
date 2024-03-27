@@ -1,6 +1,7 @@
 export interface IContext {
   data: ICoin[] | undefined;
   isLoading: boolean;
+  isError: boolean;
 }
 
 // coins
@@ -32,6 +33,10 @@ export interface ICoin {
   symbol: string;
   total_supply: number;
   total_volume: number;
+  price_change_percentage_1h_in_currency?: number;
+  price_change_percentage_24h_in_currency?: number;
+  price_change_percentage_7d_in_currency?: number;
+  price_change_percentage_30d_in_currency?: number;
 }
 
 // coin

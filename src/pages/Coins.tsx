@@ -1,11 +1,5 @@
 import { A11y } from "../styles/common";
-import {
-  CoinList,
-  CoinListHead,
-  CoinListItem,
-  Name,
-  NavTimebarWrapper,
-} from "../styles/coins";
+import { CoinList, CoinListHead, CoinListItem, Name, NavTimebarWrapper } from "../styles/coins";
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
@@ -14,18 +8,21 @@ import { CoinDataContext } from "../contexts/CoinDataContext";
 import Loading from "../components/Loading";
 import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
+import { ICoin } from "../types/coin";
 
-function Coins({ setTime }: { setTime: Function }) {
-  const { data, isLoading } = useContext(CoinDataContext);
+function Coins({ time, setTime }: { time: string; setTime: Function }) {
+  const { data, isLoading, isError } = useContext(CoinDataContext);
   const times = {
-    "1h": "1H",
-    "24h": "24H",
-    "7d": "1W",
-    "30d": "1M",
-    "365d": "1Y",
+    "1h": "1h",
+    "24h": "24h",
+    "7d": "7d",
+    "30d": "30d",
+    // "365d": "365d",
   };
   const links = [{ name: "Coins Currency", path: "/" }];
-  console.log(isLoading);
+  const key = `price_change_percentage_${time}_in_currency` as keyof ICoin;
+  console.log(isError);
+
   return (
     <>
       {isLoading ? (
@@ -51,11 +48,8 @@ function Coins({ setTime }: { setTime: Function }) {
                   <th className="change">
                     <div>Change</div>
                   </th>
-                  <th className="price_chart">
-                    <div>Price chart</div>
-                  </th>
                   <th className="volume">
-                    <div>Volume(24h)</div>
+                    <div>24h Volume</div>
                   </th>
                   <th className="market_cap">
                     <div>Market Cap</div>
@@ -76,30 +70,16 @@ function Coins({ setTime }: { setTime: Function }) {
                       </Name>
                     </td>
                     <td className="coin_price">
-                      <div>
-                        USD{" "}
-                        {0 < coin.current_price
-                          ? coin.current_price.toFixed(2)
-                          : coin.current_price}
-                      </div>
+                      <div>USD {0 < coin.current_price ? coin.current_price.toFixed(2) : coin.current_price}</div>
                     </td>
                     <td className="coin_change_percentage">
-                      <ToggleColorWithValue
-                        number={coin.price_change_percentage_24h}
-                      />
+                      <ToggleColorWithValue number={Number(coin[key])} />
                     </td>
-                    <td className="coin_price_chart"></td>
                     <td className="coin_volume">
-                      <NumberFormatter
-                        number={coin.total_volume}
-                        currencyCode="USD "
-                      />
+                      <NumberFormatter number={coin.total_volume} currencyCode="USD " />
                     </td>
                     <td className="coin_market_cap">
-                      <NumberFormatter
-                        number={coin.market_cap}
-                        currencyCode="USD "
-                      />
+                      <NumberFormatter number={coin.market_cap} currencyCode="USD " />
                     </td>
                     <td className="coin_supply">
                       <NumberFormatter number={coin.circulating_supply} />

@@ -1,21 +1,18 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { IChart } from "../types/coin";
-// import { useState } from "react";
 import Timebar from "./Timebar";
 import { useState } from "react";
-// import { ButtonWrapper } from "../styles/timebar";
 
 function Chart({ selectedCoin, queries }: IChart) {
   const [days, setDays] = useState("1");
-  const { data: currentData } =
-    queries[days.toString() as keyof typeof queries];
+  const { data: currentData } = queries[days.toString() as keyof typeof queries];
 
   const times = {
-    "1": "1H",
-    "7": "1W",
-    "30": "1M",
-    "365": "1Y",
+    "1": "1h",
+    "7": "1w",
+    "30": "1m",
+    "365": "1y",
   };
 
   // chart option

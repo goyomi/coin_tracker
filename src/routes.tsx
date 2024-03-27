@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Coin from "./pages/Coin";
 import Coins from "./pages/Coins";
 
-function Routes({ setTime }: { setTime: Function }) {
+function Routes({ time, setTime }: { time: string; setTime: Function }) {
   return (
     <Router>
       <Switch>
@@ -10,7 +10,7 @@ function Routes({ setTime }: { setTime: Function }) {
           <Coin />
         </Route>
         <Route path="/">
-          <Coins setTime={setTime} />
+          <Coins time={time} setTime={setTime} />
         </Route>
       </Switch>
     </Router>

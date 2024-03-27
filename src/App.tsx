@@ -9,15 +9,13 @@ import { useState } from "react";
 
 function App() {
   const [time, setTime] = useState("1h");
-  const { data, isLoading } = useQuery<ICoin[]>(["allCoins", time], () =>
-    fetchCoins(time)
-  );
+  const { data, isLoading, isError } = useQuery<ICoin[]>(["allCoins", time], () => fetchCoins(time));
 
   return (
-    <CoinDataContext.Provider value={{ data: data ?? undefined, isLoading }}>
+    <CoinDataContext.Provider value={{ data: data ?? undefined, isLoading, isError }}>
       <GlobalStyle />
       <MainContainer>
-        <Routes setTime={setTime} />
+        <Routes time={time} setTime={setTime} />
       </MainContainer>
     </CoinDataContext.Provider>
   );
