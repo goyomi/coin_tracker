@@ -4,7 +4,7 @@ export const HeadTitle = styled.header`
   position: fixed;
   top: 0;
   left: auto;
-  width: 96rem;
+  width: 104rem;
   height: 10rem;
   padding: 2rem;
   background-color: #fff;

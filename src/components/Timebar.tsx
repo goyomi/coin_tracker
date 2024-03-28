@@ -5,14 +5,15 @@ import styled from "styled-components";
 const ButtonWrapper = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  text-align: right;
   ol {
     display: flex;
+    justify-content: flex-end;
     gap: 1rem;
   }
   ol li button {
     padding: 1rem;
     font-size: 1.5rem;
+    text-transform: uppercase;
     border-radius: 0.5rem;
     cursor: pointer;
   }
