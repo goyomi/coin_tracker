@@ -1,4 +1,4 @@
-const BASE_URL = `https://api.coingecko.com/api/v3/coins`;
+const BASE_URL = `/api/v3/coins`;
 
 export async function fetchCoins(time: string) {
   return await (
@@ -9,9 +9,7 @@ export async function fetchCoins(time: string) {
 }
 
 export async function ohlc(coinId: string, days: number) {
-  return await (
-    await fetch(`${BASE_URL}/${coinId}/ohlc?vs_currency=usd&days=${days}`)
-  ).json();
+  return await (await fetch(`${BASE_URL}/${coinId}/ohlc?vs_currency=usd&days=${days}`)).json();
 }
 
 export async function introCoin(coinId: string) {
