@@ -1,4 +1,7 @@
+import { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { CoinDataContext } from "../contexts/CoinDataContext";
 
 const ErrorArticle = styled.article`
   width: 100vw;
@@ -24,6 +27,15 @@ const ErrorArticle = styled.article`
 `;
 
 function ErrorPage() {
+  const { isError } = useContext(CoinDataContext);
+  const history = useHistory();
+  useEffect(() => {
+    if (!isError) {
+      console.log("에러가 아닙니다");
+      history.goBack();
+    }
+  }, [isError, history]);
+
   return (
     <ErrorArticle>
       <img src="/assets/error_image.jpeg" alt="unplugged code" />
