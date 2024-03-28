@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   CoinConvertor,
   CoinData,
@@ -29,7 +29,7 @@ import Breadcrumb from "../components/Breadcrumb";
 
 function Coin() {
   // data fetch - coin 상세정보
-  const { data: coinData, isLoading } = useContext(CoinDataContext);
+  const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
   const selectedCoin = coinData?.find((coin: ICoin) => coin.id === coinId);
   // data fetch - chart
@@ -72,12 +72,12 @@ function Coin() {
     [query1, query7, query30, query365]
   );
   // data fetch - coin 소개(about)
-  const { data: coinIntro, isLoading: coinIntroLoading } = useQuery<ICoinIntro>(
-    ["intro", coinId],
-    () => introCoin(coinId),
-    { staleTime: Infinity }
-  );
-  const textLine = coinIntro?.description.en.split("\r\n");
+  const {
+    data: coinIntro,
+    isLoading: coinIntroLoading,
+    isError: coinIntroError,
+  } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId), { staleTime: Infinity });
+  const textLine = coinIntro?.description?.en.split("\r\n");
 
   const [inputOne, setInputOne] = useState<number | "">(0);
   const [inputTwo, setInputTwo] = useState<number | "">(0);
@@ -106,9 +106,7 @@ function Coin() {
   };
 
   useEffect(() => {
-    const isQueriesLoading = Object.values(queries).some(
-      (query) => query.isLoading
-    );
+    const isQueriesLoading = Object.values(queries).some((query) => query.isLoading);
     setChartQueryLoading(isQueriesLoading);
   }, [queries]);
 
@@ -119,6 +117,14 @@ function Coin() {
     { name: "Coins Currency", path: "/" },
     { name: coinId, path: `/${coinId}` },
   ];
+
+  const history = useHistory();
+  // const errors = isError || coinIntroError;
+  useEffect(() => {
+    if (isError || coinIntroError) {
+      history.push("/error");
+    }
+  }, [history, isError, coinIntroError]);
 
   return (
     <>
@@ -139,16 +145,12 @@ function Coin() {
                     <img src={selectedCoin.image} alt={selectedCoin.name} />
                     <span className="coin_name">{selectedCoin.name}</span>
                     <span className="coin_symbol">{selectedCoin.symbol}</span>
-                    <span className="coin_rank">
-                      # {selectedCoin.market_cap_rank}
-                    </span>
+                    <span className="coin_rank"># {selectedCoin.market_cap_rank}</span>
                   </CoinTitle>
                   <CoinPrice>
                     <span>US $</span>
                     <ThousandSeparator number={selectedCoin.current_price} />
-                    <ToggleColorWithValue
-                      number={selectedCoin.price_change_percentage_24h}
-                    />
+                    <ToggleColorWithValue number={selectedCoin.price_change_percentage_24h} />
                   </CoinPrice>
                   <CoinDataTable>
                     <tbody>
@@ -161,33 +163,25 @@ function Coin() {
                       <tr>
                         <th>Fully Diluted Valuation</th>
                         <td>
-                          <ThousandSeparator
-                            number={selectedCoin.fully_diluted_valuation}
-                          />
+                          <ThousandSeparator number={selectedCoin.fully_diluted_valuation} />
                         </td>
                       </tr>
                       <tr>
                         <th>24 Hour Trading Vol</th>
                         <td>
-                          <ThousandSeparator
-                            number={selectedCoin.total_volume}
-                          />
+                          <ThousandSeparator number={selectedCoin.total_volume} />
                         </td>
                       </tr>
                       <tr>
                         <th>Circulating Supply</th>
                         <td>
-                          <ThousandSeparator
-                            number={selectedCoin.circulating_supply}
-                          />
+                          <ThousandSeparator number={selectedCoin.circulating_supply} />
                         </td>
                       </tr>
                       <tr>
                         <th>Total Supply</th>
                         <td>
-                          <ThousandSeparator
-                            number={selectedCoin.total_supply}
-                          />
+                          <ThousandSeparator number={selectedCoin.total_supply} />
                         </td>
                       </tr>
                       <tr>
@@ -203,21 +197,11 @@ function Coin() {
               <CoinConvertor>
                 <h4>{selectedCoin?.symbol} Converter</h4>
                 <div className="input_wrapper">
-                  <input
-                    type="number"
-                    value={inputOne}
-                    onChange={handleInputOneChange}
-                    onFocus={handleInputOneFocus}
-                  />
+                  <input type="number" value={inputOne} onChange={handleInputOneChange} onFocus={handleInputOneFocus} />
                   <span>{selectedCoin?.symbol}</span>
                 </div>
                 <div className="input_wrapper">
-                  <input
-                    type="number"
-                    value={inputTwo}
-                    onChange={handleInputTwoChange}
-                    onFocus={handleInputTwoFocus}
-                  />
+                  <input type="number" value={inputTwo} onChange={handleInputTwoChange} onFocus={handleInputTwoFocus} />
                   <span>USD</span>
                 </div>
               </CoinConvertor>
@@ -236,30 +220,14 @@ function Coin() {
                     <tr>
                       <th>All-Time High</th>
                       <td>
-                        <i>
-                          (
-                          {selectedCoin?.ath_date
-                            ? new Date(
-                                selectedCoin?.ath_date
-                              ).toLocaleDateString()
-                            : ""}
-                          )
-                        </i>
+                        <i>({selectedCoin?.ath_date ? new Date(selectedCoin?.ath_date).toLocaleDateString() : ""})</i>
                         <ThousandSeparator number={selectedCoin?.ath} />
                       </td>
                     </tr>
                     <tr>
                       <th>All-Time Low</th>
                       <td>
-                        <i>
-                          (
-                          {selectedCoin?.atl_date
-                            ? new Date(
-                                selectedCoin.atl_date
-                              ).toLocaleDateString()
-                            : ""}
-                          )
-                        </i>
+                        <i>({selectedCoin?.atl_date ? new Date(selectedCoin.atl_date).toLocaleDateString() : ""})</i>
                         <ThousandSeparator number={selectedCoin?.atl} />
                       </td>
                     </tr>
@@ -272,9 +240,7 @@ function Coin() {
               <CoinIntro>
                 <h2>About</h2>
                 {textLine?.map((text: string, idx: number) => (
-                  <React.Fragment key={idx}>
-                    {parse(`<p>${text}</p>`)}
-                  </React.Fragment>
+                  <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
                 ))}
               </CoinIntro>
             </RightZone>

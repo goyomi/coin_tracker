@@ -3,26 +3,31 @@ import { CoinList, CoinListHead, CoinListItem, Name, NavTimebarWrapper } from ".
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import Loading from "../components/Loading";
 import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { ICoin } from "../types/coin";
+import { useHistory } from "react-router-dom";
 
 function Coins({ time, setTime }: { time: string; setTime: Function }) {
-  const { data, isLoading, isError } = useContext(CoinDataContext);
+  const { data, isLoading, isError, error } = useContext(CoinDataContext);
   const times = {
     "1h": "1h",
     "24h": "24h",
     "7d": "7d",
-    "30d": "30d",
-    // "365d": "365d",
+    // "30d": "30d",
   };
   const links = [{ name: "Coins Currency", path: "/" }];
   const key = `price_change_percentage_${time}_in_currency` as keyof ICoin;
-  console.log(isError);
-
+  const history = useHistory();
+  useEffect(() => {
+    if (isError) {
+      history.push("/error");
+      console.log("에러메세지:", error);
+    }
+  }, [isError, history, error]);
   return (
     <>
       {isLoading ? (
