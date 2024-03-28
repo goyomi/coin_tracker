@@ -12,25 +12,29 @@ import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const [time, setTime] = useState("1h");
-  const { data, isLoading, isError } = useQuery<ICoin[]>(["allCoins", time], () => fetchCoins(time));
+  const { data, isLoading, isError, error } = useQuery<ICoin[]>(["allCoins", time], () => fetchCoins(time), {
+    staleTime: Infinity,
+  });
 
   return (
-    <CoinDataContext.Provider value={{ data: data ?? undefined, isLoading, isError }}>
+    <CoinDataContext.Provider value={{ data, isLoading, isError, error }}>
       <GlobalStyle />
       <Router>
         <Switch>
           <Route path="/error">
             <ErrorPage />
           </Route>
-          <MainContainer>
+        </Switch>
+        <MainContainer>
+          <Switch>
             <Route path="/:coinId">
               <Coin />
             </Route>
             <Route path="/">
               <Coins time={time} setTime={setTime} />
             </Route>
-          </MainContainer>
-        </Switch>
+          </Switch>
+        </MainContainer>
       </Router>
     </CoinDataContext.Provider>
   );
