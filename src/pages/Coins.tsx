@@ -1,5 +1,5 @@
 import { A11y } from "../styles/common";
-import { CoinList, CoinListHead, CoinListItem, Name, NavTimebarWrapper } from "../styles/coins";
+import { CoinList, CoinListHead, CoinListItem, Main, Name, NavTimebarWrapper } from "../styles/coins";
 import NumberFormatter from "../utils/numberFormatter";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
@@ -10,6 +10,7 @@ import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { ICoin } from "../types/coin";
 import { useHistory } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Coins({ time, setTime }: { time: string; setTime: Function }) {
   const { data, isLoading, isError, error } = useContext(CoinDataContext);
@@ -35,42 +36,48 @@ function Coins({ time, setTime }: { time: string; setTime: Function }) {
       ) : (
         <>
           <Header />
-          <A11y>Coin Tracker Table</A11y>
-          <NavTimebarWrapper>
-            <Breadcrumb links={links} />
-            <Timebar times={times} setTime={setTime} />
-          </NavTimebarWrapper>
-          <main>
+          <Main>
+            <A11y>Coin Tracker Table</A11y>
+            <NavTimebarWrapper>
+              <Breadcrumb links={links} />
+              <Timebar times={times} setTime={setTime} />
+            </NavTimebarWrapper>
             <CoinList>
               <CoinListHead>
                 <tr>
+                  <th className="rank">
+                    <span>#</span>
+                  </th>
                   <th className="name">
-                    <div>Name</div>
+                    <span>Name</span>
                   </th>
                   <th className="price">
-                    <div>Price</div>
+                    <span>Price</span>
                   </th>
                   <th className="change">
-                    <div>Change</div>
+                    <span>Change</span>
                   </th>
                   <th className="volume">
-                    <div>24h Volume</div>
+                    <span>24h Volume</span>
                   </th>
                   <th className="market_cap">
-                    <div>Market Cap</div>
+                    <span>Market Cap</span>
                   </th>
                   <th className="supply">
-                    <div>Supply</div>
+                    <span>Supply</span>
                   </th>
                 </tr>
               </CoinListHead>
               <CoinListItem>
                 {data?.map((coin) => (
                   <tr key={coin.id}>
+                    <td className="coin_rank">
+                      <span>{coin.market_cap_rank}</span>
+                    </td>
                     <td>
                       <Name to={`/${coin.id}`} className="coin_name">
                         <img src={coin.image} alt={coin.name} />
-                        <span>{coin.name}</span>
+                        <span className="coin_name">{coin.name}</span>
                         <span className="coin_symbol">{coin.symbol}</span>
                       </Name>
                     </td>
@@ -93,7 +100,8 @@ function Coins({ time, setTime }: { time: string; setTime: Function }) {
                 ))}
               </CoinListItem>
             </CoinList>
-          </main>
+          </Main>
+          <Footer />
         </>
       )}
     </>
