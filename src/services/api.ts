@@ -3,7 +3,7 @@ const BASE_URL = `/api/v3/coins`;
 export async function fetchCoins(time: string) {
   return await (
     await fetch(
-      `${BASE_URL}/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=false&price_change_percentage=${time}&locale=en`
+      `${BASE_URL}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=${time}&locale=en`
     )
   ).json();
 }
