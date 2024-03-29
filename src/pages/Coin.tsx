@@ -22,7 +22,7 @@ import Chart from "../components/Chart";
 import { useQuery } from "@tanstack/react-query";
 import { introCoin, ohlc } from "../services/api";
 import parse from "html-react-parser";
-import Loading from "../components/Loading";
+import Loading from "./LoadingPage";
 import Header from "../components/Header";
 import { NavTimebarWrapper } from "../styles/coins";
 import Breadcrumb from "../components/Breadcrumb";

@@ -5,7 +5,7 @@ import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
 import { useContext, useEffect } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
-import Loading from "../components/Loading";
+import Loading from "./LoadingPage";
 import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { ICoin } from "../types/coin";
