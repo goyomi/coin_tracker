@@ -6,13 +6,9 @@ import {
   CoinData,
   CoinDataTable,
   CoinIntro,
-  CoinPrice,
-  CoinTitle,
   CoinWrapper,
   HistoricalPrice,
   HistoricalPriceTable,
-  LeftZone,
-  RightZone,
 } from "../styles/coin";
 import { A11y } from "../styles/common";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
@@ -138,21 +134,23 @@ function Coin() {
           </NavTimebarWrapper>
           <CoinWrapper>
             <A11y as="h1">Coin detail page</A11y>
-            <LeftZone>
+            <div className="left_zone">
               {selectedCoin ? (
                 <CoinData key={selectedCoin.id}>
-                  <CoinTitle>
+                  <div className="coin_title">
+                    <A11y>Coin Title</A11y>
                     <img src={selectedCoin.image} alt={selectedCoin.name} />
                     <span className="coin_name">{selectedCoin.name}</span>
                     <span className="coin_symbol">{selectedCoin.symbol}</span>
-                    <span className="coin_rank"># {selectedCoin.market_cap_rank}</span>
-                  </CoinTitle>
-                  <CoinPrice>
-                    <span>US $</span>
+                    <span className="coin_rank">#{selectedCoin.market_cap_rank}</span>
+                  </div>
+                  <div className="coin_price">
+                    <A11y as="h3">Coin Price</A11y>
                     <ThousandSeparator number={selectedCoin.current_price} />
                     <ToggleColorWithValue number={selectedCoin.price_change_percentage_24h} />
-                  </CoinPrice>
+                  </div>
                   <CoinDataTable>
+                    <A11y as="h3">Coin Data Table</A11y>
                     <tbody>
                       <tr>
                         <th>Market Cap</th>
@@ -195,18 +193,24 @@ function Coin() {
                 </CoinData>
               ) : null}
               <CoinConvertor>
-                <h4>{selectedCoin?.symbol} Converter</h4>
-                <div className="input_wrapper">
+                <h3>
+                  <span className="coin_symbol">{selectedCoin?.symbol}</span>
+                  <span>Converter</span>
+                </h3>
+                <div className="coin input_wrapper">
                   <input type="number" value={inputOne} onChange={handleInputOneChange} onFocus={handleInputOneFocus} />
                   <span>{selectedCoin?.symbol}</span>
                 </div>
-                <div className="input_wrapper">
+                <div className="current input_wrapper">
                   <input type="number" value={inputTwo} onChange={handleInputTwoChange} onFocus={handleInputTwoFocus} />
                   <span>USD</span>
                 </div>
               </CoinConvertor>
               <HistoricalPrice>
-                <h2>{selectedCoin?.symbol} Historical Price</h2>
+                <h3>
+                  <span className="coin_symbol">{selectedCoin?.symbol}</span>
+                  <span>Historical Price</span>
+                </h3>
                 <HistoricalPriceTable>
                   <tbody>
                     <tr>
@@ -234,8 +238,8 @@ function Coin() {
                   </tbody>
                 </HistoricalPriceTable>
               </HistoricalPrice>
-            </LeftZone>
-            <RightZone>
+            </div>
+            <div className="right_zone">
               <Chart selectedCoin={selectedCoin} queries={queries} />
               <CoinIntro>
                 <h2>About</h2>
@@ -243,7 +247,7 @@ function Coin() {
                   <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
                 ))}
               </CoinIntro>
-            </RightZone>
+            </div>
           </CoinWrapper>
         </>
       )}
