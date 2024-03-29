@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITimes } from "../types/coin";
 import styled from "styled-components";
 
@@ -25,7 +25,11 @@ const ButtonWrapper = styled.div`
 `;
 
 function Timebar({ times, setDays, setTime }: ITimes) {
-  const [isActive, setIsActive] = useState(Object.keys(times)[0]);
+  const [isActive, setIsActive] = useState(() => localStorage.getItem("activeTime") || Object.keys(times)[0]);
+
+  useEffect(() => {
+    localStorage.setItem("activeTime", isActive);
+  }, [isActive]);
 
   const handleClickBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
