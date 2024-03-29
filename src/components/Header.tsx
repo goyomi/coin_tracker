@@ -10,17 +10,16 @@ const HeaderPart = styled.header`
   position: fixed;
   top: 0;
   left: auto;
-  width: 104rem;
-  height: 10rem;
+  width: 124rem;
   padding: 2rem;
   background-color: #fff;
-  box-shadow: 0 0.1rem ${(props) => props.theme.grey1Color};
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     h1 .logo {
       width: 10rem;
+      height: auto;
     }
   }
 `;

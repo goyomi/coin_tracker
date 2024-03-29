@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const FooterPart = styled.footer`
-  width: 104rem;
-  height: 10rem;
+  width: 124rem;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -11,6 +10,7 @@ const FooterPart = styled.footer`
   .img_wrapper {
     .logo {
       width: 10rem;
+      height: auto;
       margin-bottom: 1rem;
     }
     .github_and_email {
@@ -30,14 +30,15 @@ const FooterPart = styled.footer`
   }
 
   .text_wrapper {
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     p {
       margin-bottom: 1rem;
       color: ${(props) => props.theme.secondFontColor};
     }
     strong a {
       font-weight: bold;
+      color: #71c93c;
     }
   }
 `;
@@ -67,9 +68,13 @@ function Footer() {
       </div>
       <div className="text_wrapper">
         <p>
-          Provides information on the top 100 coins. Data provided on this site is for informational purposes only.
-          Always do your own research before making any investment decisions. Prices may not be accurate and may differ
-          from the actual market price.
+          Coin Tracker offers a comprehensive overview of the leading 100 cryptocurrencies, presenting a broad array of
+          data to enhance your understanding of the crypto market. The information provided by Coin Tracker serves
+          solely for informational purposes, aiming to equip you with the insights needed to navigate the complex
+          landscape of cryptocurrency. It's crucial to undertake thorough research independently prior to making any
+          investment choices, as the dynamic nature of the crypto market can lead to rapid changes. Please be advised
+          that the prices displayed on Coin Tracker may not always mirror the exact market prices due to fluctuations
+          and market conditions, and should therefore be used as a guide rather than definitive financial advice.
         </p>
         <strong>
           Data from <a href="https://www.coingecko.com/api/documentation">CoinGecko</a>
