@@ -1,47 +1,63 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { HeadTitle } from "../styles/header";
+import styled from "styled-components";
+
+interface IToggleButton {
+  toggleOn: boolean;
+}
+
+const HeaderPart = styled.header`
+  position: fixed;
+  top: 0;
+  left: auto;
+  width: 104rem;
+  height: 10rem;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0.1rem ${(props) => props.theme.grey1Color};
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 .logo {
+      width: 10rem;
+    }
+  }
+`;
+
+const ToggleButton = styled.button<IToggleButton>`
+  width: 5.5rem;
+  height: 3rem;
+  border-radius: 3rem;
+  background-color: ${(props) => (props.toggleOn ? props.theme.onActiveColor : "rgb(233,233,234)")};
+  transition: 0.6s cubic-bezier(0.4, 0, 1, 1);
+  .circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgb(255, 254, 255);
+    margin-left: ${(props) => (props.toggleOn ? "auto" : "")};
+  }
+`;
 
 function Header() {
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText("ghdl1004797@gamil.com");
-      alert("이메일 주소가 복사되었습니다!");
-    } catch (err) {
-      console.error("복사실패:", err);
-    }
+  const [toggleOn, setToggleOn] = useState(false);
+  const handleToggleButton = () => {
+    setToggleOn(!toggleOn);
   };
-
   return (
-    <HeadTitle>
-      <h1>
-        <Link to="/">
-          <img
-            className="logo"
-            src="/assets/coin_tracker_logo.jpg"
-            alt="Coin Tracker Logo"
-          />
-        </Link>
-        <div>
-          <a
-            href="https://github.com/goyomi"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              className="github"
-              src="/assets/github_logo.png"
-              alt="GitHub Logo"
-            />
-          </a>
-          <img
-            className="email"
-            src="/assets/gmail_logo.png"
-            alt="Gmail Logo"
-            onClick={copyEmail}
-          />
-        </div>
-      </h1>
-    </HeadTitle>
+    <HeaderPart>
+      <div>
+        <h1>
+          <Link to="/">
+            <img className="logo" src="/assets/coin_tracker_logo.jpg" alt="Coin Tracker Logo" />
+          </Link>
+        </h1>
+        <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>
+          <div className="circle" />
+        </ToggleButton>
+      </div>
+    </HeaderPart>
   );
 }
 
