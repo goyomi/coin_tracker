@@ -13,6 +13,7 @@ const HeaderPart = styled.header`
   width: 124rem;
   padding: 2rem;
   background-color: #fff;
+  z-index: 20;
   div {
     display: flex;
     justify-content: space-between;
