@@ -36,6 +36,10 @@ function Chart({ selectedCoin, queries }: IChart) {
     title: {
       text: `${selectedCoin?.name} Chart`,
       align: "left",
+      style: {
+        fontSize: "20px",
+        fontWeight: "normal",
+      },
     },
     xaxis: {
       type: "datetime",
@@ -67,7 +71,7 @@ function Chart({ selectedCoin, queries }: IChart) {
           series={[{ data: seriesData || [] }]}
           type="candlestick"
           height={350}
-          width={600}
+          width={700}
         />
       </section>
     </>
