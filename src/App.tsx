@@ -19,7 +19,7 @@ function App() {
   return (
     <CoinDataContext.Provider value={{ data, isLoading, isError, error }}>
       <GlobalStyle />
-      <BrowserRouter basename="/">
+      <BrowserRouter basename="/coin_tracker">
         <Switch>
           <Route path="/error">
             <ErrorPage />
