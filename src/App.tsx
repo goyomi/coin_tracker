@@ -5,7 +5,7 @@ import { ICoin } from "./types/coin";
 import { fetchCoins } from "./services/api";
 import { CoinDataContext } from "./contexts/CoinDataContext";
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Coin from "./pages/Coin";
 import Coins from "./pages/Coins";
 import ErrorPage from "./pages/ErrorPage";
@@ -19,7 +19,7 @@ function App() {
   return (
     <CoinDataContext.Provider value={{ data, isLoading, isError, error }}>
       <GlobalStyle />
-      <Router>
+      <BrowserRouter basename="/">
         <Switch>
           <Route path="/error">
             <ErrorPage />
@@ -35,7 +35,7 @@ function App() {
             </Route>
           </Switch>
         </MainContainer>
-      </Router>
+      </BrowserRouter>
     </CoinDataContext.Provider>
   );
 }
