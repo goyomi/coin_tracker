@@ -57,13 +57,13 @@ function Footer() {
     <FooterPart>
       <div className="img_wrapper">
         <Link to="/">
-          <img className="logo" src="/assets/coin_tracker_logo.jpg" alt="coin tracker logo" />
+          <img className="logo" src="/public/assets/coin_tracker_logo.jpg" alt="coin tracker logo" />
         </Link>
         <div className="github_and_email">
           <a href="https://github.com/goyomi" target="_blank" rel="noopener noreferrer">
-            <img className="github" src="/assets/github_logo.png" alt="GitHub Logo" />
+            <img className="github" src="/public/assets/github_logo.png" alt="GitHub Logo" />
           </a>
-          <img className="gmail" src="/assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
+          <img className="gmail" src="/public/assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
         </div>
       </div>
       <div className="text_wrapper">

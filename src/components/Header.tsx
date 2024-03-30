@@ -50,7 +50,7 @@ function Header() {
       <div>
         <h1>
           <Link to="/">
-            <img className="logo" src="/assets/coin_tracker_logo.jpg" alt="Coin Tracker Logo" />
+            <img className="logo" src="/public/assets/coin_tracker_logo.jpg" alt="Coin Tracker Logo" />
           </Link>
         </h1>
         <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>
