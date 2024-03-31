@@ -61,17 +61,12 @@ export interface IChartQueries {
   "365": UseQueryResult<IOhlc[], unknown>;
 }
 
-// chart
 interface IOhlc {
   0: number;
   1: number;
   2: number;
   3: number;
   4: number;
-}
-interface IChart {
-  selectedCoin: ICoin | undefined;
-  queries: IChartQueries;
 }
 
 // timebar
