@@ -1,19 +1,21 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { IChart } from "../types/type";
 import Timebar from "./Timebar";
 import { useState } from "react";
+import { IChartQueries, ICoin } from "../types/type";
+import { theme } from "../styles/theme";
 
-function Chart({ selectedCoin, queries }: IChart) {
+interface IChart {
+  selectedCoin: ICoin | undefined;
+  queries: IChartQueries;
+  toggleOn: boolean;
+}
+
+function Chart({ selectedCoin, queries, toggleOn }: IChart) {
   const [days, setDays] = useState("1");
-  const { data: currentData } = queries[days.toString() as keyof typeof queries];
 
-  const times = {
-    "1": "1h",
-    "7": "1w",
-    "30": "1m",
-    "365": "1y",
-  };
+  const { data: currentData } = queries[days.toString() as keyof typeof queries];
+  const times = { "1": "1h", "7": "1w", "30": "1m", "365": "1y" };
 
   // chart option
   const seriesData = Array.isArray(currentData)
@@ -25,6 +27,7 @@ function Chart({ selectedCoin, queries }: IChart) {
       })
     : [];
 
+  const DARK_MODE_COLOR = "#E1E9F0";
   const chartOptions: ApexOptions = {
     chart: {
       type: "candlestick",
@@ -39,14 +42,25 @@ function Chart({ selectedCoin, queries }: IChart) {
       style: {
         fontSize: "20px",
         fontWeight: "normal",
+        color: toggleOn ? DARK_MODE_COLOR : "",
       },
     },
     xaxis: {
       type: "datetime",
+      labels: {
+        style: {
+          colors: toggleOn ? DARK_MODE_COLOR : "",
+        },
+      },
     },
     yaxis: {
       tooltip: {
         enabled: true,
+      },
+      labels: {
+        style: {
+          colors: toggleOn ? DARK_MODE_COLOR : "",
+        },
       },
     },
     plotOptions: {
@@ -56,9 +70,12 @@ function Chart({ selectedCoin, queries }: IChart) {
           downward: "#DF5F67",
         },
         wick: {
-          useFillColor: false,
+          useFillColor: true,
         },
       },
+    },
+    tooltip: {
+      theme: toggleOn ? "dark" : "light",
     },
   };
 

@@ -240,7 +240,7 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
               </HistoricalPrice>
             </div>
             <div className="right_zone">
-              <Chart selectedCoin={selectedCoin} queries={queries} />
+              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} />
               <CoinIntro>
                 <h2>About</h2>
                 {textLine?.map((text: string, idx: number) => (
