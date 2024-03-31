@@ -69,35 +69,36 @@ function Coins({ time, setTime }: { time: string; setTime: Function }) {
                 </tr>
               </CoinListHead>
               <CoinListItem>
-                {data?.map((coin) => (
-                  <tr key={coin.id}>
-                    <td className="coin_rank">
-                      <span>{coin.market_cap_rank}</span>
-                    </td>
-                    <td>
-                      <Name to={`/${coin.id}`} className="coin_name">
-                        <img src={coin.image} alt={coin.name} />
-                        <span className="coin_name">{coin.name}</span>
-                        <span className="coin_symbol">{coin.symbol}</span>
-                      </Name>
-                    </td>
-                    <td className="coin_price">
-                      <div>USD {0 < coin.current_price ? coin.current_price.toFixed(2) : coin.current_price}</div>
-                    </td>
-                    <td className="coin_change_percentage">
-                      <ToggleColorWithValue number={Number(coin[key])} />
-                    </td>
-                    <td className="coin_volume">
-                      <NumberFormatter number={coin.total_volume} currencyCode="USD " />
-                    </td>
-                    <td className="coin_market_cap">
-                      <NumberFormatter number={coin.market_cap} currencyCode="USD " />
-                    </td>
-                    <td className="coin_supply">
-                      <NumberFormatter number={coin.circulating_supply} />
-                    </td>
-                  </tr>
-                ))}
+                {Array.isArray(data) &&
+                  data.map((coin) => (
+                    <tr key={coin.id}>
+                      <td className="coin_rank">
+                        <span>{coin.market_cap_rank}</span>
+                      </td>
+                      <td>
+                        <Name to={`/${coin.id}`} className="coin_name">
+                          <img src={coin.image} alt={coin.name} />
+                          <span className="coin_name">{coin.name}</span>
+                          <span className="coin_symbol">{coin.symbol}</span>
+                        </Name>
+                      </td>
+                      <td className="coin_price">
+                        <div>USD {0 < coin.current_price ? coin.current_price.toFixed(2) : coin.current_price}</div>
+                      </td>
+                      <td className="coin_change_percentage">
+                        <ToggleColorWithValue number={Number(coin[key])} />
+                      </td>
+                      <td className="coin_volume">
+                        <NumberFormatter number={coin.total_volume} currencyCode="USD " />
+                      </td>
+                      <td className="coin_market_cap">
+                        <NumberFormatter number={coin.market_cap} currencyCode="USD " />
+                      </td>
+                      <td className="coin_supply">
+                        <NumberFormatter number={coin.circulating_supply} />
+                      </td>
+                    </tr>
+                  ))}
               </CoinListItem>
             </CoinList>
           </Main>

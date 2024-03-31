@@ -25,7 +25,7 @@ const ButtonWrapper = styled.div`
 `;
 
 function Timebar({ times, setDays, setTime }: ITimes) {
-  const [isActive, setIsActive] = useState(() => localStorage.getItem("activeTime") || Object.keys(times)[0]);
+  const [isActive, setIsActive] = useState(localStorage.getItem("activeTime") || Object.keys(times)[0]);
 
   useEffect(() => {
     localStorage.setItem("activeTime", isActive);
@@ -41,9 +41,9 @@ function Timebar({ times, setDays, setTime }: ITimes) {
   return (
     <ButtonWrapper>
       <ol>
-        {Object.entries(times).map(([id, value]) => (
-          <li key={id} id={id}>
-            <button id={id} className={isActive === id ? "isActive" : ""} onClick={handleClickBtn}>
+        {Object.entries(times).map(([key, value]) => (
+          <li key={key}>
+            <button id={key} className={isActive === key ? "isActive" : ""} onClick={handleClickBtn}>
               {value}
             </button>
           </li>
