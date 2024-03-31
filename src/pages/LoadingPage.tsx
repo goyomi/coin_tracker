@@ -46,7 +46,7 @@ function Loading() {
 
   return (
     <LoadingSection>
-      <img src="/assets/coingecko_logo_with_dark_text.png" alt="coin gecko logo" />
+      <img src="assets/coingecko_logo_with_dark_text.png" alt="coin gecko logo" />
       <div className="loading_text_wrapper">
         <span className="loading">Loading{dots}</span>
         <p>Please do not close and wait for a moment.</p>

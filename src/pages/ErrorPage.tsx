@@ -38,7 +38,7 @@ function ErrorPage() {
 
   return (
     <ErrorArticle>
-      <img src="/assets/error_image.jpeg" alt="unplugged code" />
+      <img src="assets/error_image.jpeg" alt="unplugged code" />
       <strong>404</strong>
       <p>It may take a few minutes to reload.</p>
       <p>Please press the refresh button or wait for a moment.</p>
