@@ -12,6 +12,8 @@ const FooterPart = styled.footer`
       width: 10rem;
       height: auto;
       margin-bottom: 1rem;
+      background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
+      border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
     }
     .github_and_email {
       display: flex;
@@ -20,6 +22,8 @@ const FooterPart = styled.footer`
       .github {
         width: 2.5rem;
         height: 2.5rem;
+        background-color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "")};
+        border-radius: ${(props) => (props.theme.mode === "dark" ? "50%" : "")};
       }
       .gmail {
         width: 2.2rem;
@@ -57,13 +61,13 @@ function Footer() {
     <FooterPart>
       <div className="img_wrapper">
         <Link to="/">
-          <img className="logo" src="/public/assets/coin_tracker_logo.jpg" alt="coin tracker logo" />
+          <img className="logo" src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
         </Link>
         <div className="github_and_email">
           <a href="https://github.com/goyomi" target="_blank" rel="noopener noreferrer">
-            <img className="github" src="/public/assets/github_logo.png" alt="GitHub Logo" />
+            <img className="github" src="assets/github_logo.png" alt="GitHub Logo" />
           </a>
-          <img className="gmail" src="/public/assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
+          <img className="gmail" src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
         </div>
       </div>
       <div className="text_wrapper">
@@ -77,7 +81,10 @@ function Footer() {
           and market conditions, and should therefore be used as a guide rather than definitive financial advice.
         </p>
         <strong>
-          Data from <a href="https://www.coingecko.com/api/documentation">CoinGecko</a>
+          Data from{" "}
+          <a href="https://www.coingecko.com/api/documentation" target="_blank" rel="noopener noreferrer">
+            CoinGecko
+          </a>
         </strong>
       </div>
     </FooterPart>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-interface IToggleButton {
+interface IToggleButtonProps {
   toggleOn: boolean;
 }
 
@@ -12,7 +12,7 @@ const HeaderPart = styled.header`
   left: auto;
   width: 124rem;
   padding: 2rem;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.backgroundColor};
   z-index: 20;
   div {
     display: flex;
@@ -21,11 +21,15 @@ const HeaderPart = styled.header`
     h1 .logo {
       width: 10rem;
       height: auto;
+      background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
+      border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
     }
   }
 `;
 
-const ToggleButton = styled.button<IToggleButton>`
+const ToggleButton = styled.button.attrs<IToggleButtonProps>((props) => ({
+  toggleOn: props.toggleOn,
+}))<IToggleButtonProps>`
   width: 5.5rem;
   height: 3rem;
   border-radius: 3rem;
@@ -50,7 +54,7 @@ function Header() {
       <div>
         <h1>
           <Link to="/">
-            <img className="logo" src="/public/assets/coin_tracker_logo.jpg" alt="Coin Tracker Logo" />
+            <img className="logo" src="assets/coin_tracker_logo.png" alt="Coin Tracker Logo" />
           </Link>
         </h1>
         <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>
