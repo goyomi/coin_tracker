@@ -9,6 +9,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Coin from "./pages/Coin";
 import Coins from "./pages/Coins";
 import ErrorPage from "./pages/ErrorPage";
+import Loading from "./pages/LoadingPage";
 
 function App() {
   const [time, setTime] = useState("1h");
@@ -21,20 +22,23 @@ function App() {
       <GlobalStyle />
       <BrowserRouter basename="/coin_tracker">
         <Switch>
+          <Route path="/loading">
+            <Loading />
+          </Route>
           <Route path="/error">
             <ErrorPage />
           </Route>
-        </Switch>
-        <MainContainer>
-          <Switch>
-            <Route path="/:coinId">
+          <Route path="/:coinId">
+            <MainContainer>
               <Coin />
-            </Route>
-            <Route path="/">
+            </MainContainer>
+          </Route>
+          <Route path="/">
+            <MainContainer>
               <Coins time={time} setTime={setTime} />
-            </Route>
-          </Switch>
-        </MainContainer>
+            </MainContainer>
+          </Route>
+        </Switch>
       </BrowserRouter>
     </CoinDataContext.Provider>
   );
