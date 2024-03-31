@@ -12,18 +12,18 @@ import {
 } from "../styles/coin";
 import { A11y } from "../styles/common";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
-import { ICoin, ICoinIntro, IOhlc, IParams } from "../types/coin";
+import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
 import ThousandSeparator from "../utils/thousandSeparator";
 import Chart from "../components/Chart";
 import { useQuery } from "@tanstack/react-query";
 import { introCoin, ohlc } from "../services/api";
 import parse from "html-react-parser";
-import Loading from "./LoadingPage";
+import Loading from "../components/Loading";
 import Header from "../components/Header";
 import { NavTimebarWrapper } from "../styles/coins";
 import Breadcrumb from "../components/Breadcrumb";
 
-function Coin() {
+function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   // data fetch - coin 상세정보
   const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
@@ -128,7 +128,7 @@ function Coin() {
         <Loading />
       ) : (
         <>
-          <Header />
+          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
           <NavTimebarWrapper>
             <Breadcrumb links={links} />
           </NavTimebarWrapper>

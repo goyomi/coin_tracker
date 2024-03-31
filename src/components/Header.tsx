@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { IToggleProps } from "../types/type";
 
-interface IToggleButtonProps {
+interface IToggleButton {
   toggleOn: boolean;
 }
 
@@ -27,9 +27,7 @@ const HeaderPart = styled.header`
   }
 `;
 
-const ToggleButton = styled.button.attrs<IToggleButtonProps>((props) => ({
-  toggleOn: props.toggleOn,
-}))<IToggleButtonProps>`
+const ToggleButton = styled.button<IToggleButton>`
   width: 5.5rem;
   height: 3rem;
   border-radius: 3rem;
@@ -44,11 +42,11 @@ const ToggleButton = styled.button.attrs<IToggleButtonProps>((props) => ({
   }
 `;
 
-function Header() {
-  const [toggleOn, setToggleOn] = useState(false);
+function Header({ toggleOn, setToggleOn }: IToggleProps) {
   const handleToggleButton = () => {
     setToggleOn(!toggleOn);
   };
+
   return (
     <HeaderPart>
       <div>

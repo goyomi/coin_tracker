@@ -5,21 +5,28 @@ import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import Header from "../components/Header";
 import { useContext, useEffect } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
-import Loading from "./LoadingPage";
-import Timebar from "../components/Timebar";
+import Loading from "../components/Loading";
+// import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
-import { ICoin } from "../types/coin";
+import { ICoin } from "../types/type";
 import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Coins({ time, setTime }: { time: string; setTime: Function }) {
+interface ICoinsProps {
+  time: string;
+  setTime: Function;
+  toggleOn: boolean;
+  setToggleOn: Function;
+}
+
+function Coins({ time, setTime, toggleOn, setToggleOn }: ICoinsProps) {
   const { data, isLoading, isError, error } = useContext(CoinDataContext);
-  const times = {
-    "1h": "1h",
-    "24h": "24h",
-    "7d": "7d",
-    // "30d": "30d",
-  };
+  // const times = {
+  //   "1h": "1h",
+  //   "24h": "24h",
+  //   "7d": "7d",
+  //   // "30d": "30d",
+  // };
   const links = [{ name: "Coins Currency", path: "/" }];
   const key = `price_change_percentage_${time}_in_currency` as keyof ICoin;
   const history = useHistory();
@@ -35,12 +42,12 @@ function Coins({ time, setTime }: { time: string; setTime: Function }) {
         <Loading />
       ) : (
         <>
-          <Header />
+          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
           <Main>
             <A11y>Coin Tracker Table</A11y>
             <NavTimebarWrapper>
               <Breadcrumb links={links} />
-              <Timebar times={times} setTime={setTime} />
+              {/* <Timebar times={times} setTime={setTime} /> */}
             </NavTimebarWrapper>
             <CoinList>
               <CoinListHead>
