@@ -5,6 +5,11 @@ export interface IContext {
   error?: unknown;
 }
 
+interface IToggleProps {
+  toggleOn: boolean;
+  setToggleOn: Function;
+}
+
 // coins
 export interface ICoin {
   ath: number;
