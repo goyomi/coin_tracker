@@ -115,12 +115,12 @@ function Coin() {
   ];
 
   const history = useHistory();
-  // const errors = isError || coinIntroError;
+  const queriesError = query1.isError || query7.isError || query30.isError || query365.isError;
   useEffect(() => {
-    if (isError || coinIntroError) {
+    if (isError || coinIntroError || queriesError) {
       history.push("/error");
     }
-  }, [history, isError, coinIntroError]);
+  }, [history, isError, coinIntroError, queriesError]);
 
   return (
     <>
