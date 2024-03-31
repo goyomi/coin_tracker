@@ -83,15 +83,19 @@ export const CoinConvertor = styled.section`
   .input_wrapper {
     border: 0.15rem solid ${(props) => props.theme.grey1Color};
     border-radius: 0.8rem;
+    padding: 1.2rem 2rem;
     input {
       width: 80%;
-      padding: 1.2rem;
       font-size: 1.8rem;
       border: none;
       border-radius: 0.8rem;
+      color: ${(props) => props.theme.mainFontColor};
+      background-color: ${(props) => props.theme.backgroundColor};
     }
     span {
-      padding: 2rem;
+      width: 20%;
+      display: inline-block;
+      margin-left: auto;
       font-size: 1.8rem;
       text-align: right;
       text-transform: uppercase;

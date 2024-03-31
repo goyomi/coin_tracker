@@ -14,7 +14,7 @@ const Nav = styled.nav`
     text-transform: capitalize;
     font-size: 1.5rem;
     color: ${(props) => props.theme.mainFontColor};
-    background-color: ${(props) => props.theme.backgroundColor};
+    background-color: ${(props) => props.theme.buttonColor};
     border-radius: 0.5rem;
   }
   ol li:first-child a {
@@ -35,10 +35,7 @@ function Breadcrumb({ links }: IBreadCrumb) {
       <ol>
         {links.map((link, idx) => (
           <li key={idx}>
-            <Link
-              className={idx === links.length - 1 ? "currentPage" : ""}
-              to={link.path}
-            >
+            <Link className={idx === links.length - 1 ? "currentPage" : ""} to={link.path}>
               {link.name} Price
             </Link>
             {idx < links.length - 1 && ">"}

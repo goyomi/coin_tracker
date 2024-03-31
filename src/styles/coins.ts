@@ -72,7 +72,7 @@ export const CoinList = styled.table`
 export const CoinListHead = styled.thead`
   position: sticky;
   top: 9rem;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.backgroundColor};
   font-size: 1.5rem;
   text-align: left;
   tr > th {
