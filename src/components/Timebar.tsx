@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ITimes } from "../types/coin";
+import { ITimes } from "../types/type";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`

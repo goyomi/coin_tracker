@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { IChart } from "../types/coin";
+import { IChart } from "../types/type";
 import Timebar from "./Timebar";
 import { useState } from "react";
 

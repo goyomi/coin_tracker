@@ -1,4 +1,4 @@
-import { IFormateNumber } from "../types/coin";
+import { IFormateNumber } from "../types/type";
 
 function NumberFormatter({ number, currencyCode }: IFormateNumber) {
   let formattedNumber;

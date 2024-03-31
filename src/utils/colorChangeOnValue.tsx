@@ -1,5 +1,5 @@
 import { ToggleColor } from "../styles/coins";
-import { IToggleNumber } from "../types/coin";
+import { IToggleNumber } from "../types/type";
 
 function ToggleColorWithValue({ number }: IToggleNumber) {
   const color = Math.sign(number) > 0 ? "changeUpColor" : "changeDownColor";

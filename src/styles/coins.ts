@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IToggleNumber } from "../types/coin";
+import { IToggleNumber } from "../types/type";
 import { Link } from "react-router-dom";
 
 export const Main = styled.main`

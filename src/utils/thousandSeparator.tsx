@@ -1,4 +1,4 @@
-import { IThousandSeparator } from "../types/coin";
+import { IThousandSeparator } from "../types/type";
 
 function ThousandSeparator({ number }: IThousandSeparator) {
   const formattedNumber = Number(number).toLocaleString();
