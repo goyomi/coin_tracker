@@ -53,6 +53,5 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3"
   },
-  "proxy": "https://api.coingecko.com",
   "homepage": "https://goyomi.github.io/coin_tracker"
 }
