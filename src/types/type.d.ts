@@ -50,10 +50,33 @@ export interface IParams {
   coinId: string;
 }
 export interface ICoinIntro {
-  description: {
-    en: string;
-  };
+  id: string;
+  symbol: string;
+  name: string;
+  web_slug: string;
+  asset_platform_id: object;
+  platforms: object;
+  detail_platforms: object;
+  block_time_in_minutes: number;
+  hashing_algorithm: string;
+  categories: object;
+  preview_listing: boolean;
+  public_notice: object;
+  additional_notices: object;
+  localization: object;
+  description: { en: string };
+  links: { homepage: string[]; whitepaper: string; blockchain_site: [string]; repos_url: { github: [string] } };
+  image: object;
+  country_origin: string;
+  genesis_date: string;
+  sentiment_votes_up_percentage: number;
+  sentiment_votes_down_percentage: number;
+  watchlist_portfolio_users: number;
+  market_cap_rank: number;
+  status_updates: object;
+  last_updated: string;
 }
+
 export interface IChartQueries {
   "1": UseQueryResult<IOhlc[], unknown>;
   "7": UseQueryResult<IOhlc[], unknown>;
