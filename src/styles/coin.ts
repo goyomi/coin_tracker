@@ -138,6 +138,37 @@ export const HistoricalPriceTable = styled(CoinDataTable)`
   }
 `;
 
+export const Information = styled(HistoricalPrice)``;
+export const InformationTable = styled(CoinDataTable)`
+  tbody tr:first-child th,
+  tbody tr:first-child td {
+    padding-top: 0;
+  }
+  .block_chain_site {
+    padding: 0.1rem 1rem;
+    border: 0.1rem solid ${(props) => props.theme.grey1Color};
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  .box {
+    padding: 0.35rem;
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme.grey1Color};
+  }
+  .sentiment_survey {
+    span:nth-child(1) {
+      margin-right: 1rem;
+    }
+    .up {
+      color: ${(props) => props.theme.changeUpColor};
+    }
+    .down {
+      color: ${(props) => props.theme.changeDownColor};
+    }
+  }
+`;
+
 export const CoinIntro = styled.section`
   h2 {
     margin: 3rem 0 2rem 0;
