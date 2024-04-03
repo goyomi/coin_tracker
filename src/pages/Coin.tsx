@@ -250,7 +250,7 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
                     <tr>
                       <th>Home Page</th>
                       <td>
-                        {coinIntro?.links.homepage ? (
+                        {coinIntro?.links.homepage[0] ? (
                           <a className="box" href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
                             {coinIntro?.links.homepage[0].split("/")[2]}
                           </a>
@@ -274,7 +274,7 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
                     <tr>
                       <th>Source Code</th>
                       <td>
-                        {coinIntro?.links.repos_url.github ? (
+                        {coinIntro?.links.repos_url.github[0] ? (
                           <a
                             className="box"
                             href={coinIntro?.links.repos_url.github[0]}
