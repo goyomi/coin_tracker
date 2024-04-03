@@ -250,25 +250,42 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
                     <tr>
                       <th>Home Page</th>
                       <td>
-                        <a className="box" href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
-                          {coinIntro?.links.homepage[0].split("/")[2]}
-                        </a>
+                        {coinIntro?.links.homepage ? (
+                          <a className="box" href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
+                            {coinIntro?.links.homepage[0].split("/")[2]}
+                          </a>
+                        ) : (
+                          "-"
+                        )}
                       </td>
                     </tr>
                     <tr>
                       <th>White Paper</th>
                       <td>
-                        <a className="box" href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
-                          {coinIntro?.links.whitepaper.split("/")[2]}
-                        </a>
+                        {coinIntro?.links.whitepaper ? (
+                          <a className="box" href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
+                            {coinIntro?.links.whitepaper.split("/")[2]}
+                          </a>
+                        ) : (
+                          "-"
+                        )}
                       </td>
                     </tr>
                     <tr>
                       <th>Source Code</th>
                       <td>
-                        <a className="box" href={coinIntro?.links.repos_url.github[0]} target="_blank" rel="noreferrer">
-                          GitHub
-                        </a>
+                        {coinIntro?.links.repos_url.github ? (
+                          <a
+                            className="box"
+                            href={coinIntro?.links.repos_url.github[0]}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            GitHub
+                          </a>
+                        ) : (
+                          "-"
+                        )}
                       </td>
                     </tr>
                     <tr>
