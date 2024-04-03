@@ -44,7 +44,7 @@ const ToggleButton = styled.button<IToggleButton>`
 
 function Header({ toggleOn, setToggleOn }: IToggleProps) {
   const handleToggleButton = () => {
-    setToggleOn(!toggleOn);
+    setToggleOn((current: boolean) => !current);
   };
 
   return (
