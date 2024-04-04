@@ -14,7 +14,7 @@ import { darkTheme, theme } from "./styles/theme";
 
 function App() {
   const [time, setTime] = useState("1h");
-  const [toggleOn, setToggleOn] = useState(false);
+  const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? false);
   const { data, isLoading, isError, error } = useQuery<ICoin[]>(["allCoins", time], () => fetchCoins(time), {
     staleTime: Infinity,
   });
