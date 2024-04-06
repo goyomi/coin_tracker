@@ -4,27 +4,18 @@ import Header from "../components/Header";
 import { useContext, useEffect } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import Loading from "../components/Loading";
-// import Timebar from "../components/Timebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import CoinListTable from "../components/CoinListTable";
 
 interface ICoinsProps {
-  time: string;
-  setTime: Function;
   toggleOn: boolean;
   setToggleOn: Function;
 }
 
 function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
   const { isLoading, isError, error } = useContext(CoinDataContext);
-  // const times = {
-  //   "1h": "1h",
-  //   "24h": "24h",
-  //   "7d": "7d",
-  //   // "30d": "30d",
-  // };
   const links = [{ name: "Coins Currency", path: "/" }];
   const history = useHistory();
   useEffect(() => {
@@ -45,7 +36,6 @@ function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
             <A11y>Coin Tracker Table</A11y>
             <NavTimebarWrapper>
               <Breadcrumb links={links} />
-              {/* <Timebar times={times} setTime={setTime} /> */}
             </NavTimebarWrapper>
             <CoinListTable />
           </Main>

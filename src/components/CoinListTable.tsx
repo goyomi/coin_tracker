@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { CoinDataContext, TimeContext } from "../contexts/CoinDataContext";
-import { ICoin, IToggleNumber } from "../types/type";
+import { CoinDataContext } from "../contexts/CoinDataContext";
+import { IToggleNumber } from "../types/type";
 import { Link } from "react-router-dom";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import NumberFormatter from "../utils/numberFormatter";
@@ -115,8 +115,6 @@ export const ToggleColor = styled.div<IToggleNumber>`
 
 function CoinListTable() {
   const { data } = useContext(CoinDataContext);
-  const { time } = useContext(TimeContext);
-  const key = `price_change_percentage_${time}_in_currency` as keyof ICoin;
 
   return (
     <CoinList>
@@ -166,7 +164,7 @@ function CoinListTable() {
                 </div>
               </td>
               <td className="coin_change_percentage">
-                <ToggleColorWithValue number={Number(coin[key])} />
+                <ToggleColorWithValue number={coin.price_change_24h} />
               </td>
               <td className="coin_volume">
                 <NumberFormatter number={coin.total_volume} currencyCode={CURRENCY} />

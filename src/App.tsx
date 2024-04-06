@@ -36,7 +36,7 @@ function App() {
             <Route path="/">
               <TimeContext.Provider value={{ time, setTime }}>
                 <MainContainer>
-                  <Coins time={time} setTime={setTime} toggleOn={toggleOn} setToggleOn={setToggleOn} />
+                  <Coins toggleOn={toggleOn} setToggleOn={setToggleOn} />
                 </MainContainer>
               </TimeContext.Provider>
             </Route>
