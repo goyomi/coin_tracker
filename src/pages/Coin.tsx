@@ -12,7 +12,7 @@ import {
   Information,
   InformationTable,
 } from "../styles/coin";
-import { A11y } from "../styles/common";
+import { ScreenReaderOnly } from "../styles/common";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
 import ThousandSeparator from "../utils/thousandSeparator";
@@ -135,24 +135,24 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
             <Breadcrumb links={links} />
           </NavTimebarWrapper>
           <CoinWrapper>
-            <A11y as="h1">Coin detail page</A11y>
+            <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
             <div className="left_zone">
               {selectedCoin ? (
                 <CoinData key={selectedCoin.id}>
                   <div className="coin_title">
-                    <A11y>Coin Title</A11y>
+                    <ScreenReaderOnly>Coin Title</ScreenReaderOnly>
                     <img src={selectedCoin.image} alt={selectedCoin.name} />
                     <span className="coin_name">{selectedCoin.name}</span>
                     <span className="coin_symbol">{selectedCoin.symbol}</span>
                     <span className="coin_rank">#{selectedCoin.market_cap_rank}</span>
                   </div>
                   <div className="coin_price">
-                    <A11y as="h3">Coin Price</A11y>
+                    <ScreenReaderOnly as="h3">Coin Price</ScreenReaderOnly>
                     <ThousandSeparator number={selectedCoin.current_price} />
                     <ToggleColorWithValue number={selectedCoin.price_change_percentage_24h} />
                   </div>
                   <CoinDataTable>
-                    <A11y as="h3">Coin Data Table</A11y>
+                    <ScreenReaderOnly as="h3">Coin Data Table</ScreenReaderOnly>
                     <tbody>
                       <tr>
                         <th>Market Cap</th>

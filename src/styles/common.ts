@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const A11y = styled.h2`
+export const ScreenReaderOnly = styled.h2`
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   width: 1px;
