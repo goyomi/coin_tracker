@@ -1,10 +1,3 @@
-export interface IContext {
-  data: ICoin[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
-  error?: unknown;
-}
-
 interface IToggleProps {
   toggleOn: boolean;
   setToggleOn: Function;
