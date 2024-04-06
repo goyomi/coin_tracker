@@ -1,15 +1,18 @@
 import { useContext } from "react";
-import styled from "styled-components";
-import { CoinDataContext } from "../contexts/CoinDataContext";
-import { IToggleNumber } from "../types/type";
 import { Link } from "react-router-dom";
+
+import styled from "styled-components";
+
+import { CoinDataContext } from "../contexts/CoinDataContext";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import NumberFormatter from "../utils/numberFormatter";
+import { IToggleNumber } from "../types/type";
 import { CURRENCY } from "../constant";
 
-export const CoinList = styled.table`
+export const Table = styled.table`
   width: 100%;
   table-layout: fixed;
+  /* common */
   thead,
   tbody {
     border: 1px solid ${(props) => props.theme.grey1Color};
@@ -64,7 +67,7 @@ export const CoinList = styled.table`
   }
 `;
 
-export const CoinListHead = styled.thead`
+export const TableHeader = styled.thead`
   position: sticky;
   top: 9rem;
   background-color: ${(props) => props.theme.backgroundColor};
@@ -75,15 +78,15 @@ export const CoinListHead = styled.thead`
   }
 `;
 
-export const CoinListItem = styled.tbody`
+export const TableBody = styled.tbody`
   font-size: 1.8rem;
   tr {
     width: 100%;
     td {
       padding: 1.4rem 0;
+      vertical-align: middle;
     }
     .coin_rank {
-      vertical-align: middle;
       color: ${(props) => props.theme.secondFontColor};
     }
     .coin_price > div span:first-child,
@@ -94,7 +97,7 @@ export const CoinListItem = styled.tbody`
   }
 `;
 
-export const Name = styled(Link)`
+export const TableLink = styled(Link)`
   & > * {
     margin-right: 1.6rem;
     vertical-align: middle;
@@ -117,8 +120,8 @@ function CoinListTable() {
   const { data } = useContext(CoinDataContext);
 
   return (
-    <CoinList>
-      <CoinListHead>
+    <Table>
+      <TableHeader>
         <tr>
           <th className="rank">
             <span>#</span>
@@ -142,8 +145,8 @@ function CoinListTable() {
             <span>Supply</span>
           </th>
         </tr>
-      </CoinListHead>
-      <CoinListItem>
+      </TableHeader>
+      <TableBody>
         {Array.isArray(data) &&
           data.map((coin) => (
             <tr key={coin.id}>
@@ -151,11 +154,11 @@ function CoinListTable() {
                 <span>{coin.market_cap_rank}</span>
               </td>
               <td>
-                <Name to={`/${coin.id}`} className="coin_name">
+                <TableLink to={`/${coin.id}`} className="coin_name">
                   <img src={coin.image} alt={coin.name} />
                   <span className="coin_name">{coin.name}</span>
                   <span className="coin_symbol">{coin.symbol}</span>
-                </Name>
+                </TableLink>
               </td>
               <td className="coin_price">
                 <div>
@@ -164,7 +167,7 @@ function CoinListTable() {
                 </div>
               </td>
               <td className="coin_change_percentage">
-                <ToggleColorWithValue number={coin.price_change_24h} />
+                <ToggleColorWithValue number={coin.market_cap_change_percentage_24h} />
               </td>
               <td className="coin_volume">
                 <NumberFormatter number={coin.total_volume} currencyCode={CURRENCY} />
@@ -177,8 +180,8 @@ function CoinListTable() {
               </td>
             </tr>
           ))}
-      </CoinListItem>
-    </CoinList>
+      </TableBody>
+    </Table>
   );
 }
 
