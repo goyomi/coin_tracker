@@ -13,13 +13,3 @@ export const CoinDataContext = createContext<IContext>({
   isLoading: false,
   isError: false,
 });
-
-interface ITimeContext {
-  time: string;
-  setTime: (time: string) => void;
-}
-
-export const TimeContext = createContext<ITimeContext>({
-  time: "1h",
-  setTime: () => {},
-});

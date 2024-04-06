@@ -1,9 +1,9 @@
 const BASE_URL = `https://api.coingecko.com/api/v3/coins`;
 
-export async function fetchCoins(time: string) {
+export async function fetchCoins() {
   return await (
     await fetch(
-      `${BASE_URL}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=${time}&locale=en`
+      `${BASE_URL}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h&locale=en`
     )
   ).json();
 }

@@ -3,7 +3,7 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { MainContainer } from "./styles/common";
 import { ICoin } from "./types/type";
 import { fetchCoins } from "./services/api";
-import { CoinDataContext, TimeContext } from "./contexts/CoinDataContext";
+import { CoinDataContext } from "./contexts/CoinDataContext";
 import { useState } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Coin from "./pages/Coin";
@@ -13,9 +13,8 @@ import { ThemeProvider } from "styled-components";
 import { darkTheme, theme } from "./styles/theme";
 
 function App() {
-  const [time, setTime] = useState("1h");
   const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? false);
-  const { data, isLoading, isError, error } = useQuery<ICoin[]>(["allCoins", time], () => fetchCoins(time), {
+  const { data, isLoading, isError, error } = useQuery<ICoin[]>(["allCoins"], () => fetchCoins(), {
     staleTime: Infinity,
   });
 
@@ -34,11 +33,9 @@ function App() {
               </MainContainer>
             </Route>
             <Route path="/">
-              <TimeContext.Provider value={{ time, setTime }}>
-                <MainContainer>
-                  <Coins toggleOn={toggleOn} setToggleOn={setToggleOn} />
-                </MainContainer>
-              </TimeContext.Provider>
+              <MainContainer>
+                <Coins toggleOn={toggleOn} setToggleOn={setToggleOn} />
+              </MainContainer>
             </Route>
           </Switch>
         </BrowserRouter>
