@@ -17,8 +17,8 @@ function NumberFormatter({ number, currencyCode }: IFormateNumber) {
 
   return (
     <div>
-      {currencyCode}
-      {formattedNumber}
+      <span>{currencyCode}</span>
+      <span>{formattedNumber}</span>
     </div>
   );
 }
