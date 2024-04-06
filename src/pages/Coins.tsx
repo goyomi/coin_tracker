@@ -1,17 +1,20 @@
-import { A11y } from "../styles/common";
-import { Main, NavTimebarWrapper } from "../styles/coins";
-import Header from "../components/Header";
 import { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { CoinDataContext } from "../contexts/CoinDataContext";
+
+import Header from "../components/Header";
 import Loading from "../components/Loading";
 import Breadcrumb from "../components/Breadcrumb";
-import { useHistory } from "react-router-dom";
 import Footer from "../components/Footer";
 import CoinListTable from "../components/CoinListTable";
 
+import { ScreenReaderOnly } from "../styles/common";
+import { Main, NavTimebarWrapper } from "../styles/coins";
+
 interface ICoinsProps {
   toggleOn: boolean;
-  setToggleOn: Function;
+  setToggleOn: (value: boolean) => void;
 }
 
 function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
@@ -25,23 +28,19 @@ function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
     }
   }, [isError, history, error]);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-          <Main>
-            <A11y>Coin Tracker Table</A11y>
-            <NavTimebarWrapper>
-              <Breadcrumb links={links} />
-            </NavTimebarWrapper>
-            <CoinListTable />
-          </Main>
-          <Footer />
-        </>
-      )}
+      <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
+      <Main>
+        <ScreenReaderOnly>Coin List Table</ScreenReaderOnly>
+        <NavTimebarWrapper>
+          <Breadcrumb links={links} />
+        </NavTimebarWrapper>
+        <CoinListTable />
+      </Main>
+      <Footer />
     </>
   );
 }
