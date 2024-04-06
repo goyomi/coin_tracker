@@ -1,4 +1,4 @@
-import { ToggleColor } from "../styles/coins";
+import { ToggleColor } from "../components/CoinListTable";
 import { IToggleNumber } from "../types/type";
 
 function ToggleColorWithValue({ number }: IToggleNumber) {
