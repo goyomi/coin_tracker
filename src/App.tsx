@@ -3,7 +3,7 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { MainContainer } from "./styles/common";
 import { ICoin } from "./types/type";
 import { fetchCoins } from "./services/api";
-import { CoinDataContext } from "./contexts/CoinDataContext";
+import { CoinDataContext, TimeContext } from "./contexts/CoinDataContext";
 import { useState } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Coin from "./pages/Coin";
@@ -34,9 +34,11 @@ function App() {
               </MainContainer>
             </Route>
             <Route path="/">
-              <MainContainer>
-                <Coins time={time} setTime={setTime} toggleOn={toggleOn} setToggleOn={setToggleOn} />
-              </MainContainer>
+              <TimeContext.Provider value={{ time, setTime }}>
+                <MainContainer>
+                  <Coins time={time} setTime={setTime} toggleOn={toggleOn} setToggleOn={setToggleOn} />
+                </MainContainer>
+              </TimeContext.Provider>
             </Route>
           </Switch>
         </BrowserRouter>
