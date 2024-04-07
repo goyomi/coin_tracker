@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import { useHistory, useParams } from "react-router-dom";
 import {
-  CoinConvertor,
-  CoinData,
-  CoinDataTable,
   CoinIntro,
   CoinWrapper,
   HistoricalPrice,
@@ -13,7 +10,6 @@ import {
   InformationTable,
 } from "../styles/coin";
 import { ScreenReaderOnly } from "../styles/common";
-import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
 import ThousandSeparator from "../utils/thousandSeparator";
 import Chart from "../components/Chart";
@@ -24,6 +20,9 @@ import Loading from "../components/Loading";
 import Header from "../components/Header";
 import { NavTimebarWrapper } from "../styles/coins";
 import Breadcrumb from "../components/Breadcrumb";
+import CoinInfoTable from "../components/CoinInfoTable";
+import CoinProfile from "../components/CoinProfile";
+import CoinConverter from "../components/CoinConverter";
 
 function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   // data fetch - coin 상세정보
@@ -77,31 +76,7 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId), { staleTime: Infinity });
   const textLine = coinIntro?.description?.en.split("\r\n");
 
-  const [inputOne, setInputOne] = useState<number | "">(0);
-  const [inputTwo, setInputTwo] = useState<number | "">(0);
   const [chartQueryLoading, setChartQueryLoading] = useState(false);
-
-  const handleInputOneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    const price = selectedCoin?.current_price || 1;
-    setInputOne(value);
-    setInputTwo(value * price);
-  };
-
-  const handleInputTwoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    const price = selectedCoin?.current_price || 1;
-    setInputTwo(value);
-    setInputOne(value / price);
-  };
-
-  const handleInputOneFocus = () => {
-    setInputOne("");
-  };
-
-  const handleInputTwoFocus = () => {
-    setInputTwo("");
-  };
 
   useEffect(() => {
     const isQueriesLoading = Object.values(queries).some((query) => query.isLoading);
@@ -136,169 +111,114 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
           </NavTimebarWrapper>
           <CoinWrapper>
             <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
-            <div className="left_zone">
-              {selectedCoin ? (
-                <CoinData key={selectedCoin.id}>
-                  <div className="coin_title">
-                    <ScreenReaderOnly>Coin Title</ScreenReaderOnly>
-                    <img src={selectedCoin.image} alt={selectedCoin.name} />
-                    <span className="coin_name">{selectedCoin.name}</span>
-                    <span className="coin_symbol">{selectedCoin.symbol}</span>
-                    <span className="coin_rank">#{selectedCoin.market_cap_rank}</span>
-                  </div>
-                  <div className="coin_price">
-                    <ScreenReaderOnly as="h3">Coin Price</ScreenReaderOnly>
-                    <ThousandSeparator number={selectedCoin.current_price} />
-                    <ToggleColorWithValue number={selectedCoin.price_change_percentage_24h} />
-                  </div>
-                  <CoinDataTable>
-                    <ScreenReaderOnly as="h3">Coin Data Table</ScreenReaderOnly>
+            {selectedCoin ? (
+              <div className="left_zone">
+                <CoinProfile selectedCoin={selectedCoin} />
+                <CoinInfoTable
+                  hidden={true}
+                  title="Coin Data Table"
+                  data={[
+                    { label: "Market Cap", value: selectedCoin.market_cap },
+                    { label: "Fully Diluted Valuation", value: selectedCoin?.fully_diluted_valuation },
+                    { label: "24 Hour Trading Vol", value: selectedCoin.total_volume },
+                    { label: "Circulating Supply", value: selectedCoin.circulating_supply },
+                    { label: "Total Supply", value: selectedCoin.total_supply },
+                    { label: "Max Supply", value: selectedCoin.max_supply },
+                  ]}
+                />
+                <CoinConverter selectedCoin={selectedCoin} />
+                <HistoricalPrice>
+                  <h3>
+                    <span className="coin_symbol">{selectedCoin?.symbol}</span>
+                    <span>Historical Price</span>
+                  </h3>
+                  <HistoricalPriceTable>
                     <tbody>
                       <tr>
-                        <th>Market Cap</th>
+                        <th>24h Range</th>
                         <td>
-                          <ThousandSeparator number={selectedCoin.market_cap} />
+                          <ThousandSeparator number={selectedCoin?.low_24h} />
+                          <span className="separator">-</span>
+                          <ThousandSeparator number={selectedCoin?.high_24h} />
                         </td>
                       </tr>
                       <tr>
-                        <th>Fully Diluted Valuation</th>
+                        <th>All-Time High</th>
                         <td>
-                          <ThousandSeparator number={selectedCoin.fully_diluted_valuation} />
+                          <i>({selectedCoin?.ath_date ? new Date(selectedCoin?.ath_date).toLocaleDateString() : ""})</i>
+                          <ThousandSeparator number={selectedCoin?.ath} />
                         </td>
                       </tr>
                       <tr>
-                        <th>24 Hour Trading Vol</th>
+                        <th>All-Time Low</th>
                         <td>
-                          <ThousandSeparator number={selectedCoin.total_volume} />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>Circulating Supply</th>
-                        <td>
-                          <ThousandSeparator number={selectedCoin.circulating_supply} />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>Total Supply</th>
-                        <td>
-                          <ThousandSeparator number={selectedCoin.total_supply} />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th>Max Supply</th>
-                        <td>
-                          <ThousandSeparator number={selectedCoin.max_supply} />
+                          <i>({selectedCoin?.atl_date ? new Date(selectedCoin.atl_date).toLocaleDateString() : ""})</i>
+                          <ThousandSeparator number={selectedCoin?.atl} />
                         </td>
                       </tr>
                     </tbody>
-                  </CoinDataTable>
-                </CoinData>
-              ) : null}
-              <CoinConvertor>
-                <h3>
-                  <span className="coin_symbol">{selectedCoin?.symbol}</span>
-                  <span>Converter</span>
-                </h3>
-                <div className="coin input_wrapper">
-                  <input type="number" value={inputOne} onChange={handleInputOneChange} onFocus={handleInputOneFocus} />
-                  <span>{selectedCoin?.symbol}</span>
-                </div>
-                <div className="current input_wrapper">
-                  <input type="number" value={inputTwo} onChange={handleInputTwoChange} onFocus={handleInputTwoFocus} />
-                  <span>USD</span>
-                </div>
-              </CoinConvertor>
-              <HistoricalPrice>
-                <h3>
-                  <span className="coin_symbol">{selectedCoin?.symbol}</span>
-                  <span>Historical Price</span>
-                </h3>
-                <HistoricalPriceTable>
-                  <tbody>
-                    <tr>
-                      <th>24h Range</th>
-                      <td>
-                        <ThousandSeparator number={selectedCoin?.low_24h} />
-                        <span className="separator">-</span>
-                        <ThousandSeparator number={selectedCoin?.high_24h} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>All-Time High</th>
-                      <td>
-                        <i>({selectedCoin?.ath_date ? new Date(selectedCoin?.ath_date).toLocaleDateString() : ""})</i>
-                        <ThousandSeparator number={selectedCoin?.ath} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>All-Time Low</th>
-                      <td>
-                        <i>({selectedCoin?.atl_date ? new Date(selectedCoin.atl_date).toLocaleDateString() : ""})</i>
-                        <ThousandSeparator number={selectedCoin?.atl} />
-                      </td>
-                    </tr>
-                  </tbody>
-                </HistoricalPriceTable>
-              </HistoricalPrice>
-              <Information>
-                <h3>
-                  <span className="coin_symbol">{selectedCoin?.symbol}</span>
-                  <span>Information</span>
-                </h3>
-                <InformationTable>
-                  <tbody>
-                    <tr>
-                      <th>Home Page</th>
-                      <td>
-                        {coinIntro?.links.homepage[0] ? (
-                          <a className="box" href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
-                            {coinIntro?.links.homepage[0].split("/")[2]}
-                          </a>
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>White Paper</th>
-                      <td>
-                        {coinIntro?.links.whitepaper ? (
-                          <a className="box" href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
-                            {coinIntro?.links.whitepaper.split("/")[2]}
-                          </a>
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Source Code</th>
-                      <td>
-                        {coinIntro?.links.repos_url.github[0] ? (
-                          <a
-                            className="box"
-                            href={coinIntro?.links.repos_url.github[0]}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            GitHub
-                          </a>
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Sentiment Survey</th>
-                      <td className="sentiment_survey">
-                        <span className="up">👍 {coinIntro?.sentiment_votes_up_percentage}%</span>
-                        <span className="down">👎 {coinIntro?.sentiment_votes_down_percentage}%</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </InformationTable>
-              </Information>
-            </div>
+                  </HistoricalPriceTable>
+                </HistoricalPrice>
+                <Information>
+                  <h3>
+                    <span className="coin_symbol">{selectedCoin?.symbol}</span>
+                    <span>Information</span>
+                  </h3>
+                  <InformationTable>
+                    <tbody>
+                      <tr>
+                        <th>Home Page</th>
+                        <td>
+                          {coinIntro?.links.homepage[0] ? (
+                            <a className="box" href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
+                              {coinIntro?.links.homepage[0].split("/")[2]}
+                            </a>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>White Paper</th>
+                        <td>
+                          {coinIntro?.links.whitepaper ? (
+                            <a className="box" href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
+                              {coinIntro?.links.whitepaper.split("/")[2]}
+                            </a>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Source Code</th>
+                        <td>
+                          {coinIntro?.links.repos_url.github[0] ? (
+                            <a
+                              className="box"
+                              href={coinIntro?.links.repos_url.github[0]}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              GitHub
+                            </a>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Sentiment Survey</th>
+                        <td className="sentiment_survey">
+                          <span className="up">👍 {coinIntro?.sentiment_votes_up_percentage}%</span>
+                          <span className="down">👎 {coinIntro?.sentiment_votes_down_percentage}%</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </InformationTable>
+                </Information>
+              </div>
+            ) : null}
             <div className="right_zone">
               <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} />
               <CoinIntro>
