@@ -1,51 +1,82 @@
 import styled from "styled-components";
-import { ScreenReaderOnly } from "../styles/common";
-import ThousandSeparator from "../utils/thousandSeparator";
+import { CoinDataTable, Heading, Section } from "../styles/coin";
+import { ICoin, ICoinIntro } from "../types/type";
 
-const CoinDataTable = styled.table`
-  width: 100%;
-  margin: 1.2rem 0;
-  text-align: left;
-  font-size: 1.8rem;
-  th,
-  td {
-    padding: 1.2rem 0;
-    box-shadow: 0 0.15rem ${(props) => props.theme.grey1Color};
-  }
-  td {
-    text-align: right;
-  }
-`;
-
-interface ICoinInfoProps {
-  hidden?: boolean;
-  title: string;
-  symbol?: string | undefined;
-  data: { label: string; value: number | undefined }[];
+interface ICoinInfoTableProps {
+  selectedCoin: ICoin;
+  coinIntro: ICoinIntro | undefined;
 }
 
-function CoinInfoTable({ hidden, title, symbol, data }: ICoinInfoProps) {
-  const Heading = hidden ? ScreenReaderOnly : "h3";
+const BoxStyle = styled.a`
+  padding: 0.35rem;
+  border-radius: 0.5rem;
+  background-color: ${(props) => props.theme.grey1Color};
+`;
 
+const Up = styled.span`
+  margin-right: 1rem;
+  color: ${(props) => props.theme.changeUpColor};
+`;
+
+const Down = styled.span`
+  color: ${(props) => props.theme.changeDownColor};
+`;
+
+function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
   return (
-    <section>
+    <Section>
       <Heading>
-        {symbol && <span className="coin_symbol">{symbol}</span>}
-        <span>{title}</span>
+        <span className="coin_symbol">{selectedCoin?.symbol}</span>
+        <span>Information</span>
       </Heading>
       <CoinDataTable>
         <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              <th>{row.label}</th>
-              <td>
-                <ThousandSeparator number={row.value} />
-              </td>
-            </tr>
-          ))}
+          <tr>
+            <th>Home Page</th>
+            <td>
+              {coinIntro?.links.homepage[0] ? (
+                <BoxStyle href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
+                  {coinIntro?.links.homepage[0].split("/")[2]}
+                </BoxStyle>
+              ) : (
+                "-"
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th>White Paper</th>
+            <td>
+              {coinIntro?.links.whitepaper ? (
+                <BoxStyle href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
+                  {coinIntro?.links.whitepaper.split("/")[2]}
+                </BoxStyle>
+              ) : (
+                "-"
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th>Source Code</th>
+            <td>
+              {coinIntro?.links.repos_url.github[0] ? (
+                <BoxStyle href={coinIntro?.links.repos_url.github[0]} target="_blank" rel="noreferrer">
+                  GitHub
+                </BoxStyle>
+              ) : (
+                "-"
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th>Sentiment Survey</th>
+            <td>
+              <Up className="up">👍 {coinIntro?.sentiment_votes_up_percentage}%</Up>
+              <Down className="down">👎 {coinIntro?.sentiment_votes_down_percentage}%</Down>
+            </td>
+          </tr>
         </tbody>
       </CoinDataTable>
-    </section>
+    </Section>
   );
 }
 
