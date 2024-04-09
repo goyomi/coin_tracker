@@ -1,11 +1,7 @@
 import { ICoin } from "../types/type";
 import styled from "styled-components";
 import ThousandSeparator from "../utils/thousandSeparator";
-import { CoinDataTable, Heading, Section } from "../styles/coin";
-
-interface CoinHistoryTableProps {
-  selectedCoin: ICoin;
-}
+import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
 const Separator = styled.span`
   margin: 0 0.5rem;
@@ -18,7 +14,36 @@ const ItalicStyle = styled.i`
   color: ${(props) => props.theme.grey2Color};
 `;
 
+interface CoinHistoryTableProps {
+  selectedCoin: ICoin;
+}
+
 function CoInHistoryTable({ selectedCoin }: CoinHistoryTableProps) {
+  const data = [
+    {
+      title: "24h Range",
+      value: (
+        <>
+          <ThousandSeparator number={selectedCoin?.low_24h} />
+          <Separator>-</Separator>
+          <ThousandSeparator number={selectedCoin?.high_24h} />
+        </>
+      ),
+    },
+    {
+      title: "All-Time High",
+      value: <ThousandSeparator number={selectedCoin?.ath} />,
+      isItalic: true,
+      date: selectedCoin?.ath_date,
+    },
+    {
+      title: "All-Time Low",
+      value: <ThousandSeparator number={selectedCoin?.atl} />,
+      isItalic: true,
+      date: selectedCoin?.atl_date,
+    },
+  ];
+
   return (
     <Section>
       <Heading>
@@ -26,34 +51,17 @@ function CoInHistoryTable({ selectedCoin }: CoinHistoryTableProps) {
         <span>Historical Price</span>
       </Heading>
       <CoinDataTable>
-        <tbody>
-          <tr>
-            <th>24h Range</th>
-            <td>
-              <ThousandSeparator number={selectedCoin?.low_24h} />
-              <Separator className="separator">-</Separator>
-              <ThousandSeparator number={selectedCoin?.high_24h} />
-            </td>
-          </tr>
-          <tr>
-            <th>All-Time High</th>
-            <td>
-              <ItalicStyle>
-                ({selectedCoin?.ath_date ? new Date(selectedCoin?.ath_date).toLocaleDateString() : ""})
-              </ItalicStyle>
-              <ThousandSeparator number={selectedCoin?.ath} />
-            </td>
-          </tr>
-          <tr>
-            <th>All-Time Low</th>
-            <td>
-              <ItalicStyle>
-                ({selectedCoin?.atl_date ? new Date(selectedCoin.atl_date).toLocaleDateString() : ""})
-              </ItalicStyle>
-              <ThousandSeparator number={selectedCoin?.atl} />
-            </td>
-          </tr>
-        </tbody>
+        <CoinDataTableBody>
+          {data.map(({ title, value, isItalic, date }) => (
+            <tr key={title}>
+              <th>{title}</th>
+              <td>
+                {isItalic && <ItalicStyle>{date ? new Date(date).toLocaleDateString() : ""}</ItalicStyle>}
+                {value}
+              </td>
+            </tr>
+          ))}
+        </CoinDataTableBody>
       </CoinDataTable>
     </Section>
   );
