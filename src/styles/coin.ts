@@ -32,6 +32,13 @@ export const CoinDataTable = styled.table`
   margin: 1.2rem 0;
   text-align: left;
   font-size: 1.8rem;
+`;
+
+export const CoinDataTableBody = styled.tbody`
+  tr:first-child th,
+  tr:first-child td {
+    padding-top: 0;
+  }
   th,
   td {
     padding: 1.2rem 0;
@@ -39,10 +46,6 @@ export const CoinDataTable = styled.table`
   }
   td {
     text-align: right;
-  }
-  tbody tr:first-child th,
-  tbody tr:first-child td {
-    padding-top: 0;
   }
 `;
 
