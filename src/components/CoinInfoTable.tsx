@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CoinDataTable, Heading, Section } from "../styles/coin";
+import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 import { ICoin, ICoinIntro } from "../types/type";
 
 interface ICoinInfoTableProps {
@@ -23,6 +23,11 @@ const Down = styled.span`
 `;
 
 function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
+  const data = [
+    { title: "Home Page", value: coinIntro?.links.homepage[0] },
+    { title: "White Paper", value: coinIntro?.links.whitepaper },
+    { title: "Source Code", value: coinIntro?.links.repos_url.github[0], subTitle: "GitHub" },
+  ];
   return (
     <Section>
       <Heading>
@@ -30,43 +35,21 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
         <span>Information</span>
       </Heading>
       <CoinDataTable>
-        <tbody>
-          <tr>
-            <th>Home Page</th>
-            <td>
-              {coinIntro?.links.homepage[0] ? (
-                <BoxStyle href={coinIntro?.links.homepage[0]} target="_blank" rel="noreferrer">
-                  {coinIntro?.links.homepage[0].split("/")[2]}
-                </BoxStyle>
-              ) : (
-                "-"
-              )}
-            </td>
-          </tr>
-          <tr>
-            <th>White Paper</th>
-            <td>
-              {coinIntro?.links.whitepaper ? (
-                <BoxStyle href={coinIntro?.links.whitepaper} target="_blank" rel="noreferrer">
-                  {coinIntro?.links.whitepaper.split("/")[2]}
-                </BoxStyle>
-              ) : (
-                "-"
-              )}
-            </td>
-          </tr>
-          <tr>
-            <th>Source Code</th>
-            <td>
-              {coinIntro?.links.repos_url.github[0] ? (
-                <BoxStyle href={coinIntro?.links.repos_url.github[0]} target="_blank" rel="noreferrer">
-                  GitHub
-                </BoxStyle>
-              ) : (
-                "-"
-              )}
-            </td>
-          </tr>
+        <CoinDataTableBody>
+          {data.map(({ title, value, subTitle }) => (
+            <tr key={title}>
+              <th>{title}</th>
+              <td>
+                {typeof value === "string" ? (
+                  <BoxStyle href={value} target="_blank" rel="noreferrer">
+                    {subTitle ? subTitle : value.split("/")[2]}
+                  </BoxStyle>
+                ) : (
+                  "-"
+                )}
+              </td>
+            </tr>
+          ))}
           <tr>
             <th>Sentiment Survey</th>
             <td>
@@ -74,7 +57,7 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
               <Down className="down">👎 {coinIntro?.sentiment_votes_down_percentage}%</Down>
             </td>
           </tr>
-        </tbody>
+        </CoinDataTableBody>
       </CoinDataTable>
     </Section>
   );
