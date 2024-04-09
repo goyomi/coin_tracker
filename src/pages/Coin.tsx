@@ -108,18 +108,7 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
             {selectedCoin ? (
               <div className="left_zone">
                 <CoinProfile selectedCoin={selectedCoin} />
-                <CoinDetailTable
-                  hidden={true}
-                  title="Coin Data Table"
-                  data={[
-                    { title: "Market Cap", value: selectedCoin.market_cap },
-                    { title: "Fully Diluted Valuation", value: selectedCoin?.fully_diluted_valuation },
-                    { title: "24 Hour Trading Vol", value: selectedCoin.total_volume },
-                    { title: "Circulating Supply", value: selectedCoin.circulating_supply },
-                    { title: "Total Supply", value: selectedCoin.total_supply },
-                    { title: "Max Supply", value: selectedCoin.max_supply },
-                  ]}
-                />
+                <CoinDetailTable selectedCoin={selectedCoin} />
                 <CoinConverter selectedCoin={selectedCoin} />
                 <CoInHistoryTable selectedCoin={selectedCoin} />
                 <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />

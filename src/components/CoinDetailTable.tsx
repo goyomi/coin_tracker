@@ -1,35 +1,46 @@
-import { CoinDataTable, Heading, Section } from "../styles/coin";
+import styled from "styled-components";
+import { CoinDataTable, CoinDataTableBody, Section } from "../styles/coin";
 import { ScreenReaderOnly } from "../styles/common";
+import { ICoin } from "../types/type";
 import ThousandSeparator from "../utils/thousandSeparator";
 
+const CustomTableBody = styled(CoinDataTableBody)`
+  tr:first-child th,
+  tr:first-child td {
+    padding-top: 1.2rem;
+  }
+`;
 interface ICoinInfoProps {
-  hidden?: boolean;
-  title: string;
-  symbol?: string | undefined;
-  data: { title: string; value: number | string }[];
-  children?: React.ReactNode;
+  selectedCoin: ICoin;
 }
 
-function CoinDetailTable({ hidden, title, symbol, data }: ICoinInfoProps) {
-  const CustomHeading = hidden ? ScreenReaderOnly : Heading;
+function CoinDetailTable({ selectedCoin }: ICoinInfoProps) {
+  const data = [
+    { title: "Market Cap", value: selectedCoin.market_cap },
+    { title: "Fully Diluted Valuation", value: selectedCoin?.fully_diluted_valuation },
+    { title: "24 Hour Trading Vol", value: selectedCoin.total_volume },
+    { title: "Circulating Supply", value: selectedCoin.circulating_supply },
+    { title: "Total Supply", value: selectedCoin.total_supply },
+    { title: "Max Supply", value: selectedCoin.max_supply },
+  ];
 
   return (
     <Section>
-      <CustomHeading>
-        {symbol && <span className="coin_symbol">{symbol}</span>}
-        <span>{title}</span>
-      </CustomHeading>
+      <ScreenReaderOnly>
+        {selectedCoin.symbol && <span className="coin_symbol">{selectedCoin.symbol}</span>}
+        <span>CoinData Table</span>
+      </ScreenReaderOnly>
       <CoinDataTable>
-        <tbody>
-          {data.map((selectedCoin, index) => (
-            <tr key={index}>
-              <th>{selectedCoin.title}</th>
+        <CustomTableBody>
+          {data.map(({ title, value }) => (
+            <tr key={title}>
+              <th>{title}</th>
               <td>
-                <ThousandSeparator number={Number(selectedCoin.value)} />
+                <ThousandSeparator number={Number(value)} />
               </td>
             </tr>
           ))}
-        </tbody>
+        </CustomTableBody>
       </CoinDataTable>
     </Section>
   );
