@@ -1,23 +1,15 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import Timebar from "./Timebar";
-import { useState } from "react";
-import { IChartQueries, ICoin } from "../types/type";
-import { theme } from "../styles/theme";
+import { IChartQueries, ICoin, IOhlc } from "../types/type";
 
 interface IChart {
   selectedCoin: ICoin | undefined;
   queries: IChartQueries;
   toggleOn: boolean;
+  currentData: IOhlc[] | undefined;
 }
 
-function Chart({ selectedCoin, queries, toggleOn }: IChart) {
-  const [days, setDays] = useState("1");
-
-  const { data: currentData } = queries[days.toString() as keyof typeof queries];
-  const times = { "1": "1h", "7": "1w", "30": "1m", "365": "1y" };
-
-  // chart option
+function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
   const seriesData = Array.isArray(currentData)
     ? currentData.map((data) => {
         return {
@@ -82,7 +74,6 @@ function Chart({ selectedCoin, queries, toggleOn }: IChart) {
   return (
     <>
       <section>
-        <Timebar times={times} setDays={setDays} />
         <ReactApexChart
           options={chartOptions}
           series={[{ data: seriesData || [] }]}

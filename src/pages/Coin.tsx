@@ -17,6 +17,7 @@ import CoinConverter from "../components/CoinConverter";
 import CoInHistoryTable from "../components/CoinHistoryTable";
 import CoinDetailTable from "../components/CoinDetailTable";
 import CoinInfoTable from "../components/CoinInfoTable";
+import Timebar from "../components/Timebar";
 
 function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   // data fetch - coin 상세정보
@@ -93,6 +94,12 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
     }
   }, [history, isError, coinIntroError, queriesError]);
 
+  // chart
+  const [days, setDays] = useState("1");
+
+  const { data: currentData } = queries[days.toString() as keyof typeof queries];
+  const times = { "1": "1h", "7": "1w", "30": "1m", "365": "1y" };
+
   return (
     <>
       {isAnyLoading ? (
@@ -115,7 +122,8 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
               </div>
             ) : null}
             <div className="right_zone">
-              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} />
+              <Timebar times={times} setDays={setDays} />
+              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
               <CoinIntro>
                 <h2>About</h2>
                 {textLine?.map((text: string, idx: number) => (
