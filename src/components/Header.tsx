@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IToggleProps } from "../types/type";
 
-interface IToggleButton {
-  toggleOn: boolean;
-}
-
 const HeaderPart = styled.header`
   position: fixed;
   top: 0;
@@ -14,17 +10,19 @@ const HeaderPart = styled.header`
   padding: 2rem;
   background-color: ${(props) => props.theme.backgroundColor};
   z-index: 20;
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    h1 .logo {
-      width: 10rem;
-      height: auto;
-      background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
-      border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
-    }
-  }
+`;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Logo = styled.img`
+  width: 10rem;
+  height: auto;
+  background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
+  border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
 `;
 
 const ToggleButton = styled.button<IToggleButton>`
@@ -42,6 +40,10 @@ const ToggleButton = styled.button<IToggleButton>`
   }
 `;
 
+interface IToggleButton {
+  toggleOn: boolean;
+}
+
 function Header({ toggleOn, setToggleOn }: IToggleProps) {
   const handleToggleButton = () => {
     setToggleOn((current: boolean) => !current);
@@ -50,16 +52,16 @@ function Header({ toggleOn, setToggleOn }: IToggleProps) {
 
   return (
     <HeaderPart>
-      <div>
+      <LogoWrapper>
         <h1>
           <Link to="/">
-            <img className="logo" src="assets/coin_tracker_logo.png" alt="Coin Tracker Logo" />
+            <Logo src="assets/coin_tracker_logo.png" alt="Coin Tracker Logo" />
           </Link>
         </h1>
         <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>
           <div className="circle" />
         </ToggleButton>
-      </div>
+      </LogoWrapper>
     </HeaderPart>
   );
 }

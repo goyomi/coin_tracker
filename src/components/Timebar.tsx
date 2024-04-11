@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
-import { ITimes } from "../types/type";
 import styled from "styled-components";
+import { ITimes } from "../types/type";
 
 const ButtonWrapper = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
-  ol {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-  }
-  ol li button {
-    padding: 1rem;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  .isActive {
-    font-weight: bolder;
-    background-color: ${(props) => props.theme.onActiveColor};
-    color: white;
-  }
+`;
+
+const OrderList = styled.ol`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+`;
+
+const TimeButton = styled.button<{ isActive: boolean }>`
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  /* isActive */
+  font-weight: ${(props) => (props.isActive ? "bolder" : "normal")};
+  background-color: ${(props) => (props.isActive ? props.theme.onActiveColor : "inherits")};
+  color: ${(props) => (props.isActive ? "white" : "inherits")};
 `;
 
 function Timebar({ times, setDays, setTime }: ITimes) {
@@ -32,7 +33,7 @@ function Timebar({ times, setDays, setTime }: ITimes) {
   }, [isActive]);
 
   const handleClickBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.target as HTMLButtonElement;
+    const target = event.currentTarget;
     setIsActive(target.id);
     if (setDays) setDays(target.id);
     if (setTime) setTime(target.id);
@@ -40,15 +41,15 @@ function Timebar({ times, setDays, setTime }: ITimes) {
 
   return (
     <ButtonWrapper>
-      <ol>
+      <OrderList>
         {Object.entries(times).map(([key, value]) => (
           <li key={key}>
-            <button id={key} className={isActive === key ? "isActive" : ""} onClick={handleClickBtn}>
+            <TimeButton id={key} isActive={isActive === key} onClick={handleClickBtn}>
               {value}
-            </button>
+            </TimeButton>
           </li>
         ))}
-      </ol>
+      </OrderList>
     </ButtonWrapper>
   );
 }

@@ -18,19 +18,22 @@ export const LoadingSection = styled.section`
   align-items: center;
   gap: 4rem;
   cursor: wait;
-  img {
-    width: 50rem;
-    height: auto;
-  }
-  .loading_text_wrapper {
-    font-size: 2.5rem;
-    line-height: 3.75rem;
-    text-align: center;
-  }
-  .loading {
-    font-size: 4rem;
-    animation: ${blink} 1s infinite;
-  }
+`;
+
+const LoadingImg = styled.img`
+  width: 50rem;
+  height: auto;
+`;
+
+const LoadingTextWrapper = styled.div`
+  font-size: 2.5rem;
+  line-height: 3.75rem;
+  text-align: center;
+`;
+
+const LoadingText = styled.span`
+  font-size: 4rem;
+  animation: ${blink} 1s infinite;
 `;
 
 function Loading() {
@@ -40,18 +43,17 @@ function Loading() {
     const interval = setInterval(() => {
       setDots((prevDots) => (prevDots.length < 3 ? prevDots + "." : ""));
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
   return (
     <LoadingSection>
-      <img src="assets/coingecko_logo_with_dark_text.png" alt="coin gecko logo" />
-      <div className="loading_text_wrapper">
-        <span className="loading">Loading{dots}</span>
+      <LoadingImg src="assets/coingecko_logo_with_dark_text.png" alt="coin gecko logo" />
+      <LoadingTextWrapper>
+        <LoadingText>Loading{dots}</LoadingText>
         <p>Please do not close and wait for a moment.</p>
         <p>Currently retrieving coin information from Coin Gecko.</p>
-      </div>
+      </LoadingTextWrapper>
     </LoadingSection>
   );
 }

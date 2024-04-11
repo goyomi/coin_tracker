@@ -7,44 +7,48 @@ const FooterPart = styled.footer`
   display: flex;
   align-items: center;
   gap: 4rem;
-  .img_wrapper {
-    .logo {
-      width: 10rem;
-      height: auto;
-      margin-bottom: 1rem;
-      background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
-      border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
-    }
-    .github_and_email {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      .github {
-        width: 2.5rem;
-        height: 2.5rem;
-        background-color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "")};
-        border-radius: ${(props) => (props.theme.mode === "dark" ? "50%" : "")};
-      }
-      .gmail {
-        width: 2.2rem;
-        height: 2.2rem;
-        cursor: copy;
-      }
-    }
-  }
+`;
 
-  .text_wrapper {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    p {
-      margin-bottom: 1rem;
-      color: ${(props) => props.theme.secondFontColor};
-    }
-    strong a {
-      font-weight: bold;
-      color: #71c93c;
-    }
-  }
+const LogoImg = styled.img`
+  width: 10rem;
+  height: auto;
+  margin-bottom: 1rem;
+  background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
+  border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
+`;
+
+const ContactWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+const GitHubIcon = styled.img`
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "")};
+  border-radius: ${(props) => (props.theme.mode === "dark" ? "50%" : "")};
+`;
+
+const GmailIcon = styled.img`
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: copy;
+`;
+
+const FooterTextWrapper = styled.div`
+  font-size: 1.5rem;
+  line-height: 2rem;
+`;
+
+const FooterText = styled.p`
+  margin-bottom: 1rem;
+  color: ${(props) => props.theme.secondFontColor};
+`;
+
+const DataProvider = styled.a`
+  font-weight: bold;
+  color: #71c93c;
 `;
 
 function Footer() {
@@ -59,19 +63,19 @@ function Footer() {
 
   return (
     <FooterPart>
-      <div className="img_wrapper">
+      <div>
         <Link to="/">
-          <img className="logo" src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
+          <LogoImg src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
         </Link>
-        <div className="github_and_email">
+        <ContactWrapper>
           <a href="https://github.com/goyomi" target="_blank" rel="noopener noreferrer">
-            <img className="github" src="assets/github_logo.png" alt="GitHub Logo" />
+            <GitHubIcon src="assets/github_logo.png" alt="GitHub Logo" />
           </a>
-          <img className="gmail" src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
-        </div>
+          <GmailIcon src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
+        </ContactWrapper>
       </div>
-      <div className="text_wrapper">
-        <p>
+      <FooterTextWrapper>
+        <FooterText>
           Coin Tracker offers a comprehensive overview of the leading 100 cryptocurrencies, presenting a broad array of
           data to enhance your understanding of the crypto market. The information provided by Coin Tracker serves
           solely for informational purposes, aiming to equip you with the insights needed to navigate the complex
@@ -79,14 +83,14 @@ function Footer() {
           investment choices, as the dynamic nature of the crypto market can lead to rapid changes. Please be advised
           that the prices displayed on Coin Tracker may not always mirror the exact market prices due to fluctuations
           and market conditions, and should therefore be used as a guide rather than definitive financial advice.
-        </p>
+        </FooterText>
         <strong>
           Data from{" "}
-          <a href="https://www.coingecko.com/api/documentation" target="_blank" rel="noopener noreferrer">
+          <DataProvider href="https://www.coingecko.com/api/documentation" target="_blank" rel="noopener noreferrer">
             CoinGecko
-          </a>
+          </DataProvider>
         </strong>
-      </div>
+      </FooterTextWrapper>
     </FooterPart>
   );
 }
