@@ -1,5 +1,5 @@
-import { ICoin } from "../types/type";
 import styled from "styled-components";
+import { ICoin } from "../types/type";
 import ThousandSeparator from "../utils/thousandSeparator";
 import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
@@ -47,7 +47,7 @@ function CoInHistoryTable({ selectedCoin }: CoinHistoryTableProps) {
   return (
     <Section>
       <Heading>
-        <span className="coin_symbol">{selectedCoin?.symbol}</span>
+        <span>{selectedCoin?.symbol}</span>
         <span>Historical Price</span>
       </Heading>
       <CoinDataTable>

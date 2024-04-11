@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 import { ICoin, ICoinIntro } from "../types/type";
+import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
 interface ICoinInfoTableProps {
   selectedCoin: ICoin;
@@ -31,7 +31,7 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
   return (
     <Section>
       <Heading>
-        <span className="coin_symbol">{selectedCoin?.symbol}</span>
+        <span>{selectedCoin?.symbol}</span>
         <span>Information</span>
       </Heading>
       <CoinDataTable>
@@ -53,8 +53,8 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
           <tr>
             <th>Sentiment Survey</th>
             <td>
-              <Up className="up">👍 {coinIntro?.sentiment_votes_up_percentage}%</Up>
-              <Down className="down">👎 {coinIntro?.sentiment_votes_down_percentage}%</Down>
+              <Up>👍 {coinIntro?.sentiment_votes_up_percentage}%</Up>
+              <Down>👎 {coinIntro?.sentiment_votes_down_percentage}%</Down>
             </td>
           </tr>
         </CoinDataTableBody>

@@ -97,7 +97,7 @@ export const TableBody = styled.tbody`
   }
 `;
 
-export const TableLink = styled(Link)`
+export const CoinLink = styled(Link)`
   & > * {
     margin-right: 1.6rem;
     vertical-align: middle;
@@ -154,11 +154,11 @@ function CoinListTable() {
                 <span>{coin.market_cap_rank}</span>
               </td>
               <td>
-                <TableLink to={`/${coin.id}`} className="coin_name">
+                <CoinLink to={`/${coin.id}`} className="coin_name">
                   <img src={coin.image} alt={coin.name} />
                   <span className="coin_name">{coin.name}</span>
                   <span className="coin_symbol">{coin.symbol}</span>
-                </TableLink>
+                </CoinLink>
               </td>
               <td className="coin_price">
                 <div>

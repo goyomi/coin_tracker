@@ -26,10 +26,12 @@ function CoinDetailTable({ selectedCoin }: ICoinInfoProps) {
 
   return (
     <Section>
-      <ScreenReaderOnly>
-        {selectedCoin.symbol && <span className="coin_symbol">{selectedCoin.symbol}</span>}
-        <span>CoinData Table</span>
-      </ScreenReaderOnly>
+      {selectedCoin.symbol && (
+        <ScreenReaderOnly>
+          <span>{selectedCoin.symbol}</span>
+          <span>CoinData Table</span>
+        </ScreenReaderOnly>
+      )}
       <CoinDataTable>
         <CustomTableBody>
           {data.map(({ title, value }) => (
