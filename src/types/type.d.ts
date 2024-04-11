@@ -70,14 +70,7 @@ export interface ICoinIntro {
   last_updated: string;
 }
 
-export interface IChartQueries {
-  "1": UseQueryResult<IOhlc[], unknown>;
-  "7": UseQueryResult<IOhlc[], unknown>;
-  "30": UseQueryResult<IOhlc[], unknown>;
-  "365": UseQueryResult<IOhlc[], unknown>;
-}
-
-interface IOhlc {
+export interface IOhlc {
   0: number;
   1: number;
   2: number;
@@ -85,22 +78,15 @@ interface IOhlc {
   4: number;
 }
 
-// timebar
-export interface ITimes {
-  times: { [key: string]: string };
-  setDays?: Function;
-  setTime?: Function;
+export interface IChartQueries {
+  "1": UseQueryResult<IOhlc[], unknown>;
+  "7": UseQueryResult<IOhlc[], unknown>;
+  "30": UseQueryResult<IOhlc[], unknown>;
+  "365": UseQueryResult<IOhlc[], unknown>;
 }
 
 // utils
-export interface IFormateNumber {
-  number: number;
-  currencyCode?: string;
-}
 export interface IToggleNumber {
   number: number;
   color?: string;
-}
-export interface IThousandSeparator {
-  number?: number;
 }

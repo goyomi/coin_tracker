@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ITimes } from "../types/type";
 
 const ButtonWrapper = styled.div`
   margin-bottom: 1rem;
@@ -24,6 +23,12 @@ const TimeButton = styled.button<{ isActive: boolean }>`
   background-color: ${(props) => (props.isActive ? props.theme.onActiveColor : "inherits")};
   color: ${(props) => (props.isActive ? "white" : "inherits")};
 `;
+
+interface ITimes {
+  times: { [key: string]: string };
+  setDays?: Function;
+  setTime?: Function;
+}
 
 function Timebar({ times, setDays, setTime }: ITimes) {
   const [isActive, setIsActive] = useState(localStorage.getItem("activeTime") || Object.keys(times)[0]);

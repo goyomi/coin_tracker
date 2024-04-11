@@ -1,6 +1,4 @@
-import { IThousandSeparator } from "../types/type";
-
-function ThousandSeparator({ number }: IThousandSeparator) {
+function ThousandSeparator({ number }: { number?: number }) {
   const formattedNumber = Number(number).toLocaleString();
   const formattedDecimal = Number(number).toFixed(8).toLocaleString();
   return (

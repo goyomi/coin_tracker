@@ -1,4 +1,7 @@
-import { IFormateNumber } from "../types/type";
+export interface IFormateNumber {
+  number: number;
+  currencyCode?: string;
+}
 
 function NumberFormatter({ number, currencyCode }: IFormateNumber) {
   let formattedNumber;
