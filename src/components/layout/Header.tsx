@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { IToggleProps } from "../types/type";
+import { IToggleProps } from "../../types/type";
 
 const HeaderPart = styled.header`
   position: fixed;

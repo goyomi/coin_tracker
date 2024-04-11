@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 
 import { CoinDataContext } from "../contexts/CoinDataContext";
 
-import Header from "../components/Header";
+import Header from "../components/layout/Header";
 import Loading from "../components/Loading";
-import Breadcrumb from "../components/Breadcrumb";
-import Footer from "../components/Footer";
+import Breadcrumb from "../components/layout/Breadcrumb";
+import Footer from "../components/layout/Footer";
 import CoinListTable from "../components/CoinListTable";
 
 import { ScreenReaderOnly } from "../styles/common";

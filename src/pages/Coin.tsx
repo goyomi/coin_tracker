@@ -9,15 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import { introCoin, ohlc } from "../services/api";
 import parse from "html-react-parser";
 import Loading from "../components/Loading";
-import Header from "../components/Header";
+import Header from "../components/layout/Header";
 import { NavTimebarWrapper } from "../styles/coins";
-import Breadcrumb from "../components/Breadcrumb";
+import Breadcrumb from "../components/layout/Breadcrumb";
 import CoinProfile from "../components/CoinProfile";
 import CoinConverter from "../components/CoinConverter";
 import CoInHistoryTable from "../components/CoinHistoryTable";
 import CoinDetailTable from "../components/CoinDetailTable";
 import CoinInfoTable from "../components/CoinInfoTable";
-import Timebar from "../components/Timebar";
+import Timebar from "../components/layout/Timebar";
 
 function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   // data fetch - coin 상세정보
