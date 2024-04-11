@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { CoinDataContext } from "../contexts/CoinDataContext";
 import { useHistory, useParams } from "react-router-dom";
-import { CoinIntro, CoinWrapper } from "../styles/coin";
-import { ScreenReaderOnly } from "../styles/common";
-import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
-import Chart from "../components/Chart";
 import { useQuery } from "@tanstack/react-query";
-import { introCoin, ohlc } from "../services/api";
 import parse from "html-react-parser";
-import Loading from "../components/Loading";
+
 import Header from "../components/layout/Header";
-import { NavTimebarWrapper } from "../styles/coins";
+import Chart from "../components/Chart";
+import Loading from "../components/Loading";
 import Breadcrumb from "../components/layout/Breadcrumb";
 import CoinProfile from "../components/CoinProfile";
 import CoinConverter from "../components/CoinConverter";
@@ -19,8 +14,14 @@ import CoinDetailTable from "../components/CoinDetailTable";
 import CoinInfoTable from "../components/CoinInfoTable";
 import Timebar from "../components/layout/Timebar";
 
+import { CoinDataContext } from "../contexts/CoinDataContext";
+import { introCoin, ohlc } from "../services/api";
+import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
+import { CoinIntro, CoinWrapper } from "../styles/coin";
+import { ScreenReaderOnly } from "../styles/common";
+import { NavTimebarWrapper } from "../styles/coins";
+
 function Coin({ toggleOn, setToggleOn }: IToggleProps) {
-  // data fetch - coin 상세정보
   const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
   const selectedCoin = coinData?.find((coin: ICoin) => coin.id === coinId);
