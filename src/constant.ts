@@ -1,2 +1,2 @@
 export const CURRENCY = "USD";
-export const CURRENCY_SYMBOL = `${CURRENCY} `;
+export const CURRENCY_SYMBOL = `US$`;
