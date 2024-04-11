@@ -16,7 +16,7 @@ import Timebar from "../components/layout/Timebar";
 
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import { introCoin, ohlc } from "../services/api";
-import { ICoin, ICoinIntro, IOhlc, IParams, IToggleProps } from "../types/type";
+import { ICoin, ICoinIntro, IParams, IToggleProps } from "../types/type";
 import { CoinIntro, CoinWrapper } from "../styles/coin";
 import { ScreenReaderOnly } from "../styles/common";
 import { NavTimebarWrapper } from "../styles/coins";
@@ -25,36 +25,26 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
   const { coinId } = useParams<IParams>();
   const selectedCoin = coinData?.find((coin: ICoin) => coin.id === coinId);
-  // data fetch - chart
-  const query1 = useQuery<IOhlc[]>(
-    ["oneDay", "ohlc", selectedCoin],
-    () => {
-      return ohlc(selectedCoin!.id, 1);
-    },
-    { staleTime: Infinity }
-  );
-  const query7 = useQuery<IOhlc[]>(
-    ["oneWeek", "ohlc", selectedCoin],
-    () => {
-      return ohlc(selectedCoin!.id, 7);
-    },
-    { staleTime: Infinity }
-  );
-  const query30 = useQuery<IOhlc[]>(
-    ["oneMonth", "ohlc", selectedCoin],
-    () => {
-      return ohlc(selectedCoin!.id, 30);
-    },
-    { staleTime: Infinity }
-  );
-  const query365 = useQuery<IOhlc[]>(
-    ["oneYear", "ohlc", selectedCoin],
-    () => {
-      return ohlc(selectedCoin!.id, 365);
-    },
-    { staleTime: Infinity }
-  );
 
+  // data fetch
+  // 1. ohlc
+  const useOhlcQuery = (days: number) => {
+    return useQuery([`${days}Days`, "ohlc", selectedCoin], () => ohlc(selectedCoin!.id, days), { staleTime: Infinity });
+  };
+  // 2. intro
+  const {
+    data: coinIntro,
+    isLoading: coinIntroLoading,
+    isError: coinIntroError,
+  } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId), { staleTime: Infinity });
+  const textLine = coinIntro?.description?.en.split("\r\n");
+
+  // Props
+  // 1. Chart
+  const query1 = useOhlcQuery(1);
+  const query7 = useOhlcQuery(7);
+  const query30 = useOhlcQuery(30);
+  const query365 = useOhlcQuery(365);
   const queries = useMemo(
     () => ({
       "1": query1,
@@ -64,29 +54,21 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
     }),
     [query1, query7, query30, query365]
   );
-  // data fetch - coin 소개(about)
-  const {
-    data: coinIntro,
-    isLoading: coinIntroLoading,
-    isError: coinIntroError,
-  } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId), { staleTime: Infinity });
-  const textLine = coinIntro?.description?.en.split("\r\n");
-
-  const [chartQueryLoading, setChartQueryLoading] = useState(false);
-
-  useEffect(() => {
-    const isQueriesLoading = Object.values(queries).some((query) => query.isLoading);
-    setChartQueryLoading(isQueriesLoading);
-  }, [queries]);
-
-  const isLoadingState = [isLoading, chartQueryLoading, coinIntroLoading];
-  const isAnyLoading = isLoadingState.some((state) => state);
-
+  // 2. Breadcrumbs
   const links = [
     { name: "Coins Currency", path: "/" },
     { name: coinId, path: `/${coinId}` },
   ];
+  // 3. timeProp >> Timebar, Chart
+  const times = { "1": "1h", "7": "1w", "30": "1m", "365": "1y" };
+  const [days, setDays] = useState("1");
+  const { data: currentData } = queries[days.toString() as keyof typeof queries];
 
+  // pages
+  // 1. loading
+  const isLoadingState = [isLoading, coinIntroLoading];
+  const isAnyLoading = isLoadingState.some((state) => state);
+  // 2. Error
   const history = useHistory();
   const queriesError = query1.isError || query7.isError || query30.isError || query365.isError;
   useEffect(() => {
@@ -94,12 +76,6 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
       history.push("/error");
     }
   }, [history, isError, coinIntroError, queriesError]);
-
-  // chart
-  const [days, setDays] = useState("1");
-
-  const { data: currentData } = queries[days.toString() as keyof typeof queries];
-  const times = { "1": "1h", "7": "1w", "30": "1m", "365": "1y" };
 
   return (
     <>
