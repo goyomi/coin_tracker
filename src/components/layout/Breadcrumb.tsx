@@ -13,13 +13,16 @@ const OrderList = styled.ol`
   }
 `;
 
-const NavLink = styled(Link)<{ isAction?: boolean }>`
+const NavLink = styled(Link).attrs<{ isAction: boolean }>(({ isAction, theme }) => ({
+  style: {
+    color: isAction ? theme.onActiveColor : theme.mainFontColor,
+  },
+}))<{ isAction: boolean }>`
   display: inline-block;
   margin: 0 1rem;
   padding: 1rem;
   text-transform: capitalize;
   font-size: 1.5rem;
-  color: ${(props) => (props.isAction ? props.theme.onActiveColor : props.theme.mainFontColor)};
   background-color: ${(props) => props.theme.buttonColor};
   border-radius: 0.5rem;
 `;
@@ -30,7 +33,7 @@ interface IBreadCrumb {
 
 function Breadcrumb({ links }: IBreadCrumb) {
   return (
-    <Navbar aria-label="breadcrumb">
+    <Navbar>
       <OrderList>
         {links.map((link, idx) => (
           <li key={idx}>
