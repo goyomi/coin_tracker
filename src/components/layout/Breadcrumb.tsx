@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = styled.nav`
@@ -13,22 +13,28 @@ const OrderList = styled.ol`
   }
 `;
 
-const NavLink = styled(Link).attrs<{ isAction: boolean }>(({ isAction, theme }) => ({
-  style: {
-    color: isAction ? theme.onActiveColor : theme.mainFontColor,
-  },
-}))<{ isAction: boolean }>`
+const NavLink = styled(Link)
+  .withConfig({ shouldForwardProp: (prop) => !["isAction"].includes(prop) })
+  .attrs<INavLinkProps>(({ theme, isAction }) => ({
+    style: {
+      color: isAction ? theme.onActiveColor : theme.mainFontColor,
+      backgroundColor: theme.buttonColor,
+    },
+  }))<INavLinkProps>`
   display: inline-block;
   margin: 0 1rem;
   padding: 1rem;
   text-transform: capitalize;
   font-size: 1.5rem;
-  background-color: ${(props) => props.theme.buttonColor};
   border-radius: 0.5rem;
 `;
 
 interface IBreadCrumb {
   links: { name: string; path: string }[];
+}
+
+interface INavLinkProps extends LinkProps {
+  isAction?: boolean;
 }
 
 function Breadcrumb({ links }: IBreadCrumb) {

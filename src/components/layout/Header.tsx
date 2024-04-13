@@ -25,11 +25,16 @@ const Logo = styled.img`
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
 `;
 
-const ToggleButton = styled.button<IToggleButton>`
+const ToggleButton = styled.button
+  .withConfig({ shouldForwardProp: (prop) => !["toggleOn"].includes(prop) })
+  .attrs<IToggleButton>(({ theme, toggleOn }) => ({
+    style: {
+      backgroundColor: toggleOn ? theme.onActiveColor : "rgb(233,233,234)",
+    },
+  }))`
   width: 5.5rem;
   height: 3rem;
   border-radius: 3rem;
-  background-color: ${(props) => (props.toggleOn ? props.theme.onActiveColor : "rgb(233,233,234)")};
   transition: 0.6s cubic-bezier(0.4, 0, 1, 1);
   .circle {
     width: 2rem;
