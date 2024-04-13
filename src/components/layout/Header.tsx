@@ -5,11 +5,22 @@ import { IToggleProps } from "../../types/type";
 const HeaderPart = styled.header`
   position: fixed;
   top: 0;
-  left: auto;
-  width: 124rem;
+  max-width: var(--width-web-max);
+  width: var(--width-web);
   padding: 2rem;
   background-color: ${(props) => props.theme.backgroundColor};
   z-index: 20;
+
+  @media (max-width: 1024px) {
+    max-width: var(--width-tablet-max);
+    width: var(--width-tablet);
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    width: var(--width-mobile);
+    padding: 1rem;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -42,6 +53,15 @@ const ToggleButton = styled.button
     border-radius: 50%;
     background-color: rgb(255, 254, 255);
     margin-left: ${(props) => (props.toggleOn ? "auto" : "")};
+  }
+
+  @media (max-width: 768px) {
+    width: 4rem;  
+    height: 2.2rem;  
+    .circle {
+      width: 1.5rem;  
+      height: 1.5rem;  
+    }
   }
 `;
 

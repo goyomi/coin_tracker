@@ -45,10 +45,6 @@ export const Table = styled.table`
   .coin_price {
     width: 10.24%;
   }
-  .price_chart,
-  .coin_price_chart {
-    width: 9.31%;
-  }
   .change,
   .coin_change_percentage {
     width: 6.56%;
@@ -65,21 +61,85 @@ export const Table = styled.table`
   .coin_supply {
     width: 5.16%;
   }
+
+  @media (max-width: 1024px) {
+    thead > tr > th,
+    tbody > tr > td {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+    thead > tr > th > div,
+    tbody > tr > td > div {
+      margin-right: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    thead > tr > th,
+    tbody > tr > td {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    thead > tr > th > div,
+    tbody > tr > td > div {
+      margin-right: 1rem;
+    }
+    .change,
+    .coin_change_percentage,
+    .supply,
+    .coin_supply {
+      display: none;
+    }
+
+    .rank,
+    .coin_rank {
+      width: 8.05%;
+    }
+    .name,
+    .coin_name {
+      width: 30.66%;
+    }
+    .price,
+    .coin_price {
+      width: 15.24%;
+    }
+    .volume,
+    .coin_volume {
+      width: 14.26%;
+    }
+    .market_cap,
+    .coin_market_cap {
+      width: 12.45%;
+    }
+  }
 `;
 
 export const TableHeader = styled.thead`
   position: sticky;
   top: 9rem;
   background-color: ${(props) => props.theme.backgroundColor};
-  font-size: 1.5rem;
+  font-size: var(--font-size-web-small);
   text-align: left;
   tr > th {
     padding: 2rem 0;
   }
+
+  @media (max-width: 1024px) {
+    top: 7rem;
+    font-size: var(--font-size-tablet-small);
+  }
+
+  @media (max-width: 768px) {
+    top: 5rem;
+    font-size: var(--font-size-mobile-small);
+    tr > th {
+      padding: 1.5rem 0;
+    }
+  }
 `;
 
 export const TableBody = styled.tbody`
-  font-size: 1.8rem;
+  font-size: var(--font-size-web-medium);
   tr {
     width: 100%;
     td {
@@ -93,6 +153,19 @@ export const TableBody = styled.tbody`
     .coin_volume > div span:first-child,
     .coin_market_cap > div span:first-child {
       margin-right: 0.5rem;
+    }
+  }
+  @media (max-width: 1024px) {
+    font-size: var(--font-size-tablet-medium);
+    tr > td {
+      padding: 1.2rem 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-mobile-medium);
+    tr > td {
+      padding: 1rem 0;
     }
   }
 `;
@@ -109,6 +182,26 @@ export const CoinLink = styled(Link)`
   .coin_symbol {
     color: ${(props) => props.theme.thirdFontColor};
     text-transform: uppercase;
+  }
+
+  @media (max-width: 1024px) {
+    & > * {
+      margin-right: 1.2rem;
+    }
+    img {
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & > * {
+      margin-right: 0.8rem;
+    }
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
 

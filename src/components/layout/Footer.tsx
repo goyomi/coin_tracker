@@ -2,11 +2,26 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const FooterPart = styled.footer`
-  width: 124rem;
+  max-width: var(--width-web-max);
+  width: var(--width-web);
   padding: 2rem;
   display: flex;
   align-items: center;
   gap: 4rem;
+
+  @media (max-width: 1024px) {
+    max-width: var(--width-tablet-max);
+    width: var(--width-tablet);
+    padding: 1.5rem;
+    gap: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    width: var(--width-mobile);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+  }
 `;
 
 const LogoImg = styled.img`
@@ -15,6 +30,10 @@ const LogoImg = styled.img`
   margin-bottom: 1rem;
   background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
+
+  @media (max-width: 768px) {
+    width: 8rem;
+  }
 `;
 
 const ContactWrapper = styled.div`
@@ -34,11 +53,21 @@ const GmailIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
   cursor: copy;
+
+  @media (max-width: 768px) {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 
 const FooterTextWrapper = styled.div`
-  font-size: 1.5rem;
+  font-size: var(--font-size-web-small);
   line-height: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-tablet-small);
+    line-height: 1.6rem;
+  }
 `;
 
 const FooterText = styled.p`
