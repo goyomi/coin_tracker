@@ -9,6 +9,13 @@ const CustomTableBody = styled(CoinDataTableBody)`
   tr:first-child td {
     padding-top: 1.2rem;
   }
+
+  @media (max-width: 768px) {
+    th,
+    td {
+      padding: 0.8rem 0;
+    }
+  }
 `;
 interface ICoinInfoProps {
   selectedCoin: ICoin;

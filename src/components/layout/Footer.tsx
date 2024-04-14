@@ -24,6 +24,13 @@ const FooterPart = styled.footer`
   }
 `;
 
+const LogoAndContacts = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+  }
+`;
+
 const LogoImg = styled.img`
   width: 10rem;
   height: auto;
@@ -32,7 +39,8 @@ const LogoImg = styled.img`
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
 
   @media (max-width: 768px) {
-    width: 8rem;
+    width: 6rem;
+    margin-bottom: 0rem;
   }
 `;
 
@@ -40,6 +48,9 @@ const ContactWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  @media (max-width: 768px) {
+    width: 6rem;
+  }
 `;
 
 const GitHubIcon = styled.img`
@@ -47,6 +58,11 @@ const GitHubIcon = styled.img`
   height: 2.5rem;
   background-color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "")};
   border-radius: ${(props) => (props.theme.mode === "dark" ? "50%" : "")};
+
+  @media (max-width: 768px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 `;
 
 const GmailIcon = styled.img`
@@ -55,8 +71,8 @@ const GmailIcon = styled.img`
   cursor: copy;
 
   @media (max-width: 768px) {
-    width: 2rem;
-    height: 2rem;
+    width: 1.3rem;
+    height: 1.3rem;
   }
 `;
 
@@ -92,7 +108,7 @@ function Footer() {
 
   return (
     <FooterPart>
-      <div>
+      <LogoAndContacts>
         <Link to="/">
           <LogoImg src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
         </Link>
@@ -102,7 +118,7 @@ function Footer() {
           </a>
           <GmailIcon src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
         </ContactWrapper>
-      </div>
+      </LogoAndContacts>
       <FooterTextWrapper>
         <FooterText>
           Coin Tracker offers a comprehensive overview of the leading 100 cryptocurrencies, presenting a broad array of

@@ -14,7 +14,7 @@ const CoinTitle = styled.div`
     height: 2rem;
   }
   span {
-    font-size: 2rem;
+    font-size: var(--font-size-web-large);
   }
   .coin_name {
     font-weight: bolder;
@@ -26,6 +26,16 @@ const CoinTitle = styled.div`
     color: ${(props) => props.theme.secondFontColor};
     margin-right: 0;
   }
+
+  @media (max-width: 768px) {
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    span {
+      font-size: var(--font-size-mobile-large);
+    }
+  }
 `;
 
 const CoinPrice = styled.div`
@@ -34,13 +44,22 @@ const CoinPrice = styled.div`
     font-weight: bolder;
   }
   .coin_current_price {
-    font-size: 3rem;
+    font-size: var(--font-size-web-extra-large);
   }
   .coin_price_change_percentage {
     margin-right: 0;
-    font-size: 2rem;
+    font-size: var(--font-size-web-large);
     display: inline-block;
     vertical-align: super;
+  }
+
+  @media (max-width: 768px) {
+    .coin_current_price {
+      font-size: var(--font-size-mobile-extra-large);
+    }
+    .coin_price_change_percentage {
+      font-size: var(--font-size-mobile-large);
+    }
   }
 `;
 

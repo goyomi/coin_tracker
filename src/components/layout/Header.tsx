@@ -34,6 +34,10 @@ const Logo = styled.img`
   height: auto;
   background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
+
+  @media (max-width: 768px) {
+    width: 6rem;
+  }
 `;
 
 const ToggleButton = styled.button

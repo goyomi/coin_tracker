@@ -6,7 +6,11 @@ import { CURRENCY } from "../constant";
 import { Heading } from "../styles/coin";
 
 const Section = styled.section`
-  font-size: 2rem;
+  font-size: var(--font-size-web-large);
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-mobile-large);
+  }
 `;
 
 const InputWrapper = styled.div<{ marginBottom: boolean }>`
@@ -14,25 +18,38 @@ const InputWrapper = styled.div<{ marginBottom: boolean }>`
   border-radius: 0.8rem;
   padding: 1.2rem 2rem;
   margin-bottom: ${(props) => (props.marginBottom ? "1rem" : "")};
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+    margin-bottom: ${(props) => (props.marginBottom ? "0.5rem" : "0")}; // 마진 조정
+  }
 `;
 
 const InputInner = styled.input`
   width: 80%;
-  font-size: 1.8rem;
+  font-size: var(--font-size-web-medium);
   border: none;
   border-radius: 0.8rem;
   color: ${(props) => props.theme.mainFontColor};
   background-color: ${(props) => props.theme.backgroundColor};
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-mobile-medium);
+  }
 `;
 
 const Unit = styled.span`
   width: 20%;
   display: inline-block;
   margin-left: auto;
-  font-size: 1.8rem;
+  font-size: var(--font-size-web-medium);
   text-align: right;
   text-transform: uppercase;
   color: grey;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-mobile-medium);
+  }
 `;
 
 interface ICoinConverterProps {

@@ -69,6 +69,7 @@ function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
     tooltip: {
       theme: toggleOn ? "dark" : "light",
     },
+    responsive: [{ breakpoint: 768, options: { title: { style: { fontSize: "18px" } } } }],
   };
 
   return (
@@ -78,8 +79,7 @@ function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
           options={chartOptions}
           series={[{ data: seriesData || [] }]}
           type="candlestick"
-          height={350}
-          width={700}
+          width={"100%"}
         />
       </section>
     </>

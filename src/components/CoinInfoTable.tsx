@@ -2,11 +2,6 @@ import styled from "styled-components";
 import { ICoin, ICoinIntro } from "../types/type";
 import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
-interface ICoinInfoTableProps {
-  selectedCoin: ICoin;
-  coinIntro: ICoinIntro | undefined;
-}
-
 const BoxStyle = styled.a`
   padding: 0.35rem;
   border-radius: 0.5rem;
@@ -16,11 +11,20 @@ const BoxStyle = styled.a`
 const Up = styled.span`
   margin-right: 1rem;
   color: ${(props) => props.theme.changeUpColor};
+
+  @media (max-width: 768px) {
+    margin-right: 0.5rem;
+  }
 `;
 
 const Down = styled.span`
   color: ${(props) => props.theme.changeDownColor};
 `;
+
+interface ICoinInfoTableProps {
+  selectedCoin: ICoin;
+  coinIntro: ICoinIntro | undefined;
+}
 
 function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
   const data = [

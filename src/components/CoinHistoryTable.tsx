@@ -9,9 +9,14 @@ const Separator = styled.span`
 
 const ItalicStyle = styled.i`
   margin-right: 1.3rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-web-small);
   font-style: italic;
   color: ${(props) => props.theme.grey2Color};
+
+  @media (max-width: 768px) {
+    margin-right: 1rem;
+    font-size: var(--font-size-mobile-small);
+  }
 `;
 
 interface CoinHistoryTableProps {
