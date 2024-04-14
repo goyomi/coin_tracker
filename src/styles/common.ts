@@ -27,3 +27,17 @@ export const MainContainer = styled.div`
     margin: 4rem auto;
   }
 `;
+
+export const Main = styled.main`
+  margin: 5rem 0;
+
+  @media (max-width: 768px) {
+    margin: 3rem 0;
+  }
+`;
+
+export const NavTimebarWrapper = styled.div`
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+`;
