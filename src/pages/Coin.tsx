@@ -13,13 +13,13 @@ import CoInHistoryTable from "../components/CoinHistoryTable";
 import CoinDetailTable from "../components/CoinDetailTable";
 import CoinInfoTable from "../components/CoinInfoTable";
 import Timebar from "../components/layout/Timebar";
+import Footer from "../components/layout/Footer";
 
 import { CoinDataContext } from "../contexts/CoinDataContext";
 import { introCoin, ohlc } from "../services/api";
 import { ICoin, ICoinIntro, IParams, IToggleProps } from "../types/type";
 import { CoinIntro, CoinWrapper } from "../styles/coin";
-import { ScreenReaderOnly } from "../styles/common";
-import { NavTimebarWrapper } from "../styles/coins";
+import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 
 function Coin({ toggleOn, setToggleOn }: IToggleProps) {
   const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
@@ -84,31 +84,34 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
       ) : (
         <>
           <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-          <NavTimebarWrapper>
-            <Breadcrumb links={links} />
-          </NavTimebarWrapper>
-          <CoinWrapper>
-            <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
-            {selectedCoin ? (
-              <div className="left_zone">
-                <CoinProfile selectedCoin={selectedCoin} />
-                <CoinDetailTable selectedCoin={selectedCoin} />
-                <CoinConverter selectedCoin={selectedCoin} />
-                <CoInHistoryTable selectedCoin={selectedCoin} />
-                <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+          <Main>
+            <NavTimebarWrapper>
+              <Breadcrumb links={links} />
+            </NavTimebarWrapper>
+            <CoinWrapper>
+              <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
+              {selectedCoin ? (
+                <div className="left_zone">
+                  <CoinProfile selectedCoin={selectedCoin} />
+                  <CoinDetailTable selectedCoin={selectedCoin} />
+                  <CoinConverter selectedCoin={selectedCoin} />
+                  <CoInHistoryTable selectedCoin={selectedCoin} />
+                  <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+                </div>
+              ) : null}
+              <div className="right_zone">
+                <Timebar times={times} setDays={setDays} />
+                <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
+                <CoinIntro>
+                  <h2>About</h2>
+                  {textLine?.map((text: string, idx: number) => (
+                    <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
+                  ))}
+                </CoinIntro>
               </div>
-            ) : null}
-            <div className="right_zone">
-              <Timebar times={times} setDays={setDays} />
-              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
-              <CoinIntro>
-                <h2>About</h2>
-                {textLine?.map((text: string, idx: number) => (
-                  <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
-                ))}
-              </CoinIntro>
-            </div>
-          </CoinWrapper>
+            </CoinWrapper>
+          </Main>
+          <Footer />
         </>
       )}
     </>
