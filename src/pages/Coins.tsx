@@ -9,8 +9,7 @@ import Breadcrumb from "../components/layout/Breadcrumb";
 import Footer from "../components/layout/Footer";
 import CoinListTable from "../components/CoinListTable";
 
-import { ScreenReaderOnly } from "../styles/common";
-import { Main, NavTimebarWrapper } from "../styles/coins";
+import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 
 interface ICoinsProps {
   toggleOn: boolean;
