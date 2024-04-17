@@ -11,13 +11,11 @@ const FooterPart = styled.footer`
 
   @media (max-width: 1024px) {
     max-width: var(--width-tablet-max);
-    width: var(--width-tablet);
     padding: 1.5rem;
     gap: 3rem;
   }
 
   @media (max-width: 768px) {
-    width: var(--width-mobile);
     flex-direction: column;
     padding: 1rem;
     gap: 2rem;
@@ -79,10 +77,11 @@ const GmailIcon = styled.img`
 const FooterTextWrapper = styled.div`
   font-size: var(--font-size-web-small);
   line-height: 2rem;
+  text-align: justify;
 
   @media (max-width: 768px) {
-    font-size: var(--font-size-tablet-small);
-    line-height: 1.6rem;
+    font-size: var(--font-size-mobile-small);
+    line-height: calc(var(--font-size-mobile-small) * 1.3);
   }
 `;
 

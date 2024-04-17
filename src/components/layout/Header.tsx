@@ -5,21 +5,16 @@ import { IToggleProps } from "../../types/type";
 const HeaderPart = styled.header`
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   max-width: var(--width-web-max);
-  width: var(--width-web);
-  padding: 2rem;
+  padding: 2rem 3rem;
   background-color: ${(props) => props.theme.backgroundColor};
   z-index: 20;
 
   @media (max-width: 1024px) {
     max-width: var(--width-tablet-max);
-    width: var(--width-tablet);
-    padding: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    width: var(--width-mobile);
-    padding: 1rem;
   }
 `;
 

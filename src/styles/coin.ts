@@ -14,7 +14,7 @@ export const CoinWrapper = styled.div`
     flex-direction: column;
     .left_zone,
     .right_zone {
-      width: var(--width-mobile);
+      width: 100%;
     }
   }
 `;
@@ -82,6 +82,7 @@ export const CoinIntro = styled.section`
     margin: 1rem 0;
     font-size: var(--font-size-web-medium);
     line-height: calc(var(--font-size-web-medium) * 1.5);
+    text-align: justify;
   }
 
   @media (max-width: 768px) {

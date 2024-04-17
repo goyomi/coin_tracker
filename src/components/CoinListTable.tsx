@@ -25,14 +25,14 @@ export const Table = styled.table`
   tbody > tr > td:last-child {
     padding-right: 2.4rem;
   }
-  thead > tr > th > div,
-  tbody > tr > td > div {
-    margin-right: 3.5rem;
+
+  th,
+  td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  thead > tr > th > div:last-child,
-  tbody > tr > td > div:last-child {
-    margin-right: 0;
-  }
+
   .rank,
   .coin_rank {
     width: 5.05%;
@@ -63,53 +63,50 @@ export const Table = styled.table`
   }
 
   @media (max-width: 1024px) {
-    thead > tr > th,
-    tbody > tr > td {
-      padding-left: 1.2rem;
-      padding-right: 1.2rem;
+    thead > tr > th:first-child,
+    tbody > tr > td:first-child {
+      padding-left: 2rem;
     }
-    thead > tr > th > div,
-    tbody > tr > td > div {
-      margin-right: 2rem;
+    .change,
+    .coin_change_percentage {
+      padding-right: 2rem;
     }
   }
 
   @media (max-width: 768px) {
-    thead > tr > th,
-    tbody > tr > td {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-    thead > tr > th > div,
-    tbody > tr > td > div {
-      margin-right: 1rem;
+    thead > tr > th:first-child,
+    tbody > tr > td:first-child {
+      padding-left: 1.6rem;
     }
     .change,
-    .coin_change_percentage,
+    .coin_change_percentage {
+      padding-right: 1.6rem;
+    }
+
+    .market_cap,
+    .coin_market_cap,
     .supply,
-    .coin_supply {
+    .coin_supply,
+    .volume,
+    .coin_volume {
       display: none;
     }
 
     .rank,
     .coin_rank {
-      width: 8.05%;
+      width: 10.05%;
     }
     .name,
     .coin_name {
-      width: 30.66%;
+      width: 40.66%;
     }
     .price,
     .coin_price {
-      width: 15.24%;
+      width: 24.24%;
     }
-    .volume,
-    .coin_volume {
-      width: 14.26%;
-    }
-    .market_cap,
-    .coin_market_cap {
-      width: 12.45%;
+    .change,
+    .coin_change_percentage {
+      width: 15.45%;
     }
   }
 `;

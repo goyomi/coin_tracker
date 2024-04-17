@@ -97,20 +97,15 @@ a{
   --font-size-tablet-extra-large: 2.5;
 
   /* Mobile font sizes */
-  --font-size-mobile-small: 0.8rem;
-  --font-size-mobile-medium: 1rem;
+  --font-size-mobile-small: 1rem;
+  --font-size-mobile-medium: 1.2rem;
   --font-size-mobile-large: 1.4rem;
   --font-size-mobile-extra-large: 1.8rem;
 
 	/* Web Width sizes */
 	--width-web-max: 124rem;
-  --width-web: 90%;
 
 	/* Tablet Width sizes */
 	--width-tablet-max: 95rem;
-	--width-tablet: 90%;
-
-	/* Mobile Width sizes */
-	--width-mobile: 90%;
 };
 `;
