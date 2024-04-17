@@ -24,7 +24,7 @@ const NavLink = styled(Link)
       color: isAction ? theme.onActiveColor : theme.mainFontColor,
       backgroundColor: theme.buttonColor,
     },
-  }))<INavLinkProps>`
+  }))`
   display: inline-block;
   margin: 0 1rem;
   padding: 1rem;

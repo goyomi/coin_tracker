@@ -13,11 +13,13 @@ const Section = styled.section`
   }
 `;
 
-const InputWrapper = styled.div<{ marginBottom: boolean }>`
+const InputWrapper = styled.div
+  .withConfig({ shouldForwardProp: (prop) => !["marginBottom"].includes(prop) })
+  .attrs((props) => ({}))<{ marginBottom: boolean }>`
   border: 0.15rem solid ${(props) => props.theme.grey1Color};
   border-radius: 0.8rem;
   padding: 1.2rem 2rem;
-  margin-bottom: ${(props) => (props.marginBottom ? "1rem" : "")};
+  margin-bottom: ${(props) => (props.marginBottom ? "1rem" : "0")};
 
   @media (max-width: 768px) {
     padding: 1rem 1.5rem;
