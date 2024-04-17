@@ -13,7 +13,7 @@ import { ThemeProvider } from "styled-components";
 import { darkTheme, theme } from "./styles/theme";
 
 function App() {
-  const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? false);
+  const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? true);
   const { data, isLoading, isError, error } = useQuery<ICoin[]>(["allCoins"], () => fetchCoins(), {
     staleTime: Infinity,
   });
