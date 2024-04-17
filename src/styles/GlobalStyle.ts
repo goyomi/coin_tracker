@@ -94,7 +94,7 @@ a{
   --font-size-tablet-small: 1.2rem;
   --font-size-tablet-medium: 1.3rem;
   --font-size-tablet-large: 1.6rem; 
-  --font-size-tablet-extra-large: 2.5;
+  --font-size-tablet-extra-large: 2.5rem;
 
   /* Mobile font sizes */
   --font-size-mobile-small: 1rem;
