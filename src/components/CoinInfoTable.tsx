@@ -32,6 +32,7 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
     { title: "White Paper", value: coinIntro?.links.whitepaper },
     { title: "Source Code", value: coinIntro?.links.repos_url.github[0], subTitle: "GitHub" },
   ];
+  console.log(data);
   return (
     <Section>
       <Heading>
@@ -44,9 +45,9 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
             <tr key={title}>
               <th>{title}</th>
               <td>
-                {typeof value === "string" ? (
+                {value !== "" ? (
                   <BoxStyle href={value} target="_blank" rel="noreferrer">
-                    {subTitle ? subTitle : value.split("/")[2]}
+                    {subTitle ? subTitle : value?.split("/")[2]}
                   </BoxStyle>
                 ) : (
                   "-"
