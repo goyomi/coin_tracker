@@ -112,7 +112,7 @@ function Footer() {
           <LogoImg src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
         </Link>
         <ContactWrapper>
-          <a href="https://github.com/goyomi" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/goyomi/coin_tracker" target="_blank" rel="noopener noreferrer">
             <GitHubIcon src="assets/github_logo.png" alt="GitHub Logo" />
           </a>
           <GmailIcon src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
