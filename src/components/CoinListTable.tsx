@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { CoinDataContext } from "../contexts/CoinDataContext";
+import { CoinListContext } from "../contexts/Context";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import NumberFormatter from "../utils/numberFormatter";
 import { IToggleNumber } from "../types/type";
@@ -207,7 +207,7 @@ export const ToggleColor = styled.div<IToggleNumber>`
 `;
 
 function CoinListTable() {
-  const { data } = useContext(CoinDataContext);
+  const { data } = useContext(CoinListContext);
 
   return (
     <Table>

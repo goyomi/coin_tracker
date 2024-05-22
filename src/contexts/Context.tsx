@@ -8,7 +8,7 @@ interface IContext {
   error?: unknown;
 }
 
-export const CoinDataContext = createContext<IContext>({
+export const CoinListContext = createContext<IContext>({
   data: [],
   isLoading: false,
   isError: false,

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { CoinDataContext } from "../contexts/CoinDataContext";
+import { CoinListContext } from "../contexts/Context";
 
 const ErrorArticle = styled.article`
   padding: 2rem;
@@ -51,14 +51,14 @@ const ErrorMessageWrapper = styled.div`
 `;
 
 function ErrorPage() {
-  const { isError } = useContext(CoinDataContext);
-  const history = useHistory();
-  useEffect(() => {
-    if (!isError) {
-      console.log("에러가 아닙니다");
-      history.goBack();
-    }
-  }, [isError, history]);
+  // const { isError } = useContext(CoinListContext);
+  // const history = useHistory();
+  // useEffect(() => {
+  //   if (!isError) {
+  //     console.log("에러가 아닙니다");
+  //     history.goBack();
+  //   }
+  // }, [isError, history]);
 
   return (
     <ErrorArticle>

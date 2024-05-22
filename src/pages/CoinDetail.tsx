@@ -15,16 +15,16 @@ import CoinInfoTable from "../components/CoinInfoTable";
 import Timebar from "../components/layout/Timebar";
 import Footer from "../components/layout/Footer";
 
-import { CoinDataContext } from "../contexts/CoinDataContext";
+import { CoinListContext } from "../contexts/Context";
 import { introCoin, ohlc } from "../services/api";
 import { ICoin, ICoinIntro, IParams, IToggleProps } from "../types/type";
 import { CoinIntro, CoinWrapper } from "../styles/coin";
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 
-function Coin({ toggleOn, setToggleOn }: IToggleProps) {
-  const { data: coinData, isLoading, isError } = useContext(CoinDataContext);
+function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
+  const { data: coinListData } = useContext(CoinListContext);
   const { coinId } = useParams<IParams>();
-  const selectedCoin = coinData?.find((coin: ICoin) => coin.id === coinId);
+  const selectedCoin = coinListData?.find((coin: ICoin) => coin.id === coinId);
 
   // data fetch
   // 1. ohlc
@@ -66,56 +66,50 @@ function Coin({ toggleOn, setToggleOn }: IToggleProps) {
 
   // pages
   // 1. loading
-  const isLoadingState = [isLoading, coinIntroLoading];
-  const isAnyLoading = isLoadingState.some((state) => state);
+  // const isLoadingState = [isLoading, coinIntroLoading];
+  // const isAnyLoading = isLoadingState.some((state) => state);
   // 2. Error
   const history = useHistory();
   const queriesError = query1.isError || query7.isError || query30.isError || query365.isError;
   useEffect(() => {
-    if (isError || coinIntroError || queriesError) {
+    if (coinIntroError || queriesError) {
       history.push("/error");
     }
-  }, [history, isError, coinIntroError, queriesError]);
+  }, [history, coinIntroError, queriesError]);
 
   return (
     <>
-      {isAnyLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-          <Main>
-            <NavTimebarWrapper>
-              <Breadcrumb links={links} />
-            </NavTimebarWrapper>
-            <CoinWrapper>
-              <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
-              {selectedCoin ? (
-                <div className="left_zone">
-                  <CoinProfile selectedCoin={selectedCoin} />
-                  <CoinDetailTable selectedCoin={selectedCoin} />
-                  <CoinConverter selectedCoin={selectedCoin} />
-                  <CoInHistoryTable selectedCoin={selectedCoin} />
-                  <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
-                </div>
-              ) : null}
-              <div className="right_zone">
-                <Timebar times={times} setDays={setDays} />
-                <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
-                <CoinIntro>
-                  <h2>About</h2>
-                  {textLine?.map((text: string, idx: number) => (
-                    <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
-                  ))}
-                </CoinIntro>
-              </div>
-            </CoinWrapper>
-          </Main>
-          <Footer />
-        </>
-      )}
+      <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
+      <Main>
+        <NavTimebarWrapper>
+          <Breadcrumb links={links} />
+        </NavTimebarWrapper>
+        <CoinWrapper>
+          <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
+          {selectedCoin ? (
+            <div className="left_zone">
+              <CoinProfile selectedCoin={selectedCoin} />
+              <CoinDetailTable selectedCoin={selectedCoin} />
+              <CoinConverter selectedCoin={selectedCoin} />
+              <CoInHistoryTable selectedCoin={selectedCoin} />
+              <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+            </div>
+          ) : null}
+          <div className="right_zone">
+            <Timebar times={times} setDays={setDays} />
+            <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
+            <CoinIntro>
+              <h2>About</h2>
+              {textLine?.map((text: string, idx: number) => (
+                <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
+              ))}
+            </CoinIntro>
+          </div>
+        </CoinWrapper>
+      </Main>
+      <Footer />
     </>
   );
 }
 
-export default Coin;
+export default CoinDetail;

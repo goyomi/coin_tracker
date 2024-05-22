@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import { CoinDataContext } from "../contexts/CoinDataContext";
+import { CoinListContext } from "../contexts/Context";
 
 import Header from "../components/layout/Header";
 import Loading from "../components/Loading";
@@ -16,8 +16,8 @@ interface ICoinsProps {
   setToggleOn: (value: boolean) => void;
 }
 
-function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
-  const { isLoading, isError, error } = useContext(CoinDataContext);
+function CoinList({ toggleOn, setToggleOn }: ICoinsProps) {
+  const { isLoading, isError, error } = useContext(CoinListContext);
   const links = [{ name: "Coins Currency", path: "/" }];
   const history = useHistory();
   useEffect(() => {
@@ -27,9 +27,7 @@ function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
     }
   }, [isError, history, error]);
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <>
       <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
       <Main>
@@ -44,4 +42,4 @@ function Coins({ toggleOn, setToggleOn }: ICoinsProps) {
   );
 }
 
-export default Coins;
+export default CoinList;
