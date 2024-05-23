@@ -19,7 +19,7 @@ import { introCoin, ohlc } from "../services/api";
 import { ICoin, ICoinIntro, IParams, IToggleProps } from "../types/type";
 import { CoinIntro, CoinWrapper } from "../styles/coin";
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../components/ErrorPage";
 
 function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
   const { data: coinListData } = useContext(CoinListContext);

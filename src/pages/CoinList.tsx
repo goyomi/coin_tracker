@@ -6,7 +6,7 @@ import Header from "../components/layout/Header";
 import Breadcrumb from "../components/layout/Breadcrumb";
 import Footer from "../components/layout/Footer";
 import CoinListTable from "../components/CoinListTable";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../components/ErrorPage";
 
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 

@@ -56,7 +56,7 @@ const LoadingText = styled.span`
   }
 `;
 
-function Loading() {
+function LoadingPage() {
   const [dots, setDots] = useState("");
 
   useEffect(() => {
@@ -77,4 +77,4 @@ function Loading() {
     </LoadingSection>
   );
 }
-export default Loading;
+export default LoadingPage;
