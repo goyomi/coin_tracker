@@ -1,13 +1,12 @@
-import { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useContext } from "react";
 
 import { CoinListContext } from "../contexts/Context";
 
 import Header from "../components/layout/Header";
-import Loading from "../components/Loading";
 import Breadcrumb from "../components/layout/Breadcrumb";
 import Footer from "../components/layout/Footer";
 import CoinListTable from "../components/CoinListTable";
+import ErrorPage from "./ErrorPage";
 
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 
@@ -17,27 +16,26 @@ interface ICoinsProps {
 }
 
 function CoinList({ toggleOn, setToggleOn }: ICoinsProps) {
-  const { isLoading, isError, error } = useContext(CoinListContext);
+  const { isError, refetch } = useContext(CoinListContext);
   const links = [{ name: "Coins Currency", path: "/" }];
-  const history = useHistory();
-  useEffect(() => {
-    if (isError) {
-      history.push("/error");
-      console.log("에러메세지:", error);
-    }
-  }, [isError, history, error]);
 
   return (
     <>
-      <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-      <Main>
-        <ScreenReaderOnly>Coin List Table</ScreenReaderOnly>
-        <NavTimebarWrapper>
-          <Breadcrumb links={links} />
-        </NavTimebarWrapper>
-        <CoinListTable />
-      </Main>
-      <Footer />
+      {isError ? (
+        <ErrorPage isError={isError} refetch={refetch} />
+      ) : (
+        <>
+          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
+          <Main>
+            <ScreenReaderOnly>Coin List Table</ScreenReaderOnly>
+            <NavTimebarWrapper>
+              <Breadcrumb links={links} />
+            </NavTimebarWrapper>
+            <CoinListTable />
+          </Main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

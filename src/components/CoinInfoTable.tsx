@@ -32,7 +32,7 @@ function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
     { title: "White Paper", value: coinIntro?.links.whitepaper },
     { title: "Source Code", value: coinIntro?.links.repos_url.github[0], subTitle: "GitHub" },
   ];
-  console.log(data);
+
   return (
     <Section>
       <Heading>

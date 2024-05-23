@@ -1,7 +1,5 @@
-import { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CoinListContext } from "../contexts/Context";
 
 const ErrorArticle = styled.article`
   padding: 2rem;
@@ -24,7 +22,7 @@ const ErrorCode = styled.strong`
   font-size: 6rem;
   line-height: 9rem;
   font-weight: bolder;
-  color: #000;
+  color: #f5f6f8;
 
   @media (max-width: 768px) {
     font-size: 4rem;
@@ -38,7 +36,7 @@ const ErrorMessageWrapper = styled.div`
   line-height: calc(var(--font-size-web-extra-large) * 1.5);
   text-align: center;
   p {
-    color: #000;
+    color: #f5f6f8;
   }
   p:nth-of-type(2) {
     margin-bottom: 1.5rem;
@@ -50,15 +48,15 @@ const ErrorMessageWrapper = styled.div`
   }
 `;
 
-function ErrorPage() {
-  // const { isError } = useContext(CoinListContext);
-  // const history = useHistory();
-  // useEffect(() => {
-  //   if (!isError) {
-  //     console.log("에러가 아닙니다");
-  //     history.goBack();
-  //   }
-  // }, [isError, history]);
+function ErrorPage({ isError, refetch }: { isError: boolean; refetch: () => void }) {
+  const [showButton, setShowButton] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 60000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <ErrorArticle>
@@ -68,6 +66,7 @@ function ErrorPage() {
         <p>It may take a few minutes to reload.</p>
         <p>Please wait for a moment.</p>
         <p>The API used on the site is free, so there are limitations on its use😭.</p>
+        {showButton && <button onClick={refetch}>Go Back</button>}
       </ErrorMessageWrapper>
     </ErrorArticle>
   );
