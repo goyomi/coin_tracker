@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const ErrorArticle = styled.article`
-  padding: 2rem;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 15rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f5f6f8;
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 `;
 
 const ErrorImage = styled.img`
+  width: 35%;
   @media (max-width: 768px) {
     width: 50%;
   }
@@ -22,7 +26,6 @@ const ErrorCode = styled.strong`
   font-size: 6rem;
   line-height: 9rem;
   font-weight: bolder;
-  color: #f5f6f8;
 
   @media (max-width: 768px) {
     font-size: 4rem;
@@ -35,9 +38,6 @@ const ErrorMessageWrapper = styled.div`
   font-size: var(--font-size-web-extra-large);
   line-height: calc(var(--font-size-web-extra-large) * 1.5);
   text-align: center;
-  p {
-    color: #f5f6f8;
-  }
   p:nth-of-type(2) {
     margin-bottom: 1.5rem;
   }
@@ -45,6 +45,20 @@ const ErrorMessageWrapper = styled.div`
   @media (max-width: 768px) {
     font-size: var(--font-size-mobile-extra-large);
     line-height: calc(var(--font-size-mobile-extra-large) * 1.5);
+  }
+`;
+
+const GoBackButton = styled.button`
+  margin: 1rem 0 5rem;
+  padding: 1rem;
+  width: 10rem;
+  background-color: ${(props) => props.theme.onActiveColor};
+  border-radius: 0.5rem;
+  font-size: var(--font-size-web-medium);
+
+  @media (max-width: 768px) {
+    width: 7rem;
+    font-size: var(--font-size-mobile-medium);
   }
 `;
 
@@ -66,8 +80,9 @@ function ErrorPage({ isError, refetch }: { isError: boolean; refetch: () => void
         <p>It may take a few minutes to reload.</p>
         <p>Please wait for a moment.</p>
         <p>The API used on the site is free, so there are limitations on its use😭.</p>
-        {showButton && <button onClick={refetch}>Go Back</button>}
+        <p>Please click the 'Go Back' button when it appears in one minute.</p>
       </ErrorMessageWrapper>
+      {showButton && <GoBackButton onClick={refetch}>Go Back</GoBackButton>}
     </ErrorArticle>
   );
 }
