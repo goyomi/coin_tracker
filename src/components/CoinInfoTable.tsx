@@ -6,6 +6,7 @@ const BoxStyle = styled.a`
   padding: 0.35rem;
   border-radius: 0.5rem;
   background-color: ${(props) => props.theme.grey1Color};
+  cursor: pointer;
 `;
 
 const Up = styled.span`
