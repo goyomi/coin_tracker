@@ -79,7 +79,7 @@ function ErrorPage({ isError, refetch }: { isError: boolean; refetch: () => void
       <ErrorMessageWrapper>
         <p>It may take a few minutes to reload.</p>
         <p>Please wait for a moment.</p>
-        <p>The API used on the site is free, so there are limitations on its use😭.</p>
+        <p>The API used on the site is free, so there are limitations on its use.</p>
         <p>Please click the 'Go Back' button when it appears in one minute.</p>
       </ErrorMessageWrapper>
       {showButton && <GoBackButton onClick={refetch}>Go Back</GoBackButton>}
