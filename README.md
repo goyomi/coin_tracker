@@ -1,4 +1,4 @@
-# 🪙 Coin Tracker
+# <img width="50" alt="Coin Tracker Logo" src="https://github.com/goyomi/coin_tracker/assets/122963246/e8312f38-5433-4c2c-9fe2-b0c5ed8d9fb6"> Coin Tracker
 <img width="1920" alt="Coin Tracker Mockup(ko)" src="https://github.com/goyomi/coin_tracker/assets/122963246/f092c63b-46e7-4fc3-b028-fa8e08445a65">
 <br>
 
@@ -28,25 +28,7 @@ npm start
 <br>
 
 ## 🗓️ 개발기간 및 일정
-### 프로젝트 기간
-- **시작 날짜**: 2024년 3월 15일
-- **종료 날짜**: 2024년 4월 17일
-### 주요 마일스톤
-1. **프로젝트 기획 및 설계**
-    - 시작: 2024년 3월 15일
-    - 완료: 2024년 3월 17일
-    - 내용: 페이지 구성, 주요 기술 스택 선정, API 선정
-2. **UI/UX 디자인 및 구현**
-    - 시작: 2024년 3월 16일
-    - 완료: 2024년 4월 17일
-    - 내용: UI/UX 디자인, 반응형 웹 디자인 구현
-3. **기능 개발**
-    - 시작: 2024년 3월 19일
-    - 완료: 2024년 3월 31일
-    - 내용: 주요 기능 개발
-4. **최종 배포**
-    - 완료: 2024년 4월 17일
-    - 내용: 최종 배포
+<img width="1264" alt="Coin Tracker Gantt Chart(ko)" src="https://github.com/goyomi/coin_tracker/assets/122963246/54cfad41-590c-4ff3-8afb-00c01c1eb69b">
 <br>
 
 ## 🛠️ 기술스택
