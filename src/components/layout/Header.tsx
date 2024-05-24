@@ -45,7 +45,7 @@ const ToggleButton = styled.button
   width: 5.5rem;
   height: 3rem;
   border-radius: 3rem;
-  transition: 0.6s cubic-bezier(0.4, 0, 1, 1);
+  transition: 0.4s cubic-bezier(0.4, 0, 1, 1);
   .circle {
     width: 2rem;
     height: 2rem;
@@ -71,7 +71,6 @@ interface IToggleButton {
 function Header({ toggleOn, setToggleOn }: IToggleProps) {
   const handleToggleButton = () => {
     setToggleOn((current: boolean) => !current);
-    localStorage.setItem("toggleOn", toggleOn + "");
   };
 
   return (

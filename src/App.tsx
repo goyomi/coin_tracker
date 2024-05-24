@@ -13,7 +13,7 @@ import { darkTheme, theme } from "./styles/theme";
 import LoadingPage from "./components/LoadingPage";
 
 function App() {
-  const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? true);
+  const [toggleOn, setToggleOn] = useState(false);
   const { data, isLoading, isError, error, refetch } = useQuery<ICoin[]>(["allCoins"], () => fetchCoins(), {
     refetchInterval: Infinity,
   });
