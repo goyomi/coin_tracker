@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { IChartQueries, ICoin, IOhlc } from "../types/type";
+import styled from "styled-components";
 
 interface IChart {
   selectedCoin: ICoin | undefined;
@@ -8,6 +9,18 @@ interface IChart {
   toggleOn: boolean;
   currentData: IOhlc[] | undefined;
 }
+
+const ApexChart = styled(ReactApexChart)<{ toggleOn: boolean }>`
+  .apexcharts-menu.apexcharts-menu-open {
+    background-color: ${({ toggleOn }) => (toggleOn ? "#f4f4f4" : "#fff")};
+  }
+  .apexcharts-menu.apexcharts-menu-open > .apexcharts-menu-item {
+    color: ${({ toggleOn }) => (toggleOn ? "#333" : "initial")};
+  }
+  .apexcharts-menu.apexcharts-menu-open > .apexcharts-menu-item:hover {
+    background-color: ${({ toggleOn }) => (toggleOn ? "rgb(51, 117, 255, 0.8)" : "#ddd")};
+  }
+`;
 
 function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
   const seriesData = Array.isArray(currentData)
@@ -75,7 +88,8 @@ function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
   return (
     <>
       <section>
-        <ReactApexChart
+        <ApexChart
+          toggleOn={toggleOn}
           options={chartOptions}
           series={[{ data: seriesData || [] }]}
           type="candlestick"
