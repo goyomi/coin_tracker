@@ -29,14 +29,17 @@ function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
   // data fetch
   // 1. ohlc
   const useOhlcQuery = (days: number, enabled: boolean) => {
-    return useQuery([`${days}Days`, "ohlc", selectedCoin], () => ohlc(selectedCoin!.id, days), { enabled });
+    return useQuery([`${days}Days`, "ohlc", selectedCoin], () => ohlc(selectedCoin!.id, days), {
+      enabled,
+      refetchInterval: Infinity,
+    });
   };
   // 2. intro
   const {
     data: coinIntro,
     isError: coinIntroError,
     refetch: coinIntroRefetch,
-  } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId));
+  } = useQuery<ICoinIntro>(["intro", coinId], () => introCoin(coinId), { refetchInterval: Infinity });
   const textLine = coinIntro?.description?.en.split("\r\n");
 
   // Props
@@ -88,41 +91,41 @@ function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
 
   return (
     <>
-      {isError ? (
-        <ErrorPage isError={isError} refetch={refetch} />
-      ) : (
-        <>
-          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-          <Main>
-            <NavTimebarWrapper>
-              <Breadcrumb links={links} />
-            </NavTimebarWrapper>
-            <CoinWrapper>
-              <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
-              {selectedCoin ? (
-                <div className="left_zone">
-                  <CoinProfile selectedCoin={selectedCoin} />
-                  <CoinDetailTable selectedCoin={selectedCoin} />
-                  <CoinConverter selectedCoin={selectedCoin} />
-                  <CoInHistoryTable selectedCoin={selectedCoin} />
-                  <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
-                </div>
-              ) : null}
-              <div className="right_zone">
-                <Timebar times={times} setDays={setDays} />
-                <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
-                <CoinIntro>
-                  <h2>About</h2>
-                  {textLine?.map((text: string, idx: number) => (
-                    <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
-                  ))}
-                </CoinIntro>
+      {/* {isError ? (
+        // <ErrorPage isError={isError} refetch={refetch} />
+      ) : ( */}
+      <>
+        <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
+        <Main>
+          <NavTimebarWrapper>
+            <Breadcrumb links={links} />
+          </NavTimebarWrapper>
+          <CoinWrapper>
+            <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
+            {selectedCoin ? (
+              <div className="left_zone">
+                <CoinProfile selectedCoin={selectedCoin} />
+                <CoinDetailTable selectedCoin={selectedCoin} />
+                <CoinConverter selectedCoin={selectedCoin} />
+                <CoInHistoryTable selectedCoin={selectedCoin} />
+                <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
               </div>
-            </CoinWrapper>
-          </Main>
-          <Footer />
-        </>
-      )}
+            ) : null}
+            <div className="right_zone">
+              <Timebar times={times} setDays={setDays} />
+              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
+              <CoinIntro>
+                <h2>About</h2>
+                {textLine?.map((text: string, idx: number) => (
+                  <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
+                ))}
+              </CoinIntro>
+            </div>
+          </CoinWrapper>
+        </Main>
+        <Footer />
+      </>
+      {/* )} */}
     </>
   );
 }

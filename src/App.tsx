@@ -14,7 +14,9 @@ import LoadingPage from "./components/LoadingPage";
 
 function App() {
   const [toggleOn, setToggleOn] = useState(() => Boolean(localStorage.getItem("toggleOn")) ?? true);
-  const { data, isLoading, isError, error, refetch } = useQuery<ICoin[]>(["allCoins"], () => fetchCoins());
+  const { data, isLoading, isError, error, refetch } = useQuery<ICoin[]>(["allCoins"], () => fetchCoins(), {
+    refetchInterval: Infinity,
+  });
 
   return (
     <CoinListContext.Provider value={{ data, isLoading, isError, error, refetch }}>
