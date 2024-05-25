@@ -32,21 +32,30 @@ npm start
 <br>
 
 ## 🛠️ 기술스택
-이 프로젝트에서는 다음과 같은 기술 스택을 사용했습니다.
-### **프로그래밍 언어**
-- **JavaScript**: 메인 프로그래밍 언어로 사용되었습니다.
-- **TypeScript**: 코드의 안정성과 유지보수성을 높이기 위해 사용되었습니다.
-### **프레임워크 및 라이브러리**
-- **React**: 사용자 인터페이스를 구축하는 데 사용된 주요 라이브러리입니다.
-- **React Router Dom**: 클라이언트 측 라우팅을 관리하기 위해 사용되었습니다.
-- **React Query**: API 상태 관리를 위해 사용되었습니다.
-- **Styled-Components**: CSS-in-JS 솔루션으로 스타일링에 사용되었습니다.
-- **ApexCharts**: 데이터 시각화를 위해 사용된 차트 라이브러리입니다.
-- **Html-React-Parser**: HTML 문자열을 React 컴포넌트로 변환하는 데 사용되었습니다.
-### **빌드 및 패키징 도구**
-- **npm**: 패키지 관리 도구로 사용되었습니다.
-### **배포 도구**
-- **gh-pages**: GitHub Pages에 프로젝트를 배포하는 데 사용되었습니다.
-### **버전 관리**
-- **Git**: 버전 관리를 위해 사용되었습니다.
-- **GitHub**: 코드 호스팅을 위해 사용되었습니다.
+| Title                  | Content             |
+|------------------------|---------------------|
+| 프로그래밍 언어         | <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">         |
+| 프레임워크 및 라이브러리 | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">  <img src="https://img.shields.io/badge/Styled-Components-DB7093?style=for-the-badge&logo=Styled-Components&logoColor=white">  <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">   <img src="https://img.shields.io/badge/ApexCharts-008ffb?style=for-the-badge&logo=ApexCharts&logoColor=white">    |
+| 패키지                 | <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> |
+| 포멧터                 | <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">           |
+| 배포 도구              | <img src="https://img.shields.io/badge/githubpages-222222?style=for-the-badge&logo=githubpages&logoColor=white">     |
+| 버전관리               | <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">       |
+<br> 
+
+## ✨ 프로젝트 구현
+### 스크린 샷
+https://github.com/goyomi/coin_tracker/assets/122963246/31da6221-6bd7-431c-9be2-1558c603fd8e
+
+https://github.com/goyomi/coin_tracker/assets/122963246/dbf881a2-2e42-46bd-86e4-5271d82baa90
+
+### 주요 기능
+- 상위 100개 가상화폐의 가격, 변동률, 24시간 거래량, 시가총액, 유통량을 테이블 형식으로 제공
+- 개별 가상화폐의 상세 정보 제공
+    - 시가총액, 완전희석시가총액, 24시간 거래량, 유통량, 총 공급량, 최대 공급량
+- 다양한 기간(1시간, 1주, 1개월, 1년)의 OHLC 데이터를 기반으로 한 가상화폐 차트 제공
+- 가상화폐와 USD 간의 환율 계산기 기능
+- 가상화폐의 24시간 가격 범위, 최고가, 최저가 등의 Historical Price 데이터 제공
+- 가상화폐 홈페이지, 백서, 소스코드(GitHub) 링크 제공
+- 가상화폐에 대한 Sentiment Survey 정보 제공
+- 가상화폐에 대한 개요 정보 제공
+- 라이트 모드와 다크 모드 지원으로 사용자 환경 개선
