@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { ICoin } from "../contexts/Context";
-import ToggleColorWithValue from "../utils/toggleColorWithValue";
-import ThousandSeparator from "../utils/thousandSeparator";
-import { ScreenReaderOnly } from "../styles/common";
+import { ICoin } from "../../contexts/Context";
+import ToggleColorWithValue from "../../utils/toggleColorWithValue";
+import ThousandSeparator from "../../utils/thousandSeparator";
+import { ScreenReaderOnly } from "../../styles/common";
 
 const CoinTitle = styled.div`
   margin-bottom: 1.2rem;

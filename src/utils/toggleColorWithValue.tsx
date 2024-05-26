@@ -1,4 +1,4 @@
-import { ToggleColor } from "../components/CoinListTable";
+import { ToggleColor } from "../components/coin/CoinListTable";
 
 function ToggleColorWithValue({ number }: { number: number; color?: string }) {
   const color = Math.sign(number) > 0 ? "changeUpColor" : "changeDownColor";

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { CoinListContext } from "../contexts/Context";
-import ToggleColorWithValue from "../utils/toggleColorWithValue";
-import NumberFormatter from "../utils/numberFormatter";
-import { CURRENCY } from "../constant";
+import { CoinListContext } from "../../contexts/Context";
+import ToggleColorWithValue from "../../utils/toggleColorWithValue";
+import NumberFormatter from "../../utils/numberFormatter";
+import { CURRENCY } from "../../constant";
 
 export const Table = styled.table`
   width: 100%;

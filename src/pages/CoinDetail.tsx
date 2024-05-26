@@ -5,16 +5,16 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 
 import Header from "../components/layout/Header";
-import Chart from "../components/Chart";
+import Chart from "../components/chart/Chart";
 import Breadcrumb from "../components/layout/Breadcrumb";
-import CoinDetailTable from "../components/CoinDetailTable";
+import CoinDetailTable from "../components/coin/CoinDetailTable";
 import Timebar from "../components/layout/Timebar";
 import Footer from "../components/layout/Footer";
 
 import { CoinListContext, ICoin } from "../contexts/Context";
 import { introCoin, ohlc } from "../services/api";
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
-import ErrorPage from "../components/ErrorPage";
+import ErrorPage from "../components/page/ErrorPage";
 
 const CoinWrapper = styled.div`
   display: flex;

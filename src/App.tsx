@@ -9,7 +9,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import CoinList from "./pages/CoinList";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, theme } from "./styles/theme";
-import LoadingPage from "./components/LoadingPage";
+import LoadingPage from "./components/page/LoadingPage";
 
 function App() {
   const [toggleOn, setToggleOn] = useState(false);

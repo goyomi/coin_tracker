@@ -1,7 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { UseQueryResult } from "@tanstack/react-query";
-import { ICoin } from "../contexts/Context";
+import { ICoin } from "../../contexts/Context";
 import styled from "styled-components";
 
 interface IChartQueries {

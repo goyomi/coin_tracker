@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { ScreenReaderOnly } from "../styles/common";
-import { ICoin } from "../contexts/Context";
-import ThousandSeparator from "../utils/thousandSeparator";
-import Converter from "./Converter";
-import { ICoinIntro } from "../pages/CoinDetail";
+import { ScreenReaderOnly } from "../../styles/common";
+import { ICoin } from "../../contexts/Context";
+import ThousandSeparator from "../../utils/thousandSeparator";
 import CoinProfile from "./CoinProfile";
+import Converter from "./Converter";
+import { ICoinIntro } from "../../pages/CoinDetail";
 
 const Section = styled.section`
   margin-top: 1.2rem;

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ICoin } from "../contexts/Context";
-import { ScreenReaderOnly } from "../styles/common";
-import { CURRENCY } from "../constant";
+import { ICoin } from "../../contexts/Context";
+import { ScreenReaderOnly } from "../../styles/common";
+import { CURRENCY } from "../../constant";
 import { Heading } from "./CoinDetailTable";
 
 const Section = styled.section`
