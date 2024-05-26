@@ -44,9 +44,9 @@ npm start
 
 ## ✨ 프로젝트 구현
 ### 스크린 샷
-https://github.com/goyomi/coin_tracker/assets/122963246/31da6221-6bd7-431c-9be2-1558c603fd8e
+https://github.com/goyomi/coin_tracker/assets/122963246/73070960-011c-4cf0-9ad3-d6119ebd094a
 
-https://github.com/goyomi/coin_tracker/assets/122963246/dbf881a2-2e42-46bd-86e4-5271d82baa90
+https://github.com/goyomi/coin_tracker/assets/122963246/4573ae63-de32-4c2d-b9a6-66d8d2925ac1
 
 ### 주요 기능
 - 상위 100개 가상화폐의 가격, 변동률, 24시간 거래량, 시가총액, 유통량을 테이블 형식으로 제공
@@ -59,3 +59,35 @@ https://github.com/goyomi/coin_tracker/assets/122963246/dbf881a2-2e42-46bd-86e4-
 - 가상화폐에 대한 Sentiment Survey 정보 제공
 - 가상화폐에 대한 개요 정보 제공
 - 라이트 모드와 다크 모드 지원으로 사용자 환경 개선
+<br>
+
+## 🗂️ 폴더구조
+<br>
+
+## 🤝 컨벤션
+### 코드컨벤션
+- 파일과 폴더명은 `camelCase`를 사용한다. (첫글자 소문자)
+- React 컴포넌트 파일은 `PascalCase`를 사용한다. (첫글자 대문자)
+- 인터페이스와 타입은 `interface`와 `type`을 사용하여 정의한다.
+- 스타일은 `styled-components`를 사용하여 정의하며, 스타일 파일은 컴포넌트 안에 함께 관리한다.
+- 모든 스타일 컴포넌트는 `PascalCase`로 선언한다.
+- 상수 및 컬러 변수는 `theme.ts`에 정의하고 `ThemeProvider`로 제공한다.
+- Prettier를 사용하여 코드 포매팅을 자동화한다.
+
+### 커밋컨벤션
+```
+- Fix: 올바르지 않은 동작을 고친 경우
+- Feat: 새로운 기능을 추가한 경우
+- Refactor: 내부 로직은 변경하지 않고 코드를 개선한 경우
+- Style: 코드 개선과 상관없이 사소하게 코드를 수정한 경우
+- Design: 사용자 UI를 추가, 수정한 경우 (마크업, 퍼블리싱 작업)
+- Add: 폴더, 파일 등을 추가한 경우
+- Move: 폴더, 파일, 코드 등의 위치를 이동한 경우
+- Rename: 폴더명, 파일명 등을 수정한 경우
+- Remove: 폴더, 파일, 코드 등을 삭제한 경우
+- Assets: 이미지, 아이콘 등의 리소스 추가 또는 수정
+- Docs: README, Wiki 등 문서 작성 및 수정
+- Chore: 빌드 스크립트 변경, 패키지 매니저 설정 등 기타 변경사항
+```
+<br>
+
