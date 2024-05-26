@@ -40,6 +40,7 @@ npm start
 | 포멧터                 | <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">           |
 | 배포 도구              | <img src="https://img.shields.io/badge/githubpages-222222?style=for-the-badge&logo=githubpages&logoColor=white">     |
 | 버전관리               | <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">       |
+| 기타               | <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">       |
 <br> 
 
 ## ✨ 프로젝트 구현
@@ -47,6 +48,8 @@ npm start
 https://github.com/goyomi/coin_tracker/assets/122963246/73070960-011c-4cf0-9ad3-d6119ebd094a
 
 https://github.com/goyomi/coin_tracker/assets/122963246/4573ae63-de32-4c2d-b9a6-66d8d2925ac1
+
+https://github.com/goyomi/coin_tracker/assets/122963246/5920e640-836d-4fd6-a3b4-eefba69fc634
 
 ### 주요 기능
 - 상위 100개 가상화폐의 가격, 변동률, 24시간 거래량, 시가총액, 유통량을 테이블 형식으로 제공
@@ -62,6 +65,41 @@ https://github.com/goyomi/coin_tracker/assets/122963246/4573ae63-de32-4c2d-b9a6-
 <br>
 
 ## 🗂️ 폴더구조
+```
+🪙 CoinTracker
+├── 📂 public              
+└── 📂 src/
+    ├── 📂 components/     
+    │   ├── 📂 chart/      ─────────────────── 📦 차트를 표시하는 컴포넌트   
+    │   ├── 📂 coin/       ─────────────────── 📦 코인과 관련된 데이터를 보여주는 컴포넌트
+    │   ├── 📂 layout/     ─────────────────── 📦 페이지의 구조를 구성하는 컴포넌트    
+    │   └── 📂 page/       ─────────────────── 📦 특정한 페이지를 나타내는 컴포넌트
+    │
+    ├── 📂 contexts/              
+    │   └── Context.tsx    ─────────────────── 📤 컨텍스트 API 설정 파일 
+    │
+    ├── 📂 pages/        
+    │   ├── CoinDetail.tsx ─────────────────── 📄 코인 상세 페이지 
+    │   └── CoinList.tsx   ─────────────────── 📄 코인 리스트 페이지
+    │
+    ├── 📂 services/
+    │   └── api.ts         ─────────────────── 📲 API 호출 함수들을 정의한 파일          
+    │
+    ├── 📂 styles/
+    │   ├── common.ts      ─────────────────── 🎨 공통으로 사용되는 스타일 정의 파일
+    │   ├── GlobalStyle.ts ─────────────────── 🎨 전역 스타일 설정 파일 
+    │   └── theme.ts       ─────────────────── 🎨 테마 설정 파일          
+    │ 
+    ├── 📂 utils/           
+    │   ├── createURL.tsx  ─────────────────── 🐭 URL을 생성하는 유틸 함수 파일
+    │   ├── thousandSeparator.tsx ──────────── 🐭 숫자를 천 단위로 구분하는 유틸 함수 파일
+    │   └── toggleColorWithValue.tsx ───────── 🐭 값에 따라 색상을 변경하는 유틸 함수 파일
+    │ 
+    ├── App.tsx          
+    ├── constant.ts        ─────────────────── 💡 상수 선언 파일 
+    ├── index.tsx 
+    └── styled.d.ts        ─────────────────── 💈 스타일 컴포넌트 타입 정의 파일       
+```
 <br>
 
 ## 🤝 컨벤션
@@ -69,7 +107,8 @@ https://github.com/goyomi/coin_tracker/assets/122963246/4573ae63-de32-4c2d-b9a6-
 - 파일과 폴더명은 `camelCase`를 사용한다. (첫글자 소문자)
 - React 컴포넌트 파일은 `PascalCase`를 사용한다. (첫글자 대문자)
 - 인터페이스와 타입은 `interface`와 `type`을 사용하여 정의한다.
-- 스타일은 `styled-components`를 사용하여 정의하며, 스타일 파일은 컴포넌트 안에 함께 관리한다.
+- 스타일은 `styled-components`를 사용하여 정의한다.
+- 공통 스타일은 `styles` 폴더 안에 파일로 작성하고 개별 스타일은 컴포넌트 안에 함께 관리한다.
 - 모든 스타일 컴포넌트는 `PascalCase`로 선언한다.
 - 상수 및 컬러 변수는 `theme.ts`에 정의하고 `ThemeProvider`로 제공한다.
 - Prettier를 사용하여 코드 포매팅을 자동화한다.
@@ -90,4 +129,3 @@ https://github.com/goyomi/coin_tracker/assets/122963246/4573ae63-de32-4c2d-b9a6-
 - Chore: 빌드 스크립트 변경, 패키지 매니저 설정 등 기타 변경사항
 ```
 <br>
-
