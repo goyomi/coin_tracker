@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { CoinListContext } from "../contexts/Context";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import NumberFormatter from "../utils/numberFormatter";
-import { IToggleNumber } from "../types/type";
 import { CURRENCY } from "../constant";
 
 export const Table = styled.table`
@@ -202,7 +201,7 @@ export const CoinLink = styled(Link)`
   }
 `;
 
-export const ToggleColor = styled.div<IToggleNumber>`
+export const ToggleColor = styled.div<{ number: number; color?: string }>`
   color: ${(props) => props.theme[props.color || "mainFontColor"]};
 `;
 

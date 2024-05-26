@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import parse from "html-react-parser";
@@ -14,14 +14,45 @@ import CoinInfoTable from "../components/CoinInfoTable";
 import Timebar from "../components/layout/Timebar";
 import Footer from "../components/layout/Footer";
 
-import { CoinListContext } from "../contexts/Context";
+import { CoinListContext, ICoin } from "../contexts/Context";
 import { introCoin, ohlc } from "../services/api";
-import { ICoin, ICoinIntro, IParams, IToggleProps } from "../types/type";
 import { CoinIntro, CoinWrapper } from "../styles/coin";
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 import ErrorPage from "../components/ErrorPage";
 
-function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
+interface IParams {
+  coinId: string;
+}
+
+export interface ICoinIntro {
+  id: string;
+  symbol: string;
+  name: string;
+  web_slug: string;
+  asset_platform_id: object;
+  platforms: object;
+  detail_platforms: object;
+  block_time_in_minutes: number;
+  hashing_algorithm: string;
+  categories: object;
+  preview_listing: boolean;
+  public_notice: object;
+  additional_notices: object;
+  localization: object;
+  description: { en: string };
+  links: { homepage: string[]; whitepaper: string; blockchain_site: [string]; repos_url: { github: [string] } };
+  image: object;
+  country_origin: string;
+  genesis_date: string;
+  sentiment_votes_up_percentage: number;
+  sentiment_votes_down_percentage: number;
+  watchlist_portfolio_users: number;
+  market_cap_rank: number;
+  status_updates: object;
+  last_updated: string;
+}
+
+function CoinDetail({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dispatch<SetStateAction<boolean>> }) {
   const { data: coinListData } = useContext(CoinListContext);
   const { coinId } = useParams<IParams>();
   const selectedCoin = coinListData?.find((coin: ICoin) => coin.id === coinId);
@@ -91,41 +122,41 @@ function CoinDetail({ toggleOn, setToggleOn }: IToggleProps) {
 
   return (
     <>
-      {/* {isError ? (
-        // <ErrorPage isError={isError} refetch={refetch} />
-      ) : ( */}
-      <>
-        <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
-        <Main>
-          <NavTimebarWrapper>
-            <Breadcrumb links={links} />
-          </NavTimebarWrapper>
-          <CoinWrapper>
-            <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
-            {selectedCoin ? (
-              <div className="left_zone">
-                <CoinProfile selectedCoin={selectedCoin} />
-                <CoinDetailTable selectedCoin={selectedCoin} />
-                <CoinConverter selectedCoin={selectedCoin} />
-                <CoInHistoryTable selectedCoin={selectedCoin} />
-                <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+      {isError ? (
+        <ErrorPage isError={isError} refetch={refetch} />
+      ) : (
+        <>
+          <Header toggleOn={toggleOn} setToggleOn={setToggleOn} />
+          <Main>
+            <NavTimebarWrapper>
+              <Breadcrumb links={links} />
+            </NavTimebarWrapper>
+            <CoinWrapper>
+              <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
+              {selectedCoin ? (
+                <div className="left_zone">
+                  <CoinProfile selectedCoin={selectedCoin} />
+                  <CoinDetailTable selectedCoin={selectedCoin} />
+                  <CoinConverter selectedCoin={selectedCoin} />
+                  <CoInHistoryTable selectedCoin={selectedCoin} />
+                  <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+                </div>
+              ) : null}
+              <div className="right_zone">
+                <Timebar times={times} setDays={setDays} />
+                <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
+                <CoinIntro>
+                  <h2>About</h2>
+                  {textLine?.map((text: string, idx: number) => (
+                    <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
+                  ))}
+                </CoinIntro>
               </div>
-            ) : null}
-            <div className="right_zone">
-              <Timebar times={times} setDays={setDays} />
-              <Chart selectedCoin={selectedCoin} queries={queries} toggleOn={toggleOn} currentData={currentData} />
-              <CoinIntro>
-                <h2>About</h2>
-                {textLine?.map((text: string, idx: number) => (
-                  <React.Fragment key={idx}>{parse(`<p>${text}</p>`)}</React.Fragment>
-                ))}
-              </CoinIntro>
-            </div>
-          </CoinWrapper>
-        </Main>
-        <Footer />
-      </>
-      {/* )} */}
+            </CoinWrapper>
+          </Main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ICoin } from "../types/type";
+import { ICoin } from "../contexts/Context";
 import { ScreenReaderOnly } from "../styles/common";
 import { CURRENCY } from "../constant";
 import { Heading } from "../styles/coin";
@@ -54,17 +54,8 @@ const Unit = styled.span`
   }
 `;
 
-interface ICoinConverterProps {
-  selectedCoin: ICoin;
-}
-
-interface IInputValueState {
-  coinAmount: number | "";
-  currencyAmount: number | "";
-}
-
-function CoinConverter({ selectedCoin }: ICoinConverterProps) {
-  const [inputValue, setInputValue] = useState<IInputValueState>({
+function CoinConverter({ selectedCoin }: { selectedCoin: ICoin }) {
+  const [inputValue, setInputValue] = useState<{ coinAmount: number | ""; currencyAmount: number | "" }>({
     coinAmount: 0,
     currencyAmount: 0,
   });

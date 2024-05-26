@@ -1,7 +1,23 @@
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { IChartQueries, ICoin, IOhlc } from "../types/type";
+import { UseQueryResult } from "@tanstack/react-query";
+import { ICoin } from "../contexts/Context";
 import styled from "styled-components";
+
+interface IChartQueries {
+  "1": UseQueryResult<IOhlc[], unknown>;
+  "7": UseQueryResult<IOhlc[], unknown>;
+  "30": UseQueryResult<IOhlc[], unknown>;
+  "365": UseQueryResult<IOhlc[], unknown>;
+}
+
+interface IOhlc {
+  0: number;
+  1: number;
+  2: number;
+  3: number;
+  4: number;
+}
 
 interface IChart {
   selectedCoin: ICoin | undefined;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ICoin } from "../types/type";
+import { ICoin } from "../contexts/Context";
 import ThousandSeparator from "../utils/thousandSeparator";
 import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
@@ -19,11 +19,7 @@ const ItalicStyle = styled.i`
   }
 `;
 
-interface CoinHistoryTableProps {
-  selectedCoin: ICoin;
-}
-
-function CoInHistoryTable({ selectedCoin }: CoinHistoryTableProps) {
+function CoInHistoryTable({ selectedCoin }: { selectedCoin: ICoin }) {
   const data = [
     {
       title: "24h Range",

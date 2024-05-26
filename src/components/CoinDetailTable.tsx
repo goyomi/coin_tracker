@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CoinDataTable, CoinDataTableBody, Section } from "../styles/coin";
 import { ScreenReaderOnly } from "../styles/common";
-import { ICoin } from "../types/type";
+import { ICoin } from "../contexts/Context";
 import ThousandSeparator from "../utils/thousandSeparator";
 
 const CustomTableBody = styled(CoinDataTableBody)`
@@ -17,11 +17,8 @@ const CustomTableBody = styled(CoinDataTableBody)`
     }
   }
 `;
-interface ICoinInfoProps {
-  selectedCoin: ICoin;
-}
 
-function CoinDetailTable({ selectedCoin }: ICoinInfoProps) {
+function CoinDetailTable({ selectedCoin }: { selectedCoin: ICoin }) {
   const data = [
     { title: "Market Cap", value: selectedCoin.market_cap },
     { title: "Fully Diluted Valuation", value: selectedCoin?.fully_diluted_valuation },

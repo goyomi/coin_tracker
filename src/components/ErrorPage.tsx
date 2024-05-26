@@ -55,6 +55,7 @@ const GoBackButton = styled.button`
   background-color: ${(props) => props.theme.onActiveColor};
   border-radius: 0.5rem;
   font-size: var(--font-size-web-medium);
+  color: #fff;
 
   @media (max-width: 768px) {
     width: 7rem;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ICoin } from "../types/type";
+import { ICoin } from "../contexts/Context";
 import ToggleColorWithValue from "../utils/colorChangeOnValue";
 import ThousandSeparator from "../utils/thousandSeparator";
 import { ScreenReaderOnly } from "../styles/common";
@@ -63,11 +63,7 @@ const CoinPrice = styled.div`
   }
 `;
 
-interface ICoinProfileProps {
-  selectedCoin: ICoin;
-}
-
-function CoinProfile({ selectedCoin }: ICoinProfileProps) {
+function CoinProfile({ selectedCoin }: { selectedCoin: ICoin }) {
   return (
     <section>
       <CoinTitle>

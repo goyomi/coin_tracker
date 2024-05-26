@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 
 import { CoinListContext } from "../contexts/Context";
 
@@ -10,12 +10,7 @@ import ErrorPage from "../components/ErrorPage";
 
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 
-interface ICoinsProps {
-  toggleOn: boolean;
-  setToggleOn: (value: boolean) => void;
-}
-
-function CoinList({ toggleOn, setToggleOn }: ICoinsProps) {
+function CoinList({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dispatch<SetStateAction<boolean>> }) {
   const { isError, refetch } = useContext(CoinListContext);
   const links = [{ name: "Coins Currency", path: "/" }];
 

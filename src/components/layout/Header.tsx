@@ -1,6 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { IToggleProps } from "../../types/type";
 
 const HeaderPart = styled.header`
   position: fixed;
@@ -37,7 +37,7 @@ const Logo = styled.img`
 
 const ToggleButton = styled.button
   .withConfig({ shouldForwardProp: (prop) => !["toggleOn"].includes(prop) })
-  .attrs<IToggleButton>(({ theme, toggleOn }) => ({
+  .attrs<{ toggleOn: boolean }>(({ theme, toggleOn }) => ({
     style: {
       backgroundColor: toggleOn ? theme.onActiveColor : "rgb(233,233,234)",
     },
@@ -64,11 +64,7 @@ const ToggleButton = styled.button
   }
 `;
 
-interface IToggleButton {
-  toggleOn: boolean;
-}
-
-function Header({ toggleOn, setToggleOn }: IToggleProps) {
+function Header({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dispatch<SetStateAction<boolean>> }) {
   const handleToggleButton = () => {
     setToggleOn((current: boolean) => !current);
   };

@@ -1,7 +1,6 @@
 import { ToggleColor } from "../components/CoinListTable";
-import { IToggleNumber } from "../types/type";
 
-function ToggleColorWithValue({ number }: IToggleNumber) {
+function ToggleColorWithValue({ number }: { number: number; color?: string }) {
   const color = Math.sign(number) > 0 ? "changeUpColor" : "changeDownColor";
   return (
     <ToggleColor color={color} number={number} className="coin_price_change_percentage">

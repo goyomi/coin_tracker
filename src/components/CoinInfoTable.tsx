@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { ICoin, ICoinIntro } from "../types/type";
+import { ICoin } from "../contexts/Context";
+import { ICoinIntro } from "../pages/CoinDetail";
 import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
 
 const BoxStyle = styled.a`
@@ -22,12 +23,7 @@ const Down = styled.span`
   color: ${(props) => props.theme.changeDownColor};
 `;
 
-interface ICoinInfoTableProps {
-  selectedCoin: ICoin;
-  coinIntro: ICoinIntro | undefined;
-}
-
-function CoinInfoTable({ selectedCoin, coinIntro }: ICoinInfoTableProps) {
+function CoinInfoTable({ selectedCoin, coinIntro }: { selectedCoin: ICoin; coinIntro: ICoinIntro | undefined }) {
   const data = [
     { title: "Home Page", value: coinIntro?.links.homepage[0] },
     { title: "White Paper", value: coinIntro?.links.whitepaper },

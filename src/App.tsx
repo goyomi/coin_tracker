@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { MainContainer } from "./styles/common";
-import { ICoin } from "./types/type";
+import CoinDetail from "./pages/CoinDetail";
 import { fetchCoins } from "./services/api";
-import { CoinListContext } from "./contexts/Context";
+import { CoinListContext, ICoin } from "./contexts/Context";
 import { Suspense, useState } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import CoinDetail from "./pages/CoinDetail";
 import CoinList from "./pages/CoinList";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, theme } from "./styles/theme";

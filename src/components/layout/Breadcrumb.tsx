@@ -1,4 +1,4 @@
-import { Link, LinkProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = styled.nav`
@@ -19,7 +19,7 @@ const OrderList = styled.ol`
 
 const NavLink = styled(Link)
   .withConfig({ shouldForwardProp: (prop) => !["isAction"].includes(prop) })
-  .attrs<INavLinkProps>(({ theme, isAction }) => ({
+  .attrs<{ isAction?: boolean }>(({ theme, isAction }) => ({
     style: {
       color: isAction ? theme.onActiveColor : theme.mainFontColor,
       backgroundColor: theme.buttonColor,
@@ -44,15 +44,7 @@ const NavLink = styled(Link)
   }
 `;
 
-interface IBreadCrumb {
-  links: { name: string; path: string }[];
-}
-
-interface INavLinkProps extends LinkProps {
-  isAction?: boolean;
-}
-
-function Breadcrumb({ links }: IBreadCrumb) {
+function Breadcrumb({ links }: { links: { name: string; path: string }[] }) {
   return (
     <Navbar>
       <OrderList>
