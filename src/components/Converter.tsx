@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ICoin } from "../contexts/Context";
 import { ScreenReaderOnly } from "../styles/common";
 import { CURRENCY } from "../constant";
-import { Heading } from "./CoinHistoryTable";
+import { Heading } from "./CoinDetailTable";
 
 const Section = styled.section`
   font-size: var(--font-size-web-large);
@@ -54,7 +54,7 @@ const Unit = styled.span`
   }
 `;
 
-function CoinConverter({ selectedCoin }: { selectedCoin: ICoin }) {
+function Converter({ selectedCoin }: { selectedCoin: ICoin }) {
   const [inputValue, setInputValue] = useState<{ coinAmount: number | ""; currencyAmount: number | "" }>({
     coinAmount: 0,
     currencyAmount: 0,
@@ -130,4 +130,4 @@ function CoinConverter({ selectedCoin }: { selectedCoin: ICoin }) {
   );
 }
 
-export default CoinConverter;
+export default Converter;

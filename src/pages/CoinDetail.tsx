@@ -7,11 +7,7 @@ import parse from "html-react-parser";
 import Header from "../components/layout/Header";
 import Chart from "../components/Chart";
 import Breadcrumb from "../components/layout/Breadcrumb";
-import CoinProfile from "../components/CoinProfile";
-import CoinConverter from "../components/CoinConverter";
-import CoInHistoryTable from "../components/CoinHistoryTable";
 import CoinDetailTable from "../components/CoinDetailTable";
-import CoinInfoTable from "../components/CoinInfoTable";
 import Timebar from "../components/layout/Timebar";
 import Footer from "../components/layout/Footer";
 
@@ -178,11 +174,7 @@ function CoinDetail({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn:
               <ScreenReaderOnly as="h1">Coin detail page</ScreenReaderOnly>
               {selectedCoin ? (
                 <div className="left_zone">
-                  <CoinProfile selectedCoin={selectedCoin} />
-                  <CoinDetailTable selectedCoin={selectedCoin} />
-                  <CoinConverter selectedCoin={selectedCoin} />
-                  <CoInHistoryTable selectedCoin={selectedCoin} />
-                  <CoinInfoTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
+                  <CoinDetailTable selectedCoin={selectedCoin} coinIntro={coinIntro} />
                 </div>
               ) : null}
               <div className="right_zone">
