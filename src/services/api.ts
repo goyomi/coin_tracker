@@ -1,9 +1,9 @@
-import createUrl from "../utils/createUrl";
+import createURLPath from "../utils/createURL";
 
 const BASE_URL = `https://api.coingecko.com/api/v3/coins`;
 
 export async function fetchCoins() {
-  const url = createUrl(BASE_URL, "markets", {
+  const url = createURLPath(BASE_URL, "markets", {
     vs_currency: "usd",
     order: "market_cap_desc",
     per_page: "100",
@@ -16,7 +16,7 @@ export async function fetchCoins() {
 }
 
 export async function ohlc(coinId: string, days: number) {
-  const url = createUrl(BASE_URL, `${coinId}/ohlc`, {
+  const url = createURLPath(BASE_URL, `${coinId}/ohlc`, {
     vs_currency: "usd",
     days: `${days}`,
   });
@@ -24,7 +24,7 @@ export async function ohlc(coinId: string, days: number) {
 }
 
 export async function introCoin(coinId: string) {
-  const url = createUrl(BASE_URL, `${coinId}`, {
+  const url = createURLPath(BASE_URL, `${coinId}`, {
     tickers: "false",
     market_data: "false",
     community_data: "false",

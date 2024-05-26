@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ICoin } from "../contexts/Context";
-import ToggleColorWithValue from "../utils/colorChangeOnValue";
+import ToggleColorWithValue from "../utils/toggleColorWithValue";
 import ThousandSeparator from "../utils/thousandSeparator";
 import { ScreenReaderOnly } from "../styles/common";
 

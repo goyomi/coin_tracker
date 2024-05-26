@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { CoinListContext } from "../contexts/Context";
-import ToggleColorWithValue from "../utils/colorChangeOnValue";
+import ToggleColorWithValue from "../utils/toggleColorWithValue";
 import NumberFormatter from "../utils/numberFormatter";
 import { CURRENCY } from "../constant";
 
