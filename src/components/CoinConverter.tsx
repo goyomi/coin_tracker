@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ICoin } from "../contexts/Context";
 import { ScreenReaderOnly } from "../styles/common";
 import { CURRENCY } from "../constant";
-import { Heading } from "../styles/coin";
+import { Heading } from "./CoinHistoryTable";
 
 const Section = styled.section`
   font-size: var(--font-size-web-large);

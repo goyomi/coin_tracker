@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ICoin } from "../contexts/Context";
 import { ICoinIntro } from "../pages/CoinDetail";
-import { CoinDataTable, CoinDataTableBody, Heading, Section } from "../styles/coin";
+import { CoinDataTable, CoinDataTableBody, Heading, Section } from "./CoinHistoryTable";
 
 const BoxStyle = styled.a`
   padding: 0.35rem;

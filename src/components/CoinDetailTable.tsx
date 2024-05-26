@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { CoinDataTable, CoinDataTableBody, Section } from "../styles/coin";
 import { ScreenReaderOnly } from "../styles/common";
 import { ICoin } from "../contexts/Context";
 import ThousandSeparator from "../utils/thousandSeparator";
+import { CoinDataTable, CoinDataTableBody, Section } from "./CoinHistoryTable";
 
 const CustomTableBody = styled(CoinDataTableBody)`
   tr:first-child th,

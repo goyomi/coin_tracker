@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import styled from "styled-components";
 import parse from "html-react-parser";
 
 import Header from "../components/layout/Header";
@@ -16,9 +17,51 @@ import Footer from "../components/layout/Footer";
 
 import { CoinListContext, ICoin } from "../contexts/Context";
 import { introCoin, ohlc } from "../services/api";
-import { CoinIntro, CoinWrapper } from "../styles/coin";
 import { Main, NavTimebarWrapper, ScreenReaderOnly } from "../styles/common";
 import ErrorPage from "../components/ErrorPage";
+
+const CoinWrapper = styled.div`
+  display: flex;
+  gap: 5rem;
+  .left_zone {
+    width: 40%;
+  }
+  .right_zone {
+    width: 60%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    .left_zone,
+    .right_zone {
+      width: 100%;
+    }
+  }
+`;
+
+const CoinIntro = styled.section`
+  h2 {
+    margin: 3rem 0 2rem 0;
+    font-size: var(--font-size-web-large);
+  }
+  p {
+    margin: 1rem 0;
+    font-size: var(--font-size-web-medium);
+    line-height: calc(var(--font-size-web-medium) * 1.5);
+    text-align: justify;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: var(--font-size-mobile-large);
+      margin: 2rem 0 1.5rem 0;
+    }
+    p {
+      font-size: var(--font-size-mobile-medium);
+      line-height: calc(var(--font-size-mobile-medium) * 1.5);
+    }
+  }
+`;
 
 interface IParams {
   coinId: string;
