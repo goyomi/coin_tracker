@@ -1,6 +1,6 @@
 import { CURRENCY_SYMBOL } from "../constant";
 
-function ThousandSeparator({ number }: { number?: number }) {
+function ThousandSeparator({ number }: { number: number }) {
   const formattedNumber = Number(number).toLocaleString();
   const formattedDecimal = Number(number).toFixed(8).toLocaleString();
   return (

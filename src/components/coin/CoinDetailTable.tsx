@@ -5,6 +5,7 @@ import ThousandSeparator from "../../utils/thousandSeparator";
 import CoinProfile from "./CoinProfile";
 import Converter from "./Converter";
 import { ICoinIntro } from "../../pages/CoinDetail";
+import { getDetailData, getHistoryData, getInfoData } from "./data";
 
 const Section = styled.section`
   margin-top: 1.2rem;
@@ -80,6 +81,9 @@ const CoinDataTable = styled.table`
 
 const Separator = styled.span`
   margin: 0 0.5rem;
+  &::before {
+    content: "-";
+  }
 `;
 
 const ItalicStyle = styled.i`
@@ -117,45 +121,9 @@ const Down = styled.span`
 `;
 
 function CoinDetailTable({ selectedCoin, coinIntro }: { selectedCoin: ICoin; coinIntro: ICoinIntro | undefined }) {
-  const data = [
-    { title: "Market Cap", value: selectedCoin.market_cap },
-    { title: "Fully Diluted Valuation", value: selectedCoin?.fully_diluted_valuation },
-    { title: "24 Hour Trading Vol", value: selectedCoin.total_volume },
-    { title: "Circulating Supply", value: selectedCoin.circulating_supply },
-    { title: "Total Supply", value: selectedCoin.total_supply },
-    { title: "Max Supply", value: selectedCoin.max_supply },
-  ];
-
-  const historyData = [
-    {
-      title: "24h Range",
-      value: (
-        <>
-          <ThousandSeparator number={selectedCoin?.low_24h} />
-          <Separator>-</Separator>
-          <ThousandSeparator number={selectedCoin?.high_24h} />
-        </>
-      ),
-    },
-    {
-      title: "All-Time High",
-      value: <ThousandSeparator number={selectedCoin?.ath} />,
-      isItalic: true,
-      date: selectedCoin?.ath_date,
-    },
-    {
-      title: "All-Time Low",
-      value: <ThousandSeparator number={selectedCoin?.atl} />,
-      isItalic: true,
-      date: selectedCoin?.atl_date,
-    },
-  ];
-
-  const infoData = [
-    { title: "Home Page", value: coinIntro?.links.homepage[0] },
-    { title: "White Paper", value: coinIntro?.links.whitepaper },
-    { title: "Source Code", value: coinIntro?.links.repos_url.github[0], subTitle: "GitHub" },
-  ];
+  const data = getDetailData(selectedCoin);
+  const historyData = getHistoryData(selectedCoin);
+  const infoData = getInfoData(coinIntro);
 
   return (
     <>
@@ -173,7 +141,7 @@ function CoinDetailTable({ selectedCoin, coinIntro }: { selectedCoin: ICoin; coi
               <tr key={title}>
                 <th>{title}</th>
                 <td>
-                  <ThousandSeparator number={Number(value)} />
+                  <ThousandSeparator number={value} />
                 </td>
               </tr>
             ))}
@@ -188,12 +156,14 @@ function CoinDetailTable({ selectedCoin, coinIntro }: { selectedCoin: ICoin; coi
         </Heading>
         <CoinDataTable>
           <CoinDataTableBody>
-            {historyData.map(({ title, value, isItalic, date }) => (
+            {historyData.map(({ title, value, value2, isItalic, date }) => (
               <tr key={title}>
                 <th>{title}</th>
                 <td>
                   {isItalic && <ItalicStyle>{date ? new Date(date).toLocaleDateString() : ""}</ItalicStyle>}
                   {value}
+                  {value2 && <Separator />}
+                  {value2}
                 </td>
               </tr>
             ))}
