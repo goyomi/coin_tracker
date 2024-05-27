@@ -75,7 +75,7 @@ function ErrorPage({ isError, refetch }: { isError: boolean; refetch: () => void
 
   return (
     <ErrorArticle>
-      <ErrorImage src="assets/error_image.jpeg" alt="unplugged code" />
+      <ErrorImage src={`${process.env.PUBLIC_URL}/assets/error_image.jpeg`} alt="unplugged code" />
       <ErrorCode>404</ErrorCode>
       <ErrorMessageWrapper>
         <p>It may take a few minutes to reload.</p>

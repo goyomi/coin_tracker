@@ -74,7 +74,7 @@ function Header({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dis
       <LogoWrapper>
         <h1>
           <Link to="/">
-            <Logo src="assets/coin_tracker_logo.png" alt="Coin Tracker Logo" />
+            <Logo src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.png`} alt="Coin Tracker Logo" />
           </Link>
         </h1>
         <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>

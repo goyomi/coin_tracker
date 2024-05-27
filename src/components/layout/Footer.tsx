@@ -109,13 +109,13 @@ function Footer() {
     <FooterPart>
       <LogoAndContacts>
         <Link to="/">
-          <LogoImg src="assets/coin_tracker_logo.png" alt="coin tracker logo" />
+          <LogoImg src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.png`} alt="coin tracker logo" />
         </Link>
         <ContactWrapper>
           <a href="https://github.com/goyomi/coin_tracker" target="_blank" rel="noopener noreferrer">
-            <GitHubIcon src="assets/github_logo.png" alt="GitHub Logo" />
+            <GitHubIcon src={`${process.env.PUBLIC_URL}/assets/github_logo.png`} alt="GitHub Logo" />
           </a>
-          <GmailIcon src="assets/gmail_logo.png" alt="Gmail Logo" onClick={copyEmail} />
+          <GmailIcon src={`${process.env.PUBLIC_URL}/assets/gmail_logo.png`} alt="Gmail Logo" onClick={copyEmail} />
         </ContactWrapper>
       </LogoAndContacts>
       <FooterTextWrapper>
