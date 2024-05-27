@@ -52,6 +52,5 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3"
-  },
-  "homepage": "https://goyomi.github.io/coin_tracker"
+  }
 }
