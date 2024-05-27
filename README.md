@@ -5,7 +5,7 @@
 ## 👋 프로젝트 소개 
 Coin Tracker는 상위 100개 가상화폐에 대한 포괄적인 개요를 제공하는 서비스입니다. 테이블 리스트와 캔들 차트를 활용하여 사용자가 암호화폐 시장을 더욱 깊이 있게 이해할 수 있도록 돕고 있습니다. 가격, 변동률, 거래량 등의 정보를 테이블로 제공하며, 개별 코인의 상세 정보와 OHLC 데이터를 기반으로 한 차트도 함께 제공합니다. 이 외에도 환율 계산기, 역사적 가격 데이터, 코인 관련 링크 등 다양한 부가 기능을 갖추고 있습니다.
 ### 배포 URL
-🚀 [Coin Tracker 배포링크](https://goyomi.github.io/coin_tracker/)
+🚀 [Coin Tracker 배포링크](https://coin-tracker-79002.firebaseapp.com/coin_tracker)
 ### 설치방법
 Coin Tracker 프로젝트를 설치하고 실행하기 위해 터미널을 열고 다음 명령어를 아래 단계에 따라 입력하세요.
 
@@ -38,7 +38,7 @@ npm start
 | 프레임워크 및 라이브러리 | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">  <img src="https://img.shields.io/badge/Styled-Components-DB7093?style=for-the-badge&logo=Styled-Components&logoColor=white">  <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">   <img src="https://img.shields.io/badge/ApexCharts-008ffb?style=for-the-badge&logo=ApexCharts&logoColor=white">    |
 | 패키지                 | <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> |
 | 포멧터                 | <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">           |
-| 배포 도구              | <img src="https://img.shields.io/badge/githubpages-222222?style=for-the-badge&logo=githubpages&logoColor=white">     |
+| 배포 도구              | <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">     |
 | 버전관리               | <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">       |
 | 기타               | <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">       |
 <br> 
