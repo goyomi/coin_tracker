@@ -201,7 +201,7 @@ export const CoinLink = styled(Link)`
   }
 `;
 
-export const ToggleColor = styled.div<{ number: number; color?: string }>`
+export const ToggleColor = styled.div<{ color?: string }>`
   color: ${(props) => props.theme[props.color || "mainFontColor"]};
 `;
 
