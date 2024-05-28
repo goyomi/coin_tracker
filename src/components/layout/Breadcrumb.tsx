@@ -17,29 +17,23 @@ const OrderList = styled.ol`
   }
 `;
 
-const NavLink = styled(Link)
-  .withConfig({ shouldForwardProp: (prop) => !["isAction"].includes(prop) })
-  .attrs<{ isAction?: boolean }>(({ theme, isAction }) => ({
-    style: {
-      color: isAction ? theme.onActiveColor : theme.mainFontColor,
-      backgroundColor: theme.buttonColor,
-    },
-  }))`
+const NavLink = styled(Link)<{ $isAction?: boolean }>`
   display: inline-block;
   margin: 0 1rem;
   padding: 1rem;
   text-transform: capitalize;
   font-size: var(--font-size-web-small);
+  color: ${(props) => (props.$isAction ? props.theme.onActiveColor : props.theme.mainFontColor)};
+  background-color: ${(props) => props.theme.buttonColor};
   border-radius: 0.5rem;
-
   @media (max-width: 1024px) {
-    font-size: var(--font-size-tablet-small);  
-    padding: 0.8rem;  
+    font-size: var(--font-size-tablet-small);
+    padding: 0.8rem;
   }
 
   @media (max-width: 768px) {
-    font-size: var(--font-size-mobile-small);  
-    margin: 0.5rem;  
+    font-size: var(--font-size-mobile-small);
+    margin: 0.5rem;
     padding: 0.5rem;
   }
 `;
@@ -50,7 +44,7 @@ function Breadcrumb({ links }: { links: { name: string; path: string }[] }) {
       <OrderList>
         {links.map((link, idx) => (
           <li key={idx}>
-            <NavLink isAction={idx === links.length - 1} to={link.path}>
+            <NavLink $isAction={idx === links.length - 1} to={link.path}>
               {link.name} Price
             </NavLink>
             {idx < links.length - 1 && ">"}

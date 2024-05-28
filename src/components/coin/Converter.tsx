@@ -13,17 +13,15 @@ const Section = styled.section`
   }
 `;
 
-const InputWrapper = styled.div
-  .withConfig({ shouldForwardProp: (prop) => !["marginBottom"].includes(prop) })
-  .attrs((props) => ({}))<{ marginBottom: boolean }>`
+const InputWrapper = styled.div<{ $marginBottom: boolean }>`
   border: 0.15rem solid ${(props) => props.theme.grey1Color};
   border-radius: 0.8rem;
   padding: 1.2rem 2rem;
-  margin-bottom: ${(props) => (props.marginBottom ? "1rem" : "0")};
+  margin-bottom: ${(props) => (props.$marginBottom ? "1rem" : "0")};
 
   @media (max-width: 768px) {
     padding: 1rem 1.5rem;
-    margin-bottom: ${(props) => (props.marginBottom ? "0.5rem" : "0")}; // 마진 조정
+    margin-bottom: ${(props) => (props.$marginBottom ? "0.5rem" : "0")}; // 마진 조정
   }
 `;
 
@@ -118,7 +116,7 @@ function Converter({ selectedCoin }: { selectedCoin: ICoin }) {
         <span>Converter</span>
       </Heading>
       {data.map(({ title, value, input }, index) => (
-        <InputWrapper key={index} marginBottom={true}>
+        <InputWrapper key={index} $marginBottom={true}>
           <ScreenReaderOnly as="label" htmlFor={title === selectedCoin?.symbol ? COIN_AMOUNT : CURRENCY_AMOUNT}>
             {title} Amount
           </ScreenReaderOnly>

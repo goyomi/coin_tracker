@@ -35,31 +35,26 @@ const Logo = styled.img`
   }
 `;
 
-const ToggleButton = styled.button
-  .withConfig({ shouldForwardProp: (prop) => !["toggleOn"].includes(prop) })
-  .attrs<{ toggleOn: boolean }>(({ theme, toggleOn }) => ({
-    style: {
-      backgroundColor: toggleOn ? theme.onActiveColor : "rgb(233,233,234)",
-    },
-  }))`
+const ToggleButton = styled.button<{ $toggleOn: boolean }>`
   width: 5.5rem;
   height: 3rem;
   border-radius: 3rem;
   transition: 0.4s cubic-bezier(0.4, 0, 1, 1);
+  background-color: ${(props) => (props.$toggleOn ? props.theme.onActiveColor : "rgb(233,233,234)")};
   .circle {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
     background-color: rgb(255, 254, 255);
-    margin-left: ${(props) => (props.toggleOn ? "auto" : "")};
+    margin-left: ${(props) => (props.$toggleOn ? "auto" : "")};
   }
 
   @media (max-width: 768px) {
-    width: 4rem;  
-    height: 2.2rem;  
+    width: 4rem;
+    height: 2.2rem;
     .circle {
-      width: 1.5rem;  
-      height: 1.5rem;  
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 `;
@@ -77,7 +72,7 @@ function Header({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dis
             <Logo src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.png`} alt="Coin Tracker Logo" />
           </Link>
         </h1>
-        <ToggleButton onClick={handleToggleButton} toggleOn={toggleOn}>
+        <ToggleButton onClick={handleToggleButton} $toggleOn={toggleOn}>
           <div className="circle" />
         </ToggleButton>
       </LogoWrapper>
