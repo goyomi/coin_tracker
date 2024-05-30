@@ -221,11 +221,7 @@ https://github.com/goyomi/coin_tracker/assets/122963246/3f163a21-a64e-42df-be2e-
 
 ### 4️⃣ styled-components의 props 전달 문제
 ![스타일 컴포넌트에서 props가 DOM에 전달되는 에러](https://github.com/goyomi/coin_tracker/assets/122963246/b2af1f6e-ad00-4225-96b0-44bfb8811de0)
-styled-components로 props를 전달받을 때, prop이 DOM 요소에 전달되어 콘솔 에러가 발생하였습니다. styled-components v6부터는 Transient Props를 사용해야 하는데, 이를 사용하지 않으면 props가 DOM 요소에 전달되어 에러가 발생합니다. `shouldForwardProp`를 사용해서 해결할 수도 있지만 v6부터 기본적으로 제공되지 않기 때문에 추가 설정이 필요합니다.
-![styled-components v6에서 shouldForwardProp를 사용하는 경우](https://github.com/goyomi/coin_tracker/assets/122963246/a336e5c3-d5f0-4dc2-af69-5adcfa0a21e4)
-styled-components v6에서 shouldForwardProp를 사용하는 경우
-styled-components v6부터는 `$`를 접두사로 사용하는 Transient Props를 사용하면 됩니다. Transient Props는 styled-components 내부에서만 사용되며, DOM 요소에는 전달되지 않습니다. props 이름 앞에 `$` 기호를 붙여 정의하면, styled-components에서 자동으로 필터링되어 실제 DOM에는 전달되지 않습니다. 코드를 간결하게 유지하기 위해 Transient Props 방법을 사용하여 에러를 해결하였습니다.
-
+styled-components로 props를 전달받을 때, prop이 DOM 요소에 전달되어 콘솔 에러가 발생하였습니다. `shouldForwardProp`를 사용해서 해결할 수도 있지만 styled-components v6부터 기본적으로 제공되지 않기 때문에 추가 설정 코드가 필요하게 됩니다. `$`를 접두사로 사용하는 Transient Props를 사용하면 문제를 간단하게 해결할 수 있습니다. props 이름 앞에 `$` 기호를 붙여 정의하면, styled-components에서 자동으로 필터링되어 실제 DOM에는 전달되지 않습니다. `shouldForwardProp`를 사용할 때보다 코드를 간결하게 유지하기도 좋습니다.
 ```tsx
 const NavLink = styled(Link)<{ $isAction?: boolean }>`
   display: inline-block;
@@ -265,5 +261,4 @@ function Breadcrumb({ links }: { links: { name: string; path: string }[] }) {
   );
 }
 ```
-Transient Props를 사용하여 styled-components의 props 전달 문제를 해결하였고, DOM 요소에 불필요한 props가 전달되지 않도록 하여 콘솔 에러를 방지할 수 있었습니다.
 <br>
