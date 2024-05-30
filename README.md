@@ -187,7 +187,7 @@ function App() {
   };
   
 // Props
-	// 1. Chart
+  // 1. Chart
   const query1 = useOhlcQuery(1, true);
   const query7 = useOhlcQuery(7, query1.isSuccess);
   const query30 = useOhlcQuery(30, query7.isSuccess);
