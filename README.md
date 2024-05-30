@@ -49,7 +49,8 @@ npm start
 | 포멧터                 | <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">           |
 | 배포 도구              | <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">     |
 | 버전관리               | <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">       |
-| 기타               | <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">       |
+| 백엔드               | <img src="https://img.shields.io/badge/Coin Gecko Free API-71C93C?style=for-the-badge">  <a href="https://docs.coingecko.com/reference/introduction" target="_blank"><img src="https://img.shields.io/badge/🚀 API 명세보기-3a4348?style=for-the-badge"></a>|
+| 디자인/문서               | <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">       |
 <br> 
 
 ## ✨ 프로젝트 구현
@@ -137,4 +138,132 @@ https://github.com/goyomi/coin_tracker/assets/122963246/5920e640-836d-4fd6-a3b4-
 - Docs: README, Wiki 등 문서 작성 및 수정
 - Chore: 빌드 스크립트 변경, 패키지 매니저 설정 등 기타 변경사항
 ```
+<br>
+
+## 🫧 트러블 슈팅
+### 1️⃣ 데이터 페칭 시 로딩 및 에러 상태 관리 문제
+`React-Query`로 데이터 페칭 시 `isLoading`과 `isError` 상태가 반복적으로 발생하여 로딩 컴포넌트와 에러 페이지가 계속해서 번갈아 표시되는 문제가 있었습니다. 이로 인해 사용자 경험에 문제가 되었으며, 상태 변화에 따라 페이지가 계속해서 바뀌지 않도록 하는 것이 필요했습니다.
+```tsx
+function App() {
+  return (
+    <CoinListContext.Provider
+      value={{ data, isLoading, isError, error, refetch }}
+    >
+      <ThemeProvider theme={toggleOn ? darkTheme : theme}>
+        <GlobalStyle />
+        <BrowserRouter basename="/coin_tracker">
+          <Switch>
+            <Suspense fallback={<LoadingPage />}>
+              <Route path="/:coinId">
+                <MainContainer>
+                  <CoinDetail toggleOn={toggleOn} setToggleOn={setToggleOn} />
+                </MainContainer>
+              </Route>
+              <Route path="/">
+                <MainContainer>
+                  <CoinList toggleOn={toggleOn} setToggleOn={setToggleOn} />
+                </MainContainer>
+              </Route>
+            </Suspense>
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </CoinListContext.Provider>
+  );
+}
+```
+이 문제를 해결하기 위해 `React.Suspense`를 사용하여 로딩 상태를 관리하고, 데이터 로딩 중에는 `fallback` UI를 보여주었습니다. 또한, 데이터 로딩이 완료될 때까지 기다림으로써 로딩 상태를 `isError` 상태와 별개로 관리할 수 있었습니다.
+
+### 2️⃣ 차트 데이터 페칭 최적화
+차트 데이터 페칭 시 초기 데이터 로딩이 느리고, 페이지 진입 시 에러 페이지로 이동하는 문제가 발생했습니다. 이를 해결하기 위해 차트 데이터(hour, week, month, year)의 4가지 기간 OHLC 데이터 중 가장 먼저 보이는 1시간 데이터부터 페치하여 사용자 불편을 감소시키고자 했습니다. `React-Query`의 `enable`옵션을 사용해서 앞의 조건이 완료되기 전에는 뒤의 데이터가 페치되지 않도록 설정하였습니다.
+```tsx
+// data fetch
+  // 1. ohlc
+  const useOhlcQuery = (days: number, enabled: boolean) => {
+    return useQuery([`${days}Days`, "ohlc", selectedCoin], () => ohlc(selectedCoin!.id, days), {
+      enabled,
+      refetchInterval: Infinity,
+    });
+  };
+  
+// Props
+	// 1. Chart
+  const query1 = useOhlcQuery(1, true);
+  const query7 = useOhlcQuery(7, query1.isSuccess);
+  const query30 = useOhlcQuery(30, query7.isSuccess);
+  const query365 = useOhlcQuery(365, query30.isSuccess);
+  const queries = {
+    "1": query1,
+    "7": query7,
+    "30": query30,
+    "365": query365,
+  };
+```
+
+### 3️⃣ 동적 라우팅 문제
+Coin의 Detail 정보 페이지로 이동할 때, router로 `id`를 전달하여 페이지를 이동시키는 방식을 사용했으나, GitHub Pages는 동적 라우팅을 지원하지 않아서 URL을 직접 입력하는 경우 404 페이지로 이동하는 문제가 있었습니다. 사용자가 URL에 Coin의 이름을 직접 입력해서 필요한 페이지로 이동하려고 할 때, GitHub Pages에서는 동적 라우팅을 지원하지 않아 배포된 URL 외의 모든 조작이 404 페이지로 처리되었습니다.
+```json
+{
+  "hosting": {
+    "public": "build",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+문제 해결을 위해 배포 서비스를 GitHub Pages에서 Firebase로 변경하고 Firebase를 사용하여 동적 라우팅을 지원하도록 설정했습니다. Firebase의 `firebase.json` 파일을 수정하여 모든 요청을 `index.html`로 리디렉션하도록 설정하여 Coin의 Detail 페이지로의 동적 라우팅을 지원할 수 있게 되었고, 사용자들이 URL에 Coin의 이름을 직접 입력하여 원하는 페이지로 바로 이동할 수 있게 되었습니다.
+
+https://github.com/goyomi/coin_tracker/assets/122963246/3f163a21-a64e-42df-be2e-cf2ae398f4fa
+
+### 4️⃣ styled-components의 props 전달 문제
+![스타일 컴포넌트에서 props가 DOM에 전달되는 에러](https://github.com/goyomi/coin_tracker/assets/122963246/b2af1f6e-ad00-4225-96b0-44bfb8811de0)
+styled-components로 props를 전달받을 때, prop이 DOM 요소에 전달되어 콘솔 에러가 발생하였습니다. styled-components v6부터는 Transient Props를 사용해야 하는데, 이를 사용하지 않으면 props가 DOM 요소에 전달되어 에러가 발생합니다. `shouldForwardProp`를 사용해서 해결할 수도 있지만 v6부터 기본적으로 제공되지 않기 때문에 추가 설정이 필요합니다.
+![styled-components v6에서 shouldForwardProp를 사용하는 경우](https://github.com/goyomi/coin_tracker/assets/122963246/a336e5c3-d5f0-4dc2-af69-5adcfa0a21e4)
+styled-components v6에서 shouldForwardProp를 사용하는 경우
+styled-components v6부터는 `$`를 접두사로 사용하는 Transient Props를 사용하면 됩니다. Transient Props는 styled-components 내부에서만 사용되며, DOM 요소에는 전달되지 않습니다. props 이름 앞에 `$` 기호를 붙여 정의하면, styled-components에서 자동으로 필터링되어 실제 DOM에는 전달되지 않습니다. 코드를 간결하게 유지하기 위해 Transient Props 방법을 사용하여 에러를 해결하였습니다.
+
+```tsx
+const NavLink = styled(Link)<{ $isAction?: boolean }>`
+  display: inline-block;
+  margin: 0 1rem;
+  padding: 1rem;
+  text-transform: capitalize;
+  font-size: var(--font-size-web-small);
+  color: ${(props) => (props.$isAction ? props.theme.onActiveColor : props.theme.mainFontColor)};
+  background-color: ${(props) => props.theme.buttonColor};
+  border-radius: 0.5rem;
+  @media (max-width: 1024px) {
+    font-size: var(--font-size-tablet-small);
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-mobile-small);
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+`;
+
+function Breadcrumb({ links }: { links: { name: string; path: string }[] }) {
+  return (
+    <Navbar>
+      <OrderList>
+        {links.map((link, idx) => (
+          <li key={idx}>
+            <NavLink $isAction={idx === links.length - 1} to={link.path}>
+              {link.name} Price
+            </NavLink>
+            {idx < links.length - 1 && ">"}
+          </li>
+        ))}
+      </OrderList>
+    </Navbar>
+  );
+}
+```
+Transient Props를 사용하여 styled-components의 props 전달 문제를 해결하였고, DOM 요소에 불필요한 props가 전달되지 않도록 하여 콘솔 에러를 방지할 수 있었습니다.
 <br>
