@@ -141,7 +141,7 @@ https://github.com/goyomi/coin_tracker/assets/122963246/5920e640-836d-4fd6-a3b4-
 <br>
 
 ## 🫧 트러블 슈팅
-### 1️⃣ 데이터 페칭 시 로딩 및 에러 상태 관리 문제
+### 1️⃣ 데이터 페칭 시 로딩 및 에러 상태 관리 문제 ([🚀 wiki](https://github.com/goyomi/coin_tracker.wiki.git))
 `React-Query`로 데이터 페칭 시 `isLoading`과 `isError` 상태가 반복적으로 발생하여 로딩 컴포넌트와 에러 페이지가 계속해서 번갈아 표시되는 문제가 있었습니다. 이로 인해 사용자 경험에 문제가 되었으며, 상태 변화에 따라 페이지가 계속해서 바뀌지 않도록 하는 것이 필요했습니다.
 ```tsx
 function App() {
@@ -219,9 +219,8 @@ Coin의 Detail 정보 페이지로 이동할 때, router로 `id`를 전달하여
 
 https://github.com/goyomi/coin_tracker/assets/122963246/3f163a21-a64e-42df-be2e-cf2ae398f4fa
 
-### 4️⃣ styled-components의 props 전달 문제
-![스타일 컴포넌트에서 props가 DOM에 전달되는 에러](https://github.com/goyomi/coin_tracker/assets/122963246/b2af1f6e-ad00-4225-96b0-44bfb8811de0)
-styled-components로 props를 전달받을 때, prop이 DOM 요소에 전달되어 콘솔 에러가 발생하였습니다. `shouldForwardProp`를 사용해서 해결할 수도 있지만 styled-components v6부터 기본적으로 제공되지 않기 때문에 추가 설정 코드가 필요하게 됩니다. `$`를 접두사로 사용하는 Transient Props를 사용하면 문제를 간단하게 해결할 수 있습니다. props 이름 앞에 `$` 기호를 붙여 정의하면, styled-components에서 자동으로 필터링되어 실제 DOM에는 전달되지 않습니다. `shouldForwardProp`를 사용할 때보다 코드를 간결하게 유지하기도 좋습니다.
+### 4️⃣ styled-components의 props 전달 문제 ([🚀 wiki](https://github.com/goyomi/coin_tracker.wiki.git))
+styled-components로 props를 전달받을 때, prop이 DOM 요소에 전달되어 콘솔 에러가 발생하였습니다. Transient Props를 사용하면 문제를 간단하게 해결할 수 있습니다. props 이름 앞에 `$` 기호를 붙여 정의하면, styled-components에서 자동으로 필터링되어 실제 DOM에는 전달되지 않습니다. `shouldForwardProp`를 사용할 때보다 코드를 간결하게 유지하기도 좋습니다.
 ```tsx
 const NavLink = styled(Link)<{ $isAction?: boolean }>`
   display: inline-block;
