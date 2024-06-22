@@ -23,20 +23,18 @@ function App() {
         <GlobalStyle />
         <BrowserRouter basename="/coin_tracker">
           <Switch>
-            <Route path="/:coinId">
-              <MainContainer>
-                <Suspense fallback={<LoadingPage />}>
+            <Suspense fallback={<LoadingPage />}>
+              <Route path="/:coinId">
+                <MainContainer>
                   <CoinDetail toggleOn={toggleOn} setToggleOn={setToggleOn} />
-                </Suspense>
-              </MainContainer>
-            </Route>
-            <Route path="/">
-              <MainContainer>
-                <Suspense fallback={<LoadingPage />}>
+                </MainContainer>
+              </Route>
+              <Route path="/">
+                <MainContainer>
                   <CoinList toggleOn={toggleOn} setToggleOn={setToggleOn} />
-                </Suspense>
-              </MainContainer>
-            </Route>
+                </MainContainer>
+              </Route>
+            </Suspense>
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
