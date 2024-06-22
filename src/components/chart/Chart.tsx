@@ -1,8 +1,9 @@
-import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { UseQueryResult } from "@tanstack/react-query";
 import { ICoin } from "../../contexts/Context";
 import styled from "styled-components";
+import React, { Suspense, lazy } from "react";
+import LoadingPage from "../page/LoadingPage";
 
 interface IChartQueries {
   "1": UseQueryResult<IOhlc[], unknown>;
@@ -26,7 +27,9 @@ interface IChart {
   currentData: IOhlc[] | undefined;
 }
 
-const ApexChart = styled(ReactApexChart)<{ toggleOn: boolean }>`
+const LazyReactApexChart = lazy(() => import("react-apexcharts"));
+
+const ApexChart = styled(LazyReactApexChart)<{ toggleOn: boolean }>`
   .apexcharts-menu.apexcharts-menu-open {
     background-color: ${({ toggleOn }) => (toggleOn ? "#f4f4f4" : "#fff")};
   }
@@ -104,13 +107,15 @@ function Chart({ selectedCoin, toggleOn, currentData }: IChart) {
   return (
     <>
       <section>
-        <ApexChart
-          toggleOn={toggleOn}
-          options={chartOptions}
-          series={[{ data: seriesData || [] }]}
-          type="candlestick"
-          width={"100%"}
-        />
+        <Suspense fallback={<LoadingPage />}>
+          <ApexChart
+            toggleOn={toggleOn}
+            options={chartOptions}
+            series={[{ data: seriesData || [] }]}
+            type="candlestick"
+            width={"100%"}
+          />
+        </Suspense>
       </section>
     </>
   );
