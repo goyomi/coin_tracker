@@ -27,6 +27,7 @@ const LogoWrapper = styled.div`
 const Logo = styled.img`
   width: 10rem;
   height: auto;
+  aspect-ratio: 16 / 9;
   background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
 
@@ -41,21 +42,23 @@ const ToggleButton = styled.button<{ $toggleOn: boolean }>`
   border-radius: 3rem;
   transition: 0.4s cubic-bezier(0.4, 0, 1, 1);
   background-color: ${(props) => (props.$toggleOn ? props.theme.onActiveColor : "rgb(233,233,234)")};
-  .circle {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    background-color: rgb(255, 254, 255);
-    margin-left: ${(props) => (props.$toggleOn ? "auto" : "")};
-  }
 
   @media (max-width: 768px) {
     width: 4rem;
     height: 2.2rem;
-    .circle {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+  }
+`;
+
+const Circle = styled.div<{ $toggleOn: boolean }>`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgb(255, 254, 255);
+  margin-left: ${(props) => (props.$toggleOn ? "auto" : "")};
+
+  @media (max-width: 768px) {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
 
@@ -73,7 +76,7 @@ function Header({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dis
           </Link>
         </h1>
         <ToggleButton onClick={handleToggleButton} $toggleOn={toggleOn}>
-          <div className="circle" />
+          <Circle $toggleOn={toggleOn} />
         </ToggleButton>
       </LogoWrapper>
     </HeaderPart>

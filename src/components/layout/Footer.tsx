@@ -32,6 +32,7 @@ const LogoAndContacts = styled.div`
 const LogoImg = styled.img`
   width: 10rem;
   height: auto;
+  aspect-ratio: 16 / 9;
   margin-bottom: 1rem;
   background-color: ${(props) => (props.theme.mode === "dark" ? "#e9f6ff" : "")};
   border-radius: ${(props) => (props.theme.mode === "dark" ? "0.5rem" : "")};
