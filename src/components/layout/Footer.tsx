@@ -110,7 +110,7 @@ function Footer() {
     <FooterPart>
       <LogoAndContacts>
         <Link to="/">
-          <LogoImg src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.png`} alt="coin tracker logo" />
+          <LogoImg src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.webp`} alt="coin tracker logo" />
         </Link>
         <ContactWrapper>
           <a href="https://github.com/goyomi/coin_tracker" target="_blank" rel="noopener noreferrer">
