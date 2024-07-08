@@ -75,7 +75,7 @@ function Header({ toggleOn, setToggleOn }: { toggleOn: boolean; setToggleOn: Dis
             <Logo src={`${process.env.PUBLIC_URL}/assets/coin_tracker_logo.webp`} alt="Coin Tracker Logo" />
           </Link>
         </h1>
-        <ToggleButton onClick={handleToggleButton} $toggleOn={toggleOn}>
+        <ToggleButton title="dark mode toggle button" onClick={handleToggleButton} $toggleOn={toggleOn}>
           <Circle $toggleOn={toggleOn} />
         </ToggleButton>
       </LogoWrapper>
