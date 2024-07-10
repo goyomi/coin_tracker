@@ -22,8 +22,8 @@ function App() {
       <ThemeProvider theme={toggleOn ? darkTheme : theme}>
         <GlobalStyle />
         <BrowserRouter basename="/coin_tracker">
-          <Switch>
-            <Suspense fallback={<LoadingPage />}>
+          <Suspense fallback={<LoadingPage />}>
+            <Switch>
               <Route path="/:coinId">
                 <MainContainer>
                   <CoinDetail toggleOn={toggleOn} setToggleOn={setToggleOn} />
@@ -34,8 +34,8 @@ function App() {
                   <CoinList toggleOn={toggleOn} setToggleOn={setToggleOn} />
                 </MainContainer>
               </Route>
-            </Suspense>
-          </Switch>
+            </Switch>
+          </Suspense>
         </BrowserRouter>
       </ThemeProvider>
     </CoinListContext.Provider>
