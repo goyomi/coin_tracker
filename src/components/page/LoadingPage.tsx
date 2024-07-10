@@ -68,7 +68,7 @@ function LoadingPage() {
 
   return (
     <LoadingSection>
-      <LoadingImg src={`${process.env.PUBLIC_URL}/assets/coingecko_logo_with_dark_text.png`} alt="coin gecko logo" />
+      <LoadingImg src="/assets/coingecko_logo_with_dark_text.png" alt="coin gecko logo" />
       <LoadingTextWrapper>
         <LoadingText>Loading{dots}</LoadingText>
         <p>Please do not close and wait for a moment.</p>
