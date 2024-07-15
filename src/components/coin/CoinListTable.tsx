@@ -31,6 +31,7 @@ export const Table = styled.table`
     white-space: nowrap;
     text-overflow: ellipsis;
     min-width: 10rem;
+    height: 3rem;
   }
 
   .rank,
@@ -142,6 +143,7 @@ export const TableBody = styled.tbody`
     td {
       padding: 1.4rem 0;
       vertical-align: middle;
+      height: 3rem;
     }
     .coin_rank {
       color: ${(props) => props.theme.secondFontColor};
@@ -156,6 +158,7 @@ export const TableBody = styled.tbody`
     font-size: var(--font-size-tablet-medium);
     tr > td {
       padding: 1.2rem 0;
+      height: 2.5rem;
     }
   }
 
@@ -163,6 +166,7 @@ export const TableBody = styled.tbody`
     font-size: var(--font-size-mobile-medium);
     tr > td {
       padding: 1rem 0;
+      height: 2rem;
     }
   }
 `;
