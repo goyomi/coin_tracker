@@ -245,16 +245,7 @@ function CoinListTable() {
               </td>
               <td>
                 <CoinLink to={`/${coin.id}`} className="coin_name">
-                  <img
-                    src={coin.image}
-                    srcSet={`
-                      ${coin.image.replace("/large/", "/small/")} 64w,
-                      ${coin.image.replace("/large/", "/medium/")} 128w, 
-                      ${coin.image} 256w
-                    `}
-                    sizes="(max-width: 768px) 2rem, (max-width: 1024px) 2.6rem, 3.2rem"
-                    alt={coin.name}
-                  />
+                  <img src={coin.image.replace("large", "small")} alt={coin.name} />
                   <span className="coin_name">{coin.name}</span>
                   <span className="coin_symbol">{coin.symbol}</span>
                 </CoinLink>
