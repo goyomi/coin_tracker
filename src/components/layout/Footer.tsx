@@ -4,6 +4,7 @@ import styled from "styled-components";
 const FooterPart = styled.footer`
   max-width: var(--width-web-max);
   width: var(--width-web);
+  height: auto;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -11,11 +12,14 @@ const FooterPart = styled.footer`
 
   @media (max-width: 1024px) {
     max-width: var(--width-tablet-max);
+    height: auto;
     padding: 1.5rem;
     gap: 3rem;
   }
 
   @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
     flex-direction: column;
     padding: 1rem;
     gap: 2rem;
