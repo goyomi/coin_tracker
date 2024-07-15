@@ -14,6 +14,7 @@ export const ScreenReaderOnly = styled.h2`
 export const MainContainer = styled.div`
   max-width: var(--width-web-max);
   width: var(--width-web);
+  height: 100vh;
   margin: 10rem auto;
   padding: 0 2rem;
 
