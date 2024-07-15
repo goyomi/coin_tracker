@@ -30,6 +30,7 @@ export const Table = styled.table`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    min-width: 10rem;
   }
 
   .rank,
